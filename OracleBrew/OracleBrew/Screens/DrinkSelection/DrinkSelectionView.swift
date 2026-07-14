@@ -12,6 +12,11 @@ struct DrinkSelectionView: View {
     let onContinue: () -> Void
     let onClose: () -> Void
 
+    /// Which catalog card is highlighted — kept separate from `draft.drink`
+    /// because picking "Random Cup" reassigns `draft.drink` to a concrete
+    /// drink while the Random Cup card itself should stay visually selected.
+    @State private var selectedID: String?
+
     private let columns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12)
@@ -35,10 +40,17 @@ struct DrinkSelectionView: View {
                         ForEach(DrinkCatalog.all) { drink in
                             DrinkCard(
                                 drink: drink,
-                                isSelected: draft.drink == drink,
-                                dimmed: draft.drink != nil && draft.drink != drink
+                                isSelected: selectedID == drink.id,
+                                dimmed: selectedID != nil && selectedID != drink.id
                             ) {
-                                draft.drink = drink
+                                selectedID = drink.id
+                                if drink.isRandom {
+                                    draft.isRandomPath = true
+                                    draft.drink = DrinkCatalog.randomPick()
+                                } else {
+                                    draft.isRandomPath = false
+                                    draft.drink = drink
+                                }
                             }
                         }
                     }

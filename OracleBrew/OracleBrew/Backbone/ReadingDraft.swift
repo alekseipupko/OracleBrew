@@ -11,6 +11,10 @@ import SwiftUI
 @Observable
 final class ReadingDraft {
     var drink: Drink?
+    /// True when the user picked "Random Cup" — `drink` still holds a real,
+    /// concrete drink (randomly assigned at selection time) so downstream
+    /// screens never display "Random" as if it were a drink name.
+    var isRandomPath = false
     var teller: FortuneTeller?
     // intention / photo added as their steps are built.
 }
