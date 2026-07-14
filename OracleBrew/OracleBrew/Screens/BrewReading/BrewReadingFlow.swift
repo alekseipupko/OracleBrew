@@ -49,7 +49,12 @@ struct BrewReadingFlow: View {
                 onBack: pop,
                 onClose: onClose
             )
-        case .intention: FlowStub(title: "flow.step.intention", onClose: onClose)
+        case .intention:
+            IntentionView(
+                onContinue: { path.append(ReadingStep.photo) },
+                onBack: pop,
+                onClose: onClose
+            )
         case .photo: FlowStub(title: "flow.step.photo", onClose: onClose)
         case .result: FlowStub(title: "flow.step.result", onClose: onClose)
         }

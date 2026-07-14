@@ -16,5 +16,10 @@ final class ReadingDraft {
     /// screens never display "Random" as if it were a drink name.
     var isRandomPath = false
     var teller: FortuneTeller?
-    // intention / photo added as their steps are built.
+
+    // Intention
+    var horizon: TimeHorizon = .month
+    var topic: Topic?
+    var question: String = ""
+    // photo added once its step is built.
 }
