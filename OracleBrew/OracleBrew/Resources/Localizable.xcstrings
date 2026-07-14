@@ -1,0 +1,108 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "drink.title" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Your Drink" } } } },
+    "drink.subtitle" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Each drink carries its own energy" } } } },
+    "drink.photo_included" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Photo included" } } } },
+    "drink.random.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Random Cup" } } } },
+    "drink.random.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Let the universe choose for you" } } } },
+    "drink.turkish.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Turkish Coffee" } } } },
+    "drink.turkish.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Ancient tradition of reading the grounds" } } } },
+    "drink.espresso.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Espresso" } } } },
+    "drink.espresso.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Quick insights in a bold, rich pattern" } } } },
+    "drink.herbal.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Herbal Brew" } } } },
+    "drink.herbal.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Nature’s whispers and healing signs" } } } },
+    "drink.tea.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Tea Leaves" } } } },
+    "drink.tea.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Reflections in every steeped leaf" } } } },
+    "drink.matcha.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Matcha" } } } },
+    "drink.matcha.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Clarity and focus from green wisdom" } } } },
+    "drink.chocolate.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Hot Chocolate" } } } },
+    "drink.chocolate.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Comfort and intuition in every sip" } } } },
+    "drink.wine.name" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Wine Sediment" } } } },
+    "drink.wine.blurb" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Timeless answers in every drop" } } } },
+    "flow.continue" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue" } } } },
+    "teller.title" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Your Oracle" } } } },
+    "teller.subtitle" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Everyone has unique areas of wisdom" } } } },
+    "teller.view_profile" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "View profile" } } } },
+    "teller.about" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } } } },
+    "teller.reviews_heading" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Reviews" } } } },
+    "teller.continue" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue with Oracle" } } } },
+    "teller.sessions %lld" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld sessions" } } } },
+    "teller.reviews %lld" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld reviews" } } } },
+    "flow.step.tellers" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Fortune Tellers" } } } },
+    "flow.step.intention" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Intention" } } } },
+    "flow.step.photo" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Photo Upload" } } } },
+    "flow.step.result" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Reading Result" } } } },
+    "brew.card.oracle.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ask anything and receive personalized guidance" } }
+      }
+    },
+    "brew.card.oracle.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Oracle Chat" } }
+      }
+    },
+    "brew.card.reading.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Upload your cup photo and get a personalized reading" } }
+      }
+    },
+    "brew.card.reading.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Brew Reading" } }
+      }
+    },
+    "brew.daily_fortune" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Daily Fortune" } }
+      }
+    },
+    "brew.greeting %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hi %@!" } }
+      }
+    },
+    "brew.hero.headline" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "One simple step can start an important change" } }
+      }
+    },
+    "brew.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Let's uncover your day" } }
+      }
+    },
+    "flow.brew_reading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Brew Reading" } }
+      }
+    },
+    "flow.oracle_chat" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Oracle Chat" } }
+      }
+    },
+    "settings.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } }
+      }
+    },
+    "tab.brew" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Brew" } }
+      }
+    },
+    "tab.chats" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chats" } }
+      }
+    },
+    "tab.history" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "History" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
