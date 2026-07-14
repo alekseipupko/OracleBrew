@@ -55,7 +55,12 @@ struct BrewReadingFlow: View {
                 onBack: pop,
                 onClose: onClose
             )
-        case .photo: FlowStub(title: "flow.step.photo", onClose: onClose)
+        case .photo:
+            PhotoUploadView(
+                onContinue: { path.append(ReadingStep.result) },
+                onBack: pop,
+                onClose: onClose
+            )
         case .result: FlowStub(title: "flow.step.result", onClose: onClose)
         }
     }

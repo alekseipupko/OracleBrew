@@ -75,3 +75,23 @@ struct PrimaryButton: View {
         .disabled(!enabled)
     }
 }
+
+/// Full-width outlined secondary CTA (same footprint as PrimaryButton).
+struct SecondaryButton: View {
+    let title: LocalizedStringKey
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(Lettering.displayMedium(20))
+                .foregroundStyle(Pigment.cream)
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+                .background(Capsule().fill(Color(hex: 0x19132B)))
+                .overlay(Capsule().strokeBorder(Color.white.opacity(0.15), lineWidth: 1))
+                .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+}

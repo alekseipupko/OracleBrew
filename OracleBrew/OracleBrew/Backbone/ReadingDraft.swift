@@ -21,5 +21,7 @@ final class ReadingDraft {
     var horizon: TimeHorizon = .month
     var topic: Topic?
     var question: String = ""
-    // photo added once its step is built.
+
+    // Photo of the cup (gallery / camera / a bundled sample for the Random path)
+    var photo: UIImage?
 }
