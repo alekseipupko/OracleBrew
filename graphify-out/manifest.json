@@ -5,9 +5,9 @@
     "semantic_hash": "144e68ab3ab18caad8e0f7a3637c930f"
   },
   "OracleBrew/OracleBrew/App/Atrium.swift": {
-    "mtime": 1784013674.458569,
-    "ast_hash": "22f9de445ca8bd01bd6a34e2991378c7",
-    "semantic_hash": "22f9de445ca8bd01bd6a34e2991378c7"
+    "mtime": 1784032301.6143315,
+    "ast_hash": "9b56db9477889e154c160878da52ac2a",
+    "semantic_hash": "9b56db9477889e154c160878da52ac2a"
   },
   "OracleBrew/OracleBrew/App/Ignition.swift": {
     "mtime": 1784013271.1601567,
@@ -30,14 +30,14 @@
     "semantic_hash": "ae732ce204435e190a810985dc336262"
   },
   "OracleBrew/OracleBrew/Backbone/ReadingDraft.swift": {
-    "mtime": 1784030513.078668,
-    "ast_hash": "dc7e9f6a6dd1714df78435e32ffbaf50",
-    "semantic_hash": ""
+    "mtime": 1784031732.6679842,
+    "ast_hash": "c1e8a6af74d4b2fb37f9936609b7364e",
+    "semantic_hash": "c1e8a6af74d4b2fb37f9936609b7364e"
   },
   "OracleBrew/OracleBrew/Backbone/Waypoint.swift": {
-    "mtime": 1784013623.7507057,
-    "ast_hash": "3e17b0fa186ae84a58bc46079170203b",
-    "semantic_hash": "3e17b0fa186ae84a58bc46079170203b"
+    "mtime": 1784030812.9123564,
+    "ast_hash": "f80223af060808af1a9cf188db93d25e",
+    "semantic_hash": "f80223af060808af1a9cf188db93d25e"
   },
   "OracleBrew/OracleBrew/Kit/Cadence.swift": {
     "mtime": 1784014069.8288774,
@@ -47,7 +47,7 @@
   "OracleBrew/OracleBrew/Kit/FlowChrome.swift": {
     "mtime": 1784028141.0520797,
     "ast_hash": "072b39408e2cff4858fc6787968bdcbb",
-    "semantic_hash": ""
+    "semantic_hash": "072b39408e2cff4858fc6787968bdcbb"
   },
   "OracleBrew/OracleBrew/Kit/FlowLayout.swift": {
     "mtime": 1784016242.0430343,
@@ -72,12 +72,12 @@
   "OracleBrew/OracleBrew/Kit/StepDots.swift": {
     "mtime": 1784027683.2833326,
     "ast_hash": "c345994e49185729bfb1900378e212db",
-    "semantic_hash": ""
+    "semantic_hash": "c345994e49185729bfb1900378e212db"
   },
   "OracleBrew/OracleBrew/Kit/TabChrome.swift": {
     "mtime": 1784027555.9087355,
     "ast_hash": "44581823791602f4d90b873f7d8e082a",
-    "semantic_hash": ""
+    "semantic_hash": "44581823791602f4d90b873f7d8e082a"
   },
   "OracleBrew/OracleBrew/Kit/TopicChip.swift": {
     "mtime": 1784016079.8596163,
@@ -90,9 +90,9 @@
     "semantic_hash": "b7249905b14feeedd397ee0b0ef37634"
   },
   "OracleBrew/OracleBrew/Screens/Brew/BrewView.swift": {
-    "mtime": 1784015057.964105,
-    "ast_hash": "eb7690eed5a67d7529efad9697f53f9d",
-    "semantic_hash": "eb7690eed5a67d7529efad9697f53f9d"
+    "mtime": 1784030809.428192,
+    "ast_hash": "84a732a42c59f5cb1913076308e9cebe",
+    "semantic_hash": "84a732a42c59f5cb1913076308e9cebe"
   },
   "OracleBrew/OracleBrew/Screens/Brew/components/FlowCard.swift": {
     "mtime": 1784014161.5678108,
@@ -100,14 +100,14 @@
     "semantic_hash": "97e62631fa53484ce6e800a55334c454"
   },
   "OracleBrew/OracleBrew/Screens/BrewReading/BrewReadingFlow.swift": {
-    "mtime": 1784030543.6692905,
-    "ast_hash": "721ef9cca5a3c5840537a65a539f5c6f",
-    "semantic_hash": ""
+    "mtime": 1784031770.149497,
+    "ast_hash": "b16820c7503441652271dec5cc0831e0",
+    "semantic_hash": "b16820c7503441652271dec5cc0831e0"
   },
   "OracleBrew/OracleBrew/Screens/DrinkSelection/DrinkSelectionView.swift": {
     "mtime": 1784029096.1532307,
     "ast_hash": "393d80559b0851df10220fd44c4cc68e",
-    "semantic_hash": ""
+    "semantic_hash": "393d80559b0851df10220fd44c4cc68e"
   },
   "OracleBrew/OracleBrew/Screens/DrinkSelection/components/DrinkCard.swift": {
     "mtime": 1784015588.2853801,
@@ -142,51 +142,101 @@
   "OracleBrew/OracleBrew/Backbone/Intention.swift": {
     "mtime": 1784027694.6811192,
     "ast_hash": "3b0d5b5e44e465b985f718cd57c500bd",
-    "semantic_hash": ""
+    "semantic_hash": "3b0d5b5e44e465b985f718cd57c500bd"
   },
   "OracleBrew/OracleBrew/Backbone/ReadingEngine.swift": {
     "mtime": 1784028642.5455763,
     "ast_hash": "af3d949d92a6e9c11c12073a56dec604",
-    "semantic_hash": ""
+    "semantic_hash": "af3d949d92a6e9c11c12073a56dec604"
   },
   "OracleBrew/OracleBrew/Kit/CameraPicker.swift": {
     "mtime": 1784028161.0656154,
     "ast_hash": "2fb72f0f48a057b75e959467a3635fc7",
-    "semantic_hash": ""
+    "semantic_hash": "2fb72f0f48a057b75e959467a3635fc7"
   },
   "OracleBrew/OracleBrew/Kit/SegmentedSelector.swift": {
     "mtime": 1784027710.6107285,
     "ast_hash": "8f75c463b6d06f8daaf7849c921161f4",
-    "semantic_hash": ""
+    "semantic_hash": "8f75c463b6d06f8daaf7849c921161f4"
   },
   "OracleBrew/OracleBrew/Screens/Intention/IntentionView.swift": {
     "mtime": 1784027737.072869,
     "ast_hash": "4e36126ac01b17289bd74d0c8421fa9e",
-    "semantic_hash": ""
+    "semantic_hash": "4e36126ac01b17289bd74d0c8421fa9e"
   },
   "OracleBrew/OracleBrew/Screens/Intention/components/TopicButton.swift": {
     "mtime": 1784027721.2255347,
     "ast_hash": "760b1d3b9c82732c3f57525ce4b6e397",
-    "semantic_hash": ""
+    "semantic_hash": "760b1d3b9c82732c3f57525ce4b6e397"
   },
   "OracleBrew/OracleBrew/Screens/PhotoUpload/PhotoUploadView.swift": {
     "mtime": 1784029103.9883194,
     "ast_hash": "cce224df990e3fae86fa912c76413ee6",
-    "semantic_hash": ""
+    "semantic_hash": "cce224df990e3fae86fa912c76413ee6"
   },
   "OracleBrew/OracleBrew/Screens/ReadingResult/ReadingResultView.swift": {
-    "mtime": 1784029464.1901112,
-    "ast_hash": "afa805d1e596d2d8d74421472389c4ab",
-    "semantic_hash": ""
+    "mtime": 1784031749.969577,
+    "ast_hash": "2ef1c0b00d0032d129e53d2f3a0fd4ab",
+    "semantic_hash": "2ef1c0b00d0032d129e53d2f3a0fd4ab"
   },
   "OracleBrew/OracleBrew/Screens/ReadingResult/components/SymbolChip.swift": {
     "mtime": 1784028684.9433997,
     "ast_hash": "b0e3a8c876cf70fa705bcc9c44be926a",
-    "semantic_hash": ""
+    "semantic_hash": "b0e3a8c876cf70fa705bcc9c44be926a"
   },
   "OracleBrew/OracleBrew/Screens/ReadingResult/components/ThumbCard.swift": {
     "mtime": 1784029120.5482712,
     "ast_hash": "dae2dd5d450e801fc44e8649c4cc1a86",
-    "semantic_hash": ""
+    "semantic_hash": "dae2dd5d450e801fc44e8649c4cc1a86"
+  },
+  "OracleBrew/OracleBrew/Backbone/ChatEngine.swift": {
+    "mtime": 1784030870.976106,
+    "ast_hash": "1d53300a25b0cb8a12ec516d796d6e02",
+    "semantic_hash": "1d53300a25b0cb8a12ec516d796d6e02"
+  },
+  "OracleBrew/OracleBrew/Screens/OracleChat/OracleChatEntryFlow.swift": {
+    "mtime": 1784031789.4402037,
+    "ast_hash": "c7ccda5cb3c85ee096ec5ae6e31d9c03",
+    "semantic_hash": "c7ccda5cb3c85ee096ec5ae6e31d9c03"
+  },
+  "OracleBrew/OracleBrew/Screens/OracleChat/OracleChatView.swift": {
+    "mtime": 1784031726.008794,
+    "ast_hash": "0dc02d2b9b3dde178f56642a295b2990",
+    "semantic_hash": "0dc02d2b9b3dde178f56642a295b2990"
+  },
+  "OracleBrew/OracleBrew/Screens/OracleChat/components/ChatBubble.swift": {
+    "mtime": 1784030763.6027281,
+    "ast_hash": "9a6c0d78aa0f6c18b38f9dda6a5c404c",
+    "semantic_hash": "9a6c0d78aa0f6c18b38f9dda6a5c404c"
+  },
+  "OracleBrew/OracleBrew/Backbone/ChatSessionStore.swift": {
+    "mtime": 1784031686.7121956,
+    "ast_hash": "0a140cfdf5c6d00359dd168c254e7544",
+    "semantic_hash": "0a140cfdf5c6d00359dd168c254e7544"
+  },
+  "OracleBrew/OracleBrew/Backbone/ReadingHistory.swift": {
+    "mtime": 1784031674.861125,
+    "ast_hash": "c34d185f29f61244fd82615cee0f5ab7",
+    "semantic_hash": "c34d185f29f61244fd82615cee0f5ab7"
+  },
+  "OracleBrew/OracleBrew/Screens/Chats/ChatsView.swift": {
+    "mtime": 1784032319.5078871,
+    "ast_hash": "9c697781a294b86346bba113cf3508f3",
+    "semantic_hash": "9c697781a294b86346bba113cf3508f3"
+  },
+  "OracleBrew/OracleBrew/Screens/Chats/components/ChatThreadRow.swift": {
+    "mtime": 1784031845.416046,
+    "ast_hash": "d453a51657138df34627eec494dfdfc8",
+    "semantic_hash": "d453a51657138df34627eec494dfdfc8"
+  },
+  "OracleBrew/OracleBrew/Screens/History/HistoryView.swift": {
+    "mtime": 1784032328.23527,
+    "ast_hash": "0d83e7fa8dd561f495804d36c68e526f",
+    "semantic_hash": "0d83e7fa8dd561f495804d36c68e526f"
+  },
+  "OracleBrew/OracleBrew/Screens/History/components/HistoryCard.swift": {
+    "mtime": 1784031865.6628377,
+    "ast_hash": "8e42ade7f1c7ac7194a20c49f4222e8e",
+    "semantic_hash": "8e42ade7f1c7ac7194a20c49f4222e8e"
   }
 }

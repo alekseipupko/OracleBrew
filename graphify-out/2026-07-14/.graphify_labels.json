@@ -20,5 +20,9 @@
   "18": "Int",
   "19": "Waypoint",
   "20": "PhotoUploadView",
-  "21": "ReadingDraft"
+  "21": "ReadingDraft",
+  "22": "ReadingSymbol",
+  "23": "FortuneTeller",
+  "24": "ReadingStep",
+  "25": "CGFloat"
 }
