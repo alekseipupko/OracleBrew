@@ -39,7 +39,6 @@ struct Atrium: View {
         switch waypoint {
         case .settings: TabPlaceholder(title: "settings.title")
         case .brewReading: TabPlaceholder(title: "flow.brew_reading")
-        case .oracleChat: TabPlaceholder(title: "flow.oracle_chat")
         }
     }
 }

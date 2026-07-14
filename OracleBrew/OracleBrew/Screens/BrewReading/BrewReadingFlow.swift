@@ -67,7 +67,7 @@ struct BrewReadingFlow: View {
                 onClose: onClose
             )
         case .chat:
-            FlowStub(title: "flow.step.chat", onClose: onClose)
+            OracleChatView(teller: draft.teller ?? FortuneTellerRoster.all[0], draft: draft, userName: "Susan", onClose: onClose)
         }
     }
 

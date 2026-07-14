@@ -11,6 +11,7 @@ struct BrewView: View {
     @Environment(Pathfinder.self) private var router
     @State private var model = BrewModel()
     @State private var showReadingFlow = false
+    @State private var showChatFlow = false
 
     private var vs: CGFloat { Screen.vScale }
     private var ballSize: CGFloat { 168 * vs }
@@ -35,6 +36,9 @@ struct BrewView: View {
         .toolbar(.hidden, for: .navigationBar)
         .fullScreenCover(isPresented: $showReadingFlow) {
             BrewReadingFlow { showReadingFlow = false }
+        }
+        .fullScreenCover(isPresented: $showChatFlow) {
+            OracleChatEntryFlow { showChatFlow = false }
         }
     }
 
@@ -117,7 +121,7 @@ struct BrewView: View {
                 gradient: Pigment.oracleCard,
                 art: "TellerArt",
                 height: cardHeight
-            ) { router.push(.oracleChat) }
+            ) { showChatFlow = true }
         }
     }
 }

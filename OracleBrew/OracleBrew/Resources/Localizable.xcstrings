@@ -88,6 +88,16 @@
         }
       }
     },
+    "chat.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask your oracle…"
+          }
+        }
+      }
+    },
     "common.done" : {
       "localizations" : {
         "en" : {
