@@ -9,5 +9,6 @@ import Foundation
 
 enum Waypoint: Hashable {
     case settings
-    case brewReading   // Drink Selection → … → Reading Result
+    case brewReading
+    case profile
 }

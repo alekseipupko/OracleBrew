@@ -11,6 +11,7 @@ import SwiftUI
 struct Atrium: View {
     @State private var tab: RootTab = .brew
     @State private var brewRouter = Pathfinder()
+    @State private var profileStore = UserProfileStore()
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -31,6 +32,7 @@ struct Atrium: View {
 
             TabBar(selection: $tab)
         }
+        .environment(profileStore)
     }
 
     @ViewBuilder
@@ -39,6 +41,8 @@ struct Atrium: View {
         switch waypoint {
         case .settings: TabPlaceholder(title: "settings.title")
         case .brewReading: TabPlaceholder(title: "flow.brew_reading")
+        case .profile:
+            ProfileView(onBack: brewRouter.pop, onSaved: brewRouter.pop)
         }
     }
 }
