@@ -14,6 +14,7 @@ enum Lettering {
     // MARK: Display — Josefin Sans
     static func display(_ size: CGFloat) -> Font { .custom("JosefinSans-Regular", size: size) }
     static func displayMedium(_ size: CGFloat) -> Font { .custom("JosefinSans-Medium", size: size) }
+    static func displaySemibold(_ size: CGFloat) -> Font { .custom("JosefinSans-SemiBold", size: size) }
 
     // MARK: Body — Inter
     static func body(_ size: CGFloat) -> Font { .custom("Inter-Regular", size: size) }
@@ -21,7 +22,7 @@ enum Lettering {
 
     /// Register bundled fonts once at app launch.
     static func registerFonts() {
-        for name in ["JosefinSans-Regular", "JosefinSans-Medium", "Inter-Regular", "Inter-Medium"] {
+        for name in ["JosefinSans-Regular", "JosefinSans-Medium", "JosefinSans-SemiBold", "Inter-Regular", "Inter-Medium"] {
             guard let url = Bundle.main.url(forResource: name, withExtension: "ttf") else {
                 assertionFailure("Missing bundled font: \(name).ttf")
                 continue

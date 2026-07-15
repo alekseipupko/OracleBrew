@@ -42,6 +42,21 @@ enum Pigment {
     static let cardSubtitle = Color(hex: 0x7A6F8E)
     /// Near-black navy — card titles on light cards.
     static let cardInk = Color(hex: 0x170D33)
+    /// Gold — Pro Plan crown + label.
+    static let gold = Color(hex: 0xFCBD1F)
+    /// Settings/profile card fill — slightly lighter than background.
+    static let settingsCard = Color(hex: 0x1A1430)
+    /// Destructive — Delete Account.
+    static let danger = Color(hex: 0xEF4444)
+
+    /// Hairline border on form fields and unselected chips.
+    static let fieldBorder = Color(hex: 0xFFFFFF, alpha: 0.07)
+    /// Uppercase section label above a form field.
+    static let fieldLabel = Color(hex: 0xFFEEE4, alpha: 0.2)
+    /// Text inside an unselected chip / secondary field text.
+    static let fieldMuted = Color(hex: 0xFFEEE4, alpha: 0.6)
+    /// Selected chip fill — accent at 15%.
+    static let chipSelected = Color(hex: 0xBB7EF7, alpha: 0.15)
 
     // Card gradients (angles ≈ Figma: 133° / 128°, mapped to topLeading→bottomTrailing).
     static let brewCard = LinearGradient(
