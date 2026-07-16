@@ -32,9 +32,15 @@ struct ChatThreadRow: View {
 
             Spacer()
 
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(Pigment.cream.opacity(0.3))
+            if summary.hasUnread {
+                Circle()
+                    .fill(Pigment.accent)
+                    .frame(width: 10, height: 10)
+            } else {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Pigment.cream.opacity(0.3))
+            }
         }
         .padding(14)
         .background(RoundedRectangle(cornerRadius: Cadence.cardRadius).fill(Color(hex: 0x1F1A2F)))

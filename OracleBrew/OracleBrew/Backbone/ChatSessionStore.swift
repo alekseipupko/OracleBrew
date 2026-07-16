@@ -41,6 +41,8 @@ struct ChatSummary: Identifiable, Hashable {
     let teller: FortuneTeller
     let preview: String
     let date: Date
+    /// The oracle sent a message the user hasn't opened yet — shows the dot.
+    let hasUnread: Bool
 }
 
 @MainActor
@@ -120,7 +122,8 @@ final class ChatSessionStore {
             id: dto.id,
             teller: CatalogMapper.oracle(dto.oracle),
             preview: dto.lastMessage?.text ?? "Say hello to start the conversation",
-            date: dto.updatedAt.flatMap { isoFormatter.date(from: $0) } ?? Date()
+            date: dto.updatedAt.flatMap { isoFormatter.date(from: $0) } ?? Date(),
+            hasUnread: dto.hasUnreadFromOracle ?? false
         )
     }
 }

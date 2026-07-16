@@ -40,12 +40,14 @@ struct ChatListItemDTO: Decodable {
     let oracle: OracleDTO
     let readingId: Int?
     let lastMessage: ChatMessageDTO?
+    let hasUnreadFromOracle: Bool?
     let updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, oracle
         case readingId = "reading_id"
         case lastMessage = "last_message"
+        case hasUnreadFromOracle = "has_unread_from_oracle"
         case updatedAt = "updated_at"
     }
 }
