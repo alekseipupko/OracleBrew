@@ -553,6 +553,26 @@
         }
       }
     },
+    "loading.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The symbols are revealing themselves"
+          }
+        }
+      }
+    },
+    "loading.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading your cup..."
+          }
+        }
+      }
+    },
     "photo.continue" : {
       "localizations" : {
         "en" : {

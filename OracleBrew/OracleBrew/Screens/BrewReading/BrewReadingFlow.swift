@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum ReadingStep: Hashable {
-    case tellers, intention, photo, result, chat
+    case tellers, intention, photo, loading, result, chat
 }
 
 struct BrewReadingFlow: View {
@@ -58,10 +58,18 @@ struct BrewReadingFlow: View {
             )
         case .photo:
             PhotoUploadView(
-                onContinue: { path.append(ReadingStep.result) },
+                onContinue: { path.append(ReadingStep.loading) },
                 onBack: pop,
                 onClose: onClose
             )
+        case .loading:
+            // Swap for the result rather than pushing on top of it — the reading
+            // is the destination, and going back from it belongs at the photo
+            // step, not at a spinner that would immediately run again.
+            ReadingLoadingView(photo: draft.photo) {
+                path.removeLast()
+                path.append(ReadingStep.result)
+            }
         case .result:
             ReadingResultView(
                 onAskOracle: { path.append(ReadingStep.chat) },
