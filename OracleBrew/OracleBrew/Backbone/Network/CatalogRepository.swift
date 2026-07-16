@@ -39,6 +39,17 @@ struct CatalogRepository {
         if let drinkID { query["drink_id"] = String(drinkID) }
         return try await emissary.perform(EmissaryRequest(path: "drinks/random/", query: query), as: RandomCupDTO.self)
     }
+
+    /// The home screen's daily line. Returns nil when the backend has none
+    /// (it answers 404 rather than an empty object).
+    func dailyFortune() async -> String? {
+        try? await emissary.perform(EmissaryRequest(path: "daily-fortune/"), as: DailyFortuneDTO.self).text
+    }
+}
+
+struct DailyFortuneDTO: Decodable {
+    let id: Int
+    let text: String
 }
 
 enum CatalogMapper {

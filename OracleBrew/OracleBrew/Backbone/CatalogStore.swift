@@ -17,6 +17,8 @@ final class CatalogStore {
     private(set) var drinks: [Drink] = DrinkCatalog.all
     private(set) var oracles: [FortuneTeller] = FortuneTellerRoster.all
     private(set) var topics: [Topic] = TopicCatalog.all
+    /// The home screen's daily line; nil until loaded (or if the backend has none).
+    private(set) var dailyFortune: String?
 
     private let repository: CatalogRepository
     private var loaded = false
@@ -44,5 +46,6 @@ final class CatalogStore {
         if let topics = await remoteTopics, !topics.isEmpty {
             self.topics = topics
         }
+        dailyFortune = await repository.dailyFortune()
     }
 }

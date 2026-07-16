@@ -9,9 +9,17 @@ import SwiftUI
 
 struct BrewView: View {
     @Environment(Pathfinder.self) private var router
+    @Environment(UserProfileStore.self) private var profileStore
+    @Environment(CatalogStore.self) private var catalog
     @State private var model = BrewModel()
     @State private var showReadingFlow = false
     @State private var showChatFlow = false
+
+    /// The profile name once saved, otherwise a neutral greeting.
+    private var greetingName: String {
+        let name = profileStore.profile.name.trimmingCharacters(in: .whitespaces)
+        return name.isEmpty ? "there" : name
+    }
 
     private var vs: CGFloat { Screen.vScale }
     private var ballSize: CGFloat { 168 * vs }
@@ -48,7 +56,7 @@ struct BrewView: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
-                    Text("brew.greeting \(model.userName)")
+                    Text("brew.greeting \(greetingName)")
                         .font(Lettering.displayMedium(24))
                         .foregroundStyle(Pigment.cream)
                     Image(systemName: "sparkles")
@@ -81,10 +89,18 @@ struct BrewView: View {
                     .tracking(0.5)
                     .textCase(.uppercase)
                     .foregroundStyle(Pigment.accent)
-                Text(model.dailyHeadline)
-                    .font(Lettering.display(26))
-                    .foregroundStyle(Pigment.cream)
-                    .fixedSize(horizontal: false, vertical: true)
+                Group {
+                    // The server's fortune of the day; the bundled line until
+                    // it loads (or if the backend has none).
+                    if let fortune = catalog.dailyFortune, !fortune.isEmpty {
+                        Text(fortune)
+                    } else {
+                        Text(model.dailyHeadline)
+                    }
+                }
+                .font(Lettering.display(26))
+                .foregroundStyle(Pigment.cream)
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
     }

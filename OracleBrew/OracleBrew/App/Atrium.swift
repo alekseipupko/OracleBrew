@@ -63,6 +63,7 @@ struct Atrium: View {
             if session.isReady {
                 await catalog.refresh()
                 await profileStore.load()
+                await session.refreshAccess()
             }
         }
     }

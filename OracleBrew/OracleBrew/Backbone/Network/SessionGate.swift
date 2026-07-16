@@ -24,11 +24,25 @@ private struct AuthResponse: Decodable {
 final class SessionGate {
     private(set) var isReady = false
     private(set) var startupFailed = false
+    /// Whether the account has an active subscription (GET /access/ → 200).
+    /// v1.0 has no purchase flow, so this stays false, but the check is wired
+    /// for when a paywall lands.
+    private(set) var isPro = false
 
     private let emissary: Emissary
 
     init(emissary: Emissary = .shared) {
         self.emissary = emissary
+    }
+
+    /// 200 = subscribed, 403 = not. Any other failure leaves it false.
+    func refreshAccess() async {
+        do {
+            try await emissary.performVoid(EmissaryRequest(path: "access/"))
+            isPro = true
+        } catch {
+            isPro = false
+        }
     }
 
     /// Called once at launch. Reuses an existing token, or claims a guest one.
