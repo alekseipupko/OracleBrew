@@ -15,14 +15,21 @@ struct Drink: Identifiable, Equatable {
     let art: String
     let gradient: [Color]
     let isRandom: Bool
+    /// Set for drinks coming from the API; nil for the bundled mock drinks,
+    /// which draw from `art` instead.
+    var imageURL: String? = nil
 
     static func == (lhs: Drink, rhs: Drink) -> Bool { lhs.id == rhs.id }
 }
 
 enum DrinkCatalog {
+    /// The "Random Cup" entry — a client-side path (the app supplies the cup),
+    /// so it's prepended to whatever real drinks the catalog holds.
+    static let randomCup = Drink(id: "random", name: "drink.random.name", blurb: "drink.random.blurb",
+                                 art: "DrinkRandom", gradient: [Color(hex: 0x241649), Color(hex: 0x0E062C)], isRandom: true)
+
     static let all: [Drink] = [
-        Drink(id: "random", name: "drink.random.name", blurb: "drink.random.blurb",
-              art: "DrinkRandom", gradient: [Color(hex: 0x241649), Color(hex: 0x0E062C)], isRandom: true),
+        randomCup,
         Drink(id: "turkish", name: "drink.turkish.name", blurb: "drink.turkish.blurb",
               art: "DrinkTurkish", gradient: [Color(hex: 0x351B27), Color(hex: 0x1C111A)], isRandom: false),
         Drink(id: "espresso", name: "drink.espresso.name", blurb: "drink.espresso.blurb",

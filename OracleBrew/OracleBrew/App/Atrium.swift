@@ -16,6 +16,8 @@ struct Atrium: View {
     @State private var chatStore = ChatSessionStore()
     @State private var historyStore = ReadingHistoryStore()
     @State private var profileStore = UserProfileStore()
+    @State private var session = SessionGate()
+    @State private var catalog = CatalogStore()
 
     /// The floating tab bar only makes sense at each tab's root — once a tab
     /// pushes a destination, it'd otherwise float on top of that content too
@@ -52,6 +54,17 @@ struct Atrium: View {
         .environment(chatStore)
         .environment(historyStore)
         .environment(profileStore)
+        .environment(session)
+        .environment(catalog)
+        .task {
+            await session.start()
+            // Catalog and profile are authed, so they wait for the token
+            // guest-signup mints.
+            if session.isReady {
+                await catalog.refresh()
+                await profileStore.load()
+            }
+        }
     }
 }
 

@@ -783,6 +783,26 @@
         }
       }
     },
+    "profile.save_failed.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong saving your profile. Please try again."
+          }
+        }
+      }
+    },
+    "profile.save_failed.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't save"
+          }
+        }
+      }
+    },
     "profile.subtitle" : {
       "localizations" : {
         "en" : {

@@ -51,14 +51,23 @@ struct DrinkCard: View {
         )
     }
 
+    @ViewBuilder
     private var photo: some View {
-        Image(drink.art)
-            .resizable()
-            .scaledToFill()
-            .frame(height: 108)
-            .frame(maxWidth: .infinity)
-            .clipShape(RoundedRectangle(cornerRadius: Cadence.cardRadius))
-            .allowsHitTesting(false)
+        Group {
+            // Prefer the API image; fall back to the bundled art (slug-mapped)
+            // while the backend serves image: null.
+            if let url = drink.imageURL, !url.isEmpty {
+                RemoteImage(urlString: url, cornerRadius: Cadence.cardRadius)
+            } else {
+                Image(drink.art)
+                    .resizable()
+                    .scaledToFill()
+            }
+        }
+        .frame(height: 108)
+        .frame(maxWidth: .infinity)
+        .clipShape(RoundedRectangle(cornerRadius: Cadence.cardRadius))
+        .allowsHitTesting(false)
     }
 
     private var radio: some View {

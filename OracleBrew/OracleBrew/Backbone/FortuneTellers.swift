@@ -28,6 +28,9 @@ struct FortuneTeller: Identifiable, Equatable, Hashable {
     let blurb: String   // short one-liner for the list card
     let bio: String     // long "About" text
     let reviews: [Review]
+    /// Set for oracles from the API; nil for the bundled mock roster, which
+    /// draws from `portrait` instead.
+    var portraitURL: String? = nil
 
     var reviewCount: Int { reviews.count }
 

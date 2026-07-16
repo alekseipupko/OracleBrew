@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DrinkSelectionView: View {
     @Environment(ReadingDraft.self) private var draft
+    @Environment(CatalogStore.self) private var catalog
     let onContinue: () -> Void
     let onClose: () -> Void
 
@@ -37,7 +38,7 @@ struct DrinkSelectionView: View {
 
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 12) {
-                        ForEach(DrinkCatalog.all) { drink in
+                        ForEach(catalog.drinks) { drink in
                             DrinkCard(
                                 drink: drink,
                                 isSelected: selectedID == drink.id,

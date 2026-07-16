@@ -22,6 +22,7 @@ struct ProfileView: View {
     @State private var loaded = false
     @State private var openField: OpenField?
     @State private var countryQuery = ""
+    @State private var saveFailed = false
     @FocusState private var countrySearchFocused: Bool
 
     /// Only one dropdown may be open at a time — opening another closes it.
@@ -45,6 +46,22 @@ struct ProfileView: View {
             guard !loaded else { return }
             draft = store.profile
             loaded = true
+        }
+        .alert("profile.save_failed.title", isPresented: $saveFailed) {
+            Button("common.ok", role: .cancel) {}
+        } message: {
+            Text("profile.save_failed.message")
+        }
+    }
+
+    private func save() {
+        Task {
+            do {
+                try await store.save(draft)
+                onSaved()
+            } catch {
+                saveFailed = true
+            }
         }
     }
 
@@ -367,21 +384,24 @@ struct ProfileView: View {
     // MARK: Save
 
     private var saveBar: some View {
-        Button {
-            store.save(draft)
-            onSaved()
-        } label: {
-            Text("profile.save")
-                .font(Lettering.displayMedium(18))
-                .foregroundStyle(Pigment.cream)
-                .frame(maxWidth: .infinity)
-                .frame(height: saveBarHeight)
-                .background(Capsule().fill(Pigment.accentGradient))
-                .opacity(canSave ? 1 : 0.4)
-                .contentShape(Capsule())
+        Button(action: save) {
+            ZStack {
+                Text("profile.save")
+                    .font(Lettering.displayMedium(18))
+                    .foregroundStyle(Pigment.cream)
+                    .opacity(store.isSaving ? 0 : 1)
+                if store.isSaving {
+                    ProgressView().tint(Pigment.cream)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: saveBarHeight)
+            .background(Capsule().fill(Pigment.accentGradient))
+            .opacity(canSave ? 1 : 0.4)
+            .contentShape(Capsule())
         }
         .buttonStyle(.plain)
-        .disabled(!canSave)
+        .disabled(!canSave || store.isSaving)
         .padding(.horizontal, 20)
         .padding(.top, fadeHeight)
         .background(

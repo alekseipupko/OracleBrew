@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IntentionView: View {
     @Environment(ReadingDraft.self) private var draft
+    @Environment(CatalogStore.self) private var catalog
     let onContinue: () -> Void
     let onBack: () -> Void
     let onClose: () -> Void
@@ -45,7 +46,7 @@ struct IntentionView: View {
 
                         section("intention.topics") {
                             LazyVGrid(columns: columns, spacing: 8) {
-                                ForEach(TopicCatalog.all) { topic in
+                                ForEach(catalog.topics) { topic in
                                     TopicButton(topic: topic, isSelected: draft.topic == topic) {
                                         draft.topic = topic
                                     }

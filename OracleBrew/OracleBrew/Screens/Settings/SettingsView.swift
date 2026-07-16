@@ -24,6 +24,7 @@ enum SettingsDestination: Hashable {
 struct SettingsView: View {
     @Environment(Pathfinder.self) private var router
     @Environment(UserProfileStore.self) private var profileStore
+    @Environment(SessionGate.self) private var session
     let onBack: () -> Void
     let onOpenProfile: () -> Void
 
@@ -63,7 +64,12 @@ struct SettingsView: View {
         }
         .alert("settings.delete_account.title", isPresented: $showDeleteConfirm) {
             Button("settings.delete_account.confirm", role: .destructive) {
-                profileStore.deleteAccount()
+                Task {
+                    await profileStore.deleteAccount()
+                    // The old token died with the account — mint a fresh guest
+                    // so the app keeps working.
+                    await session.recoverFromUnauthorized()
+                }
             }
             Button("common.cancel", role: .cancel) {}
         } message: {

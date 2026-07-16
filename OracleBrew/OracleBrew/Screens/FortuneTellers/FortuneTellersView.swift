@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FortuneTellersView: View {
     @Environment(ReadingDraft.self) private var draft
+    @Environment(CatalogStore.self) private var catalog
     let onContinue: () -> Void
     let onOpenProfile: (FortuneTeller) -> Void
     let onBack: () -> Void
@@ -30,7 +31,7 @@ struct FortuneTellersView: View {
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 12) {
-                        ForEach(FortuneTellerRoster.all) { teller in
+                        ForEach(catalog.oracles) { teller in
                             TellerCard(
                                 teller: teller,
                                 isSelected: draft.teller == teller,

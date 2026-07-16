@@ -3,8 +3,9 @@
 //  OracleBrew
 //
 //  The user's own details, gathered on the Profile screen. Feeds the greeting
-//  ("Hi Susan!") and, later, the reading's personalization. Persisted locally
-//  via UserDefaults — v1.0 has no backend.
+//  ("Hi Susan!") and, later, the reading's personalization. Backed by the API
+//  (GET/PATCH /profile/); the domain enum raw values are the backend's enum
+//  strings, so they cross the wire unchanged.
 //
 
 import Foundation
@@ -12,7 +13,9 @@ import Foundation
 // MARK: Field options
 
 enum Identity: String, CaseIterable, Codable, Identifiable {
-    case female, male, ratherNot
+    // Raw values are the backend's gender enum.
+    case female, male
+    case ratherNot = "prefer_not_to_say"
     var id: String { rawValue }
 
     var label: String {
@@ -25,7 +28,13 @@ enum Identity: String, CaseIterable, Codable, Identifiable {
 }
 
 enum RelationshipStatus: String, CaseIterable, Codable, Identifiable {
-    case married, inRelationship, single, divorced, complicated
+    // Raw values are the backend's relationship_status enum; declaration order
+    // is the dropdown order from the design.
+    case married
+    case inRelationship = "in_a_relationship"
+    case single
+    case divorced
+    case complicated = "its_complicated"
     var id: String { rawValue }
 
     var label: String {
@@ -40,22 +49,27 @@ enum RelationshipStatus: String, CaseIterable, Codable, Identifiable {
 }
 
 enum Employment: String, CaseIterable, Codable, Identifiable {
-    case studying, working, retired, both, seeking
+    // Raw values are the backend's employment_status enum.
+    case studying, working, both, seeking
+    case notWorking = "not_working"
     var id: String { rawValue }
 
     var label: String {
         switch self {
         case .studying: "Studying"
         case .working: "Working"
-        case .retired: "Retired"
         case .both: "Both"
         case .seeking: "Seeking"
+        case .notWorking: "Not Working"
         }
     }
 }
 
 enum ChildrenStatus: String, CaseIterable, Codable, Identifiable {
-    case have, none, planning
+    // Raw values are the backend's children enum.
+    case have = "yes"
+    case none = "no"
+    case planning
     var id: String { rawValue }
 
     var label: String {
@@ -97,6 +111,8 @@ enum Zodiac: String, Codable, CaseIterable {
 
     /// Western tropical zodiac. Each entry is the sign's *start* day within its
     /// month; a date before its month's cutoff belongs to the previous sign.
+    /// The backend also derives this from the DOB and returns the same value —
+    /// this keeps the label live while the user is still picking a date.
     private static let cutoffs: [(month: Int, day: Int, sign: Zodiac)] = [
         (1, 20, .aquarius), (2, 19, .pisces), (3, 21, .aries), (4, 20, .taurus),
         (5, 21, .gemini), (6, 21, .cancer), (7, 23, .leo), (8, 23, .virgo),
@@ -136,30 +152,40 @@ struct UserProfile: Codable, Equatable {
     var isCreated: Bool { !name.trimmingCharacters(in: .whitespaces).isEmpty }
 }
 
+@MainActor
 @Observable
 final class UserProfileStore {
-    private static let key = "profile.v1"
+    private(set) var profile = UserProfile()
+    private(set) var isLoaded = false
+    var isSaving = false
 
-    private(set) var profile: UserProfile
+    private let repository: ProfileRepository
 
-    init() {
-        if let data = UserDefaults.standard.data(forKey: Self.key),
-           let decoded = try? JSONDecoder().decode(UserProfile.self, from: data) {
-            profile = decoded
-        } else {
-            profile = UserProfile()
-        }
+    init(repository: ProfileRepository = ProfileRepository()) {
+        self.repository = repository
     }
 
-    func save(_ new: UserProfile) {
-        profile = new
-        if let data = try? JSONEncoder().encode(new) {
-            UserDefaults.standard.set(data, forKey: Self.key)
+    /// Pull the profile once the token exists. A failure leaves the empty
+    /// default in place — the screens treat that as "no profile yet".
+    func load() async {
+        guard !isLoaded else { return }
+        if let fetched = try? await repository.fetch() {
+            profile = fetched
         }
+        isLoaded = true
     }
 
-    func deleteAccount() {
+    func save(_ new: UserProfile) async throws {
+        isSaving = true
+        defer { isSaving = false }
+        profile = try await repository.update(new)
+    }
+
+    /// Deletes the server account. The caller then mints a fresh guest token
+    /// (the old one is now invalid) so the app keeps working.
+    func deleteAccount() async {
+        try? await repository.deleteAccount()
         profile = UserProfile()
-        UserDefaults.standard.removeObject(forKey: Self.key)
+        isLoaded = false
     }
 }
