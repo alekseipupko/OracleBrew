@@ -21,21 +21,7 @@ struct ChatsView: View {
 
                 VStack(spacing: 0) {
                     header
-                    if chatStore.threads.isEmpty {
-                        emptyState
-                    } else {
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 10) {
-                                ForEach(chatStore.threads) { thread in
-                                    Button { router.path.append(thread) } label: {
-                                        ChatThreadRow(thread: thread)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                            }
-                            .padding(.top, 12)
-                        }
-                    }
+                    content
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
@@ -43,11 +29,57 @@ struct ChatsView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .waypointDestinations(router)
+            .navigationDestination(for: ChatSummary.self) { summary in
+                OracleChatView(thread: chatStore.thread(for: summary), userName: "Susan", onClose: router.pop)
+            }
             .navigationDestination(for: ChatThread.self) { thread in
                 OracleChatView(thread: thread, userName: "Susan", onClose: router.pop)
             }
         }
         .environment(router)
+        .task { await chatStore.loadList() }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch chatStore.listPhase {
+        case .loading:
+            loadingState
+        case .content(let items):
+            if items.isEmpty { emptyState } else { list(items) }
+        case .loadFailure, .offline:
+            ScreenStateView(
+                kind: chatStore.listPhase.isOffline ? .offline : .failure,
+                retry: { Task { await chatStore.loadList() } }
+            )
+        }
+    }
+
+    private func list(_ items: [ChatSummary]) -> some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 10) {
+                ForEach(items) { summary in
+                    Button { router.path.append(summary) } label: {
+                        ChatThreadRow(summary: summary)
+                    }
+                    .buttonStyle(.plain)
+                    .task { await chatStore.loadMoreIfNeeded(currentItem: summary) }
+                }
+                if chatStore.isLoadingMore {
+                    ProgressView().tint(Pigment.accent).padding(.vertical, 12)
+                }
+            }
+            .padding(.top, 12)
+        }
+    }
+
+    private var loadingState: some View {
+        VStack {
+            Spacer()
+            ProgressView().tint(Pigment.accent)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
     }
 
     private var header: some View {

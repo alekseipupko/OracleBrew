@@ -66,14 +66,23 @@ struct OracleChatView: View {
     }
 
     private func load() async {
-        guard thread.backendID == nil else { return }
+        // Already populated (returning to an open thread) — nothing to do.
+        guard thread.messages.isEmpty, !loading else { return }
         loading = true
         defer { loading = false }
         do {
-            let oracleID = Int(teller.id) ?? 0
-            let created = try await repository.createOrResume(oracleID: oracleID, readingID: draft?.readingID)
-            thread.backendID = created.id
-            let detail = try await repository.detail(id: created.id)
+            // A thread opened from the list already knows its server id; one
+            // opened fresh gets created-or-resumed first.
+            let chatID: Int
+            if let id = thread.backendID {
+                chatID = id
+            } else {
+                let oracleID = Int(teller.id) ?? 0
+                let created = try await repository.createOrResume(oracleID: oracleID, readingID: draft?.readingID)
+                thread.backendID = created.id
+                chatID = created.id
+            }
+            let detail = try await repository.detail(id: chatID)
             thread.messages = (detail.messages ?? []).map(ChatMapper.message)
             thread.quickQuestions = detail.quickQuestions ?? []
         } catch {

@@ -39,7 +39,11 @@ struct TellerCard: View {
             Color.clear
                 .frame(width: 132, height: 204)
                 .overlay {
-                    Image(teller.portrait).resizable().scaledToFill()
+                    if let url = teller.portraitURL, !url.isEmpty {
+                        RemoteImage(urlString: url, cornerRadius: 0)
+                    } else {
+                        Image(teller.portrait).resizable().scaledToFill()
+                    }
                 }
                 .clipShape(Rectangle())
                 .overlay(alignment: .trailing) {

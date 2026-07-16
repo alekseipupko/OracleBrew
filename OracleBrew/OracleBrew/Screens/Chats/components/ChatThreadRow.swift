@@ -6,25 +6,25 @@
 import SwiftUI
 
 struct ChatThreadRow: View {
-    let thread: ChatThread
-
-    private var preview: String {
-        thread.messages.last?.text ?? "Say hello to start the conversation"
-    }
+    let summary: ChatSummary
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(thread.teller.portrait)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 52, height: 52)
-                .clipShape(Circle())
+            Group {
+                if let url = summary.teller.portraitURL, !url.isEmpty {
+                    RemoteImage(urlString: url, cornerRadius: 26)
+                } else {
+                    Image(summary.teller.portrait).resizable().scaledToFill()
+                }
+            }
+            .frame(width: 52, height: 52)
+            .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(thread.teller.name)
+                Text(summary.teller.name)
                     .font(Lettering.displayMedium(16))
                     .foregroundStyle(Pigment.cream)
-                Text(preview)
+                Text(summary.preview)
                     .font(Lettering.body(12))
                     .foregroundStyle(Pigment.cream.opacity(0.5))
                     .lineLimit(1)
