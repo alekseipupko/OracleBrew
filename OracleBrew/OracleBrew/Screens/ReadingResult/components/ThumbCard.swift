@@ -9,13 +9,21 @@
 import SwiftUI
 
 struct ThumbCard: View {
-    let image: Image
+    /// A server image URL takes precedence; `fallback` is the bundled art.
+    var imageURL: String? = nil
+    let fallback: Image
     let caption: LocalizedStringKey
     let value: Text
 
     var body: some View {
         Color.clear
-            .overlay { image.resizable().scaledToFill() }
+            .overlay {
+                if let imageURL, !imageURL.isEmpty {
+                    RemoteImage(urlString: imageURL, cornerRadius: 24)
+                } else {
+                    fallback.resizable().scaledToFill()
+                }
+            }
             .overlay(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(caption)

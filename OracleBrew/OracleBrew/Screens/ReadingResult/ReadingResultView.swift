@@ -90,12 +90,13 @@ struct ReadingResultView: View {
         VStack(spacing: 24) {
             HStack(spacing: 9) {
                 ThumbCard(
-                    image: cupImage,
+                    fallback: cupImage,
                     caption: "result.your_cup",
                     value: draft.drink.map { Text($0.name) } ?? Text("")
                 )
                 ThumbCard(
-                    image: draft.teller.map { Image($0.portrait) } ?? Image("SampleCupCard"),
+                    imageURL: draft.teller?.portraitURL,
+                    fallback: draft.teller.map { Image($0.portrait) } ?? Image("SampleCupCard"),
                     caption: "result.your_oracle",
                     value: Text(draft.teller?.name ?? "")
                 )
