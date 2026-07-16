@@ -47,13 +47,16 @@ struct TellerCard: View {
                         colors: [fadeColor.opacity(0), fadeColor],
                         startPoint: .leading, endPoint: .trailing
                     )
-                    .frame(width: 60)
+                    .frame(width: 53)
                 }
             Spacer(minLength: 0)
         }
         .allowsHitTesting(false)
     }
 
+    /// Figma: a 193×164 text block at (142, 18) — the button sits at its
+    /// bottom, so the card's own bottom inset (204 − 18 − 164 = 22) falls out
+    /// of the fixed height rather than being padded in by hand.
     private var content: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 0) {
@@ -65,29 +68,32 @@ struct TellerCard: View {
                     .foregroundStyle(Pigment.cream.opacity(0.4))
             }
 
-            HStack(spacing: 12) {
-                RatingLabel(rating: teller.rating, starSize: 16, textSize: 12)
-                Text("teller.sessions \(teller.sessions)")
-                    .font(Lettering.body(10)).foregroundStyle(Pigment.cream.opacity(0.4))
-                Text("teller.reviews \(teller.reviewCount)")
-                    .font(Lettering.body(10)).foregroundStyle(Pigment.cream.opacity(0.4))
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 12) {
+                    RatingLabel(rating: teller.rating, starSize: 16, textSize: 12)
+                    Text("teller.sessions \(teller.sessions)")
+                        .font(Lettering.body(10)).foregroundStyle(Pigment.cream.opacity(0.4))
+                    Text("teller.reviews \(teller.reviewCount)")
+                        .font(Lettering.body(10)).foregroundStyle(Pigment.cream.opacity(0.4))
+                }
+
+                chipsRow
+
+                Text(teller.blurb)
+                    .font(Lettering.body(10))
+                    .foregroundStyle(Pigment.cream.opacity(0.4))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
-            chipsRow
-
-            Text(teller.blurb)
-                .font(Lettering.body(10))
-                .foregroundStyle(Pigment.cream.opacity(0.4))
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Spacer(minLength: 6)
+            Spacer(minLength: 0)
             viewProfileButton
         }
+        .frame(height: 164, alignment: .top)
         .padding(.leading, 142)
         .padding(.trailing, 18)
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, 18)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     /// Show as many topic chips as fit (3 → 2 → 1) + a "+N" remainder, never truncating.
@@ -112,10 +118,10 @@ struct TellerCard: View {
     private var viewProfileButton: some View {
         Button(action: onViewProfile) {
             Text("teller.view_profile")
-                .font(Lettering.body(11))
+                .font(Lettering.body(8))
                 .foregroundStyle(Pigment.accent)
                 .frame(maxWidth: .infinity)
-                .frame(height: 26)
+                .frame(height: 24)
                 .background(Capsule().fill(Pigment.accent.opacity(0.15)))
                 .contentShape(Capsule())
         }
@@ -130,8 +136,13 @@ struct TellerCard: View {
                 Image(systemName: "checkmark").font(.system(size: 12, weight: .bold)).foregroundStyle(Pigment.cream)
             }
         }
+        // Figma: 24pt dot at (319, 6) on a 353-wide card → 10 from the trailing
+        // edge, 6 from the top. Pad the dot itself before stretching — padding
+        // after .frame(maxWidth: .infinity) grows the block past the card and
+        // clips the dot.
+        .padding(.top, 6)
+        .padding(.trailing, 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        .padding(10)
         .allowsHitTesting(false)
     }
 }
