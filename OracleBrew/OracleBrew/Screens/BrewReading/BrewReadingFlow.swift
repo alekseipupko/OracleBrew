@@ -15,6 +15,7 @@ enum ReadingStep: Hashable {
 struct BrewReadingFlow: View {
     let onClose: () -> Void
 
+    @Environment(ChatSessionStore.self) private var chatStore
     @State private var draft = ReadingDraft()
     @State private var path = NavigationPath()
 
@@ -67,7 +68,8 @@ struct BrewReadingFlow: View {
                 onClose: onClose
             )
         case .chat:
-            OracleChatView(teller: draft.teller ?? FortuneTellerRoster.all[0], draft: draft, userName: "Susan", onClose: onClose)
+            let teller = draft.teller ?? FortuneTellerRoster.all[0]
+            OracleChatView(thread: chatStore.thread(for: teller, context: draft), userName: "Susan", onClose: onClose)
         }
     }
 

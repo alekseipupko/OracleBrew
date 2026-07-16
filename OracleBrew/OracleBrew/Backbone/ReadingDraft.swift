@@ -24,4 +24,8 @@ final class ReadingDraft {
 
     // Photo of the cup (gallery / camera / a bundled sample for the Random path)
     var photo: UIImage?
+
+    /// Set once this reading is recorded into ReadingHistoryStore, so re-appearing
+    /// on Reading Result (e.g. after a chat) doesn't record a duplicate entry.
+    var historySessionID: UUID?
 }

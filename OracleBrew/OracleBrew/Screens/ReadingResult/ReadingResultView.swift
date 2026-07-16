@@ -11,6 +11,10 @@ import SwiftUI
 
 struct ReadingResultView: View {
     @Environment(ReadingDraft.self) private var draft
+    @Environment(ReadingHistoryStore.self) private var historyStore
+    /// Pre-computed reading to replay verbatim (History tab resume). When nil,
+    /// a fresh reading is generated from `draft` and recorded into history.
+    var existingReading: Reading? = nil
     let onAskOracle: () -> Void
     let onClose: () -> Void
 
@@ -46,7 +50,15 @@ struct ReadingResultView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
-            if reading == nil { reading = ReadingEngine.generate(from: draft) }
+            guard reading == nil else { return }
+            let result = existingReading ?? ReadingEngine.generate(from: draft)
+            reading = result
+            if existingReading == nil, draft.historySessionID == nil,
+               let drink = draft.drink, let teller = draft.teller {
+                let session = historyStore.record(drink: drink, teller: teller, topic: draft.topic,
+                                                   horizon: draft.horizon, photo: draft.photo, reading: result)
+                draft.historySessionID = session.id
+            }
         }
     }
 

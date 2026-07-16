@@ -10,15 +10,16 @@
 import SwiftUI
 
 struct OracleChatView: View {
-    let teller: FortuneTeller
-    let draft: ReadingDraft?
+    let thread: ChatThread
     let userName: String
     let onClose: () -> Void
 
-    @State private var messages: [ChatMessage] = []
+    @Environment(ReadingHistoryStore.self) private var historyStore
     @State private var draftText = ""
     @FocusState private var inputFocused: Bool
 
+    private var teller: FortuneTeller { thread.teller }
+    private var draft: ReadingDraft? { thread.draftContext }
     private var quickQuestions: [String] { ChatEngine.quickQuestions(hasReadingContext: draft?.topic != nil) }
 
     var body: some View {
@@ -30,12 +31,12 @@ struct OracleChatView: View {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 12) {
-                            ForEach(messages) { ChatBubble(message: $0).id($0.id) }
+                            ForEach(thread.messages) { ChatBubble(message: $0).id($0.id) }
                         }
                         .padding(.vertical, 16)
                     }
-                    .onChange(of: messages.count) {
-                        guard let last = messages.last else { return }
+                    .onChange(of: thread.messages.count) {
+                        guard let last = thread.messages.last else { return }
                         withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
                     }
                 }
@@ -46,8 +47,12 @@ struct OracleChatView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
-            guard messages.isEmpty else { return }
-            messages.append(ChatMessage(isFromUser: false, text: ChatEngine.greeting(teller: teller, userName: userName, draft: draft)))
+            if thread.messages.isEmpty {
+                thread.messages.append(ChatMessage(isFromUser: false, text: ChatEngine.greeting(teller: teller, userName: userName, draft: draft)))
+            }
+            if let id = draft?.historySessionID {
+                historyStore.markChatted(id)
+            }
         }
     }
 
@@ -129,9 +134,10 @@ struct OracleChatView: View {
     private func send(_ text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        messages.append(ChatMessage(isFromUser: true, text: trimmed))
+        thread.messages.append(ChatMessage(isFromUser: true, text: trimmed))
         draftText = ""
         inputFocused = false
-        messages.append(ChatMessage(isFromUser: false, text: ChatEngine.reply(to: trimmed, teller: teller, draft: draft)))
+        thread.messages.append(ChatMessage(isFromUser: false, text: ChatEngine.reply(to: trimmed, teller: teller, draft: draft)))
+        thread.lastUpdated = Date()
     }
 }

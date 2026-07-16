@@ -11,6 +11,10 @@ import SwiftUI
 struct Atrium: View {
     @State private var tab: RootTab = .brew
     @State private var brewRouter = Pathfinder()
+    @State private var chatsRouter = Pathfinder()
+    @State private var historyRouter = Pathfinder()
+    @State private var chatStore = ChatSessionStore()
+    @State private var historyStore = ReadingHistoryStore()
     @State private var profileStore = UserProfileStore()
 
     /// The floating tab bar only makes sense at each tab's root — once a tab
@@ -19,7 +23,8 @@ struct Atrium: View {
     private var showTabBar: Bool {
         switch tab {
         case .brew: brewRouter.path.isEmpty
-        case .chats, .history: true
+        case .chats: chatsRouter.path.isEmpty
+        case .history: historyRouter.path.isEmpty
         }
     }
 
@@ -35,29 +40,18 @@ struct Atrium: View {
                 }
                 .environment(brewRouter)
             case .chats:
-                TabPlaceholder(title: "tab.chats")
+                ChatsView(router: chatsRouter)
             case .history:
-                TabPlaceholder(title: "tab.history")
+                HistoryView(router: historyRouter)
             }
 
             if showTabBar {
                 TabBar(selection: $tab)
             }
         }
+        .environment(chatStore)
+        .environment(historyStore)
         .environment(profileStore)
-    }
-}
-
-/// Temporary stand-in for tabs/flows not yet built.
-private struct TabPlaceholder: View {
-    let title: LocalizedStringKey
-    var body: some View {
-        ZStack {
-            Pigment.background.ignoresSafeArea()
-            Text(title)
-                .font(Lettering.displayMedium(24))
-                .foregroundStyle(Pigment.cream)
-        }
     }
 }
 

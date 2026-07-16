@@ -14,6 +14,7 @@ private enum ChatEntryStep: Hashable { case chat }
 struct OracleChatEntryFlow: View {
     let onClose: () -> Void
 
+    @Environment(ChatSessionStore.self) private var chatStore
     @State private var draft = ReadingDraft()
     @State private var path = NavigationPath()
 
@@ -37,7 +38,7 @@ struct OracleChatEntryFlow: View {
             }
             .navigationDestination(for: ChatEntryStep.self) { _ in
                 if let teller = draft.teller {
-                    OracleChatView(teller: teller, draft: nil, userName: "Susan", onClose: onClose)
+                    OracleChatView(thread: chatStore.thread(for: teller, context: nil), userName: "Susan", onClose: onClose)
                 }
             }
         }
