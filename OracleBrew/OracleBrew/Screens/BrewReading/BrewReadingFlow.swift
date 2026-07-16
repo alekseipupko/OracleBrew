@@ -18,6 +18,7 @@ struct BrewReadingFlow: View {
     @Environment(ChatSessionStore.self) private var chatStore
     @State private var draft = ReadingDraft()
     @State private var path = NavigationPath()
+    @State private var readingError: EmissaryFailure?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -38,6 +39,15 @@ struct BrewReadingFlow: View {
             }
         }
         .environment(draft)
+        .alert("reading.failed.title", isPresented: showReadingError) {
+            Button("common.ok", role: .cancel) {}
+        } message: {
+            Text(readingError?.isOffline == true ? "reading.failed.offline" : "reading.failed.message")
+        }
+    }
+
+    private var showReadingError: Binding<Bool> {
+        Binding(get: { readingError != nil }, set: { if !$0 { readingError = nil } })
     }
 
     @ViewBuilder
@@ -66,10 +76,16 @@ struct BrewReadingFlow: View {
             // Swap for the result rather than pushing on top of it — the reading
             // is the destination, and going back from it belongs at the photo
             // step, not at a spinner that would immediately run again.
-            ReadingLoadingView(photo: draft.photo) {
-                path.removeLast()
-                path.append(ReadingStep.result)
-            }
+            ReadingLoadingView(
+                onDone: {
+                    path.removeLast()
+                    path.append(ReadingStep.result)
+                },
+                onFailure: { failure in
+                    path.removeLast()          // back to the photo step
+                    readingError = failure
+                }
+            )
         case .result:
             ReadingResultView(
                 onAskOracle: { path.append(ReadingStep.chat) },

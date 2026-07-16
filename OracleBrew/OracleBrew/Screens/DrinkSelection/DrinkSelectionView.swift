@@ -47,7 +47,10 @@ struct DrinkSelectionView: View {
                                 selectedID = drink.id
                                 if drink.isRandom {
                                     draft.isRandomPath = true
-                                    draft.drink = DrinkCatalog.randomPick()
+                                    // Pick from the live catalog (real ids), not
+                                    // the bundled mock, so the reading can create.
+                                    let real = catalog.drinks.filter { !$0.isRandom }
+                                    draft.drink = real.randomElement() ?? DrinkCatalog.randomPick()
                                 } else {
                                     draft.isRandomPath = false
                                     draft.drink = drink

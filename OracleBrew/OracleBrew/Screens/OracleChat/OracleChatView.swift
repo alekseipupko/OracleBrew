@@ -14,13 +14,16 @@ struct OracleChatView: View {
     let userName: String
     let onClose: () -> Void
 
-    @Environment(ReadingHistoryStore.self) private var historyStore
     @State private var draftText = ""
+    @State private var loading = false
+    @State private var sending = false
+    @State private var sendFailed = false
     @FocusState private var inputFocused: Bool
+
+    private let repository = ChatRepository()
 
     private var teller: FortuneTeller { thread.teller }
     private var draft: ReadingDraft? { thread.draftContext }
-    private var quickQuestions: [String] { ChatEngine.quickQuestions(hasReadingContext: draft?.topic != nil) }
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -32,37 +35,63 @@ struct OracleChatView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 12) {
                             ForEach(thread.messages) { ChatBubble(message: $0).id($0.id) }
+                            if sending { TypingBubble().id("typing") }
                         }
                         .padding(.vertical, 16)
                     }
-                    .onChange(of: thread.messages.count) {
-                        guard let last = thread.messages.last else { return }
-                        withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
-                    }
+                    .overlay { if loading { ProgressView().tint(Pigment.accent) } }
+                    .onChange(of: thread.messages.count) { scrollToBottom(proxy) }
+                    .onChange(of: sending) { scrollToBottom(proxy) }
                 }
-                quickChips
+                if !thread.quickQuestions.isEmpty { quickChips }
                 inputBar
             }
             .padding(.horizontal, 20)
         }
         .toolbar(.hidden, for: .navigationBar)
-        .onAppear {
-            if thread.messages.isEmpty {
-                thread.messages.append(ChatMessage(isFromUser: false, text: ChatEngine.greeting(teller: teller, userName: userName, draft: draft)))
-            }
-            if let id = draft?.historySessionID {
-                historyStore.markChatted(id)
-            }
+        .task { await load() }
+        .alert("chat.send_failed.title", isPresented: $sendFailed) {
+            Button("common.ok", role: .cancel) {}
+        } message: {
+            Text("chat.send_failed.message")
+        }
+    }
+
+    private func scrollToBottom(_ proxy: ScrollViewProxy) {
+        if sending {
+            withAnimation { proxy.scrollTo("typing", anchor: .bottom) }
+        } else if let last = thread.messages.last {
+            withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
+        }
+    }
+
+    private func load() async {
+        guard thread.backendID == nil else { return }
+        loading = true
+        defer { loading = false }
+        do {
+            let oracleID = Int(teller.id) ?? 0
+            let created = try await repository.createOrResume(oracleID: oracleID, readingID: draft?.readingID)
+            thread.backendID = created.id
+            let detail = try await repository.detail(id: created.id)
+            thread.messages = (detail.messages ?? []).map(ChatMapper.message)
+            thread.quickQuestions = detail.quickQuestions ?? []
+        } catch {
+            sendFailed = true
         }
     }
 
     private var header: some View {
         HStack(spacing: 12) {
-            Image(teller.portrait)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 44, height: 44)
-                .clipShape(Circle())
+            Group {
+                if let url = teller.portraitURL, !url.isEmpty {
+                    RemoteImage(urlString: url, cornerRadius: 22)
+                } else {
+                    Image(teller.portrait).resizable().scaledToFill()
+                }
+            }
+            .frame(width: 44, height: 44)
+            .clipShape(Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(teller.name)
                     .font(Lettering.displayMedium(18))
@@ -88,7 +117,7 @@ struct OracleChatView: View {
     private var quickChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(quickQuestions, id: \.self) { question in
+                ForEach(thread.quickQuestions, id: \.self) { question in
                     Button { send(question) } label: {
                         Text(question)
                             .font(Lettering.body(13))
@@ -133,11 +162,51 @@ struct OracleChatView: View {
 
     private func send(_ text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
+        guard !trimmed.isEmpty, !sending, let chatID = thread.backendID else { return }
+
         thread.messages.append(ChatMessage(isFromUser: true, text: trimmed))
         draftText = ""
         inputFocused = false
-        thread.messages.append(ChatMessage(isFromUser: false, text: ChatEngine.reply(to: trimmed, teller: teller, draft: draft)))
-        thread.lastUpdated = Date()
+        sending = true
+
+        Task {
+            defer { sending = false }
+            do {
+                let response = try await repository.send(chatID: chatID, text: trimmed)
+                thread.messages.append(ChatMapper.message(response.assistantMessage))
+                thread.lastUpdated = Date()
+            } catch {
+                // Drop the optimistic user bubble back into the input so nothing
+                // is lost, and surface the failure.
+                if thread.messages.last?.isFromUser == true { thread.messages.removeLast() }
+                draftText = trimmed
+                sendFailed = true
+            }
+        }
+    }
+}
+
+/// Three-dot "oracle is typing" bubble shown while awaiting a reply.
+private struct TypingBubble: View {
+    @State private var phase = 0
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<3, id: \.self) { i in
+                Circle()
+                    .fill(Pigment.cream.opacity(phase == i ? 0.9 : 0.3))
+                    .frame(width: 6, height: 6)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Capsule().fill(Pigment.surface))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .task {
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .milliseconds(350))
+                phase = (phase + 1) % 3
+            }
+        }
     }
 }

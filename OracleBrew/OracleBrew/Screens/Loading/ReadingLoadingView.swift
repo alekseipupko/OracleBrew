@@ -14,8 +14,11 @@
 import SwiftUI
 
 struct ReadingLoadingView: View {
-    let photo: UIImage?
+    @Environment(ReadingDraft.self) private var draft
     let onDone: () -> Void
+    let onFailure: (EmissaryFailure) -> Void
+
+    private let service = ReadingService()
 
     /// Figma lays the orb out in a 353×353 box; every size below is that box's
     /// coordinate space, scaled from the source SVG's 472.138 viewBox (×0.7477).
@@ -30,8 +33,6 @@ struct ReadingLoadingView: View {
     /// centre. Anchoring to the centre (rather than padding from the top) keeps
     /// it clear of the bottom on a 667-tall SE.
     private static let captionCentreOffset: CGFloat = 192
-
-    private let duration: Duration = .seconds(2.5)
 
     @State private var spinning = false
 
@@ -58,8 +59,16 @@ struct ReadingLoadingView: View {
         .toolbar(.hidden, for: .navigationBar)
         .task {
             spinning = true
-            try? await Task.sleep(for: duration)
-            onDone()
+            do {
+                let (reading, id) = try await service.generate(from: draft)
+                draft.reading = reading
+                draft.readingID = id
+                onDone()
+            } catch let failure as EmissaryFailure {
+                onFailure(failure)
+            } catch {
+                onFailure(.server(statusCode: -1))
+            }
         }
     }
 
@@ -96,7 +105,7 @@ struct ReadingLoadingView: View {
 
     private var cupPhoto: some View {
         Group {
-            if let photo {
+            if let photo = draft.photo {
                 Image(uiImage: photo).resizable().scaledToFill()
             } else {
                 Image("SampleCupCard").resizable().scaledToFill()

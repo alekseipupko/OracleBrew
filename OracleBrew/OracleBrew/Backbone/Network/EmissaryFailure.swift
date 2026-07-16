@@ -20,6 +20,8 @@ enum EmissaryFailure: Error {
 
     /// True when re-authenticating (a fresh guest-signup) might recover.
     var isAuthProblem: Bool { if case .unauthorized = self { true } else { false } }
+
+    var isOffline: Bool { if case .offline = self { true } else { false } }
 }
 
 extension EmissaryFailure {

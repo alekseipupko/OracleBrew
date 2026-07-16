@@ -22,9 +22,12 @@ enum TimeHorizon: String, CaseIterable, Identifiable {
 }
 
 struct Topic: Identifiable, Hashable {
-    let id: String
+    let id: String          // slug — stable identity, drives the chip colour
     let name: String
     let color: Color
+    /// The backend's numeric topic id, needed when creating a reading. nil for
+    /// the bundled mock topics.
+    var numericID: Int? = nil
 
     static func == (lhs: Topic, rhs: Topic) -> Bool { lhs.id == rhs.id }
     func hash(into hasher: inout Hasher) { hasher.combine(id) }

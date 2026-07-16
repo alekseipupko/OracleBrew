@@ -116,6 +116,26 @@
         }
       }
     },
+    "chat.send_failed.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The oracle couldn't respond right now. Please try again."
+          }
+        }
+      }
+    },
+    "chat.send_failed.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message not sent"
+          }
+        }
+      }
+    },
     "chats.empty" : {
       "localizations" : {
         "en" : {
@@ -833,6 +853,36 @@
         }
       }
     },
+    "reading.failed.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The oracle couldn't read your cup right now. Please try again."
+          }
+        }
+      }
+    },
+    "reading.failed.offline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No connection. Check your internet and try again."
+          }
+        }
+      }
+    },
+    "reading.failed.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading didn't come through"
+          }
+        }
+      }
+    },
     "result.advice_label" : {
       "localizations" : {
         "en" : {
@@ -1179,6 +1229,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Decipher the Signs of Fate"
+          }
+        }
+      }
+    },
+    "state.failure.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We couldn't load this right now. Please try again."
+          }
+        }
+      }
+    },
+    "state.failure.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong"
+          }
+        }
+      }
+    },
+    "state.offline.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your internet and try again."
+          }
+        }
+      }
+    },
+    "state.offline.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No connection"
+          }
+        }
+      }
+    },
+    "state.retry" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
           }
         }
       }

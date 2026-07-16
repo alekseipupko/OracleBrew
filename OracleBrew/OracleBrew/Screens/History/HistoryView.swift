@@ -2,8 +2,8 @@
 //  HistoryView.swift
 //  OracleBrew
 //
-//  Tab 3 — archive of past Brew Reading sessions. Tapping a card replays the
-//  same stored Reading (not a re-roll) and can resume that oracle's chat.
+//  Tab 3 — the user's past readings, paged from the API. Tapping a card fetches
+//  the full reading and replays it; from there the oracle's chat can resume.
 //
 
 import SwiftUI
@@ -22,21 +22,7 @@ struct HistoryView: View {
 
                 VStack(spacing: 0) {
                     header
-                    if historyStore.sessions.isEmpty {
-                        emptyState
-                    } else {
-                        ScrollView(showsIndicators: false) {
-                            VStack(spacing: 10) {
-                                ForEach(historyStore.sessions) { session in
-                                    Button { router.path.append(session) } label: {
-                                        HistoryCard(session: session)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                            }
-                            .padding(.top, 12)
-                        }
-                    }
+                    content
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
@@ -44,31 +30,62 @@ struct HistoryView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .waypointDestinations(router)
-            .navigationDestination(for: ReadingSession.self) { session in
-                ReadingResultView(
-                    existingReading: session.reading,
+            .navigationDestination(for: HistoryItem.self) { item in
+                HistoryReplayView(
+                    item: item,
                     onAskOracle: {
-                        router.path.append(chatStore.thread(for: session.teller, context: makeDraft(session)))
+                        router.path.append(chatStore.thread(for: item.teller, context: makeDraft(item)))
                     },
                     onClose: router.pop
                 )
-                .environment(makeDraft(session))
             }
             .navigationDestination(for: ChatThread.self) { thread in
                 OracleChatView(thread: thread, userName: "Susan", onClose: router.pop)
             }
         }
         .environment(router)
+        .task { await historyStore.loadFirst() }
     }
 
-    private func makeDraft(_ session: ReadingSession) -> ReadingDraft {
+    @ViewBuilder
+    private var content: some View {
+        switch historyStore.phase {
+        case .loading:
+            loadingState
+        case .content(let items):
+            if items.isEmpty { emptyState } else { list(items) }
+        case .loadFailure, .offline:
+            ScreenStateView(
+                kind: historyStore.phase.isOffline ? .offline : .failure,
+                retry: { Task { await historyStore.loadFirst() } }
+            )
+        }
+    }
+
+    private func list(_ items: [HistoryItem]) -> some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 10) {
+                ForEach(items) { item in
+                    Button { router.path.append(item) } label: {
+                        HistoryCard(item: item)
+                    }
+                    .buttonStyle(.plain)
+                    .task { await historyStore.loadMoreIfNeeded(currentItem: item) }
+                }
+                if historyStore.isLoadingMore {
+                    ProgressView().tint(Pigment.accent).padding(.vertical, 12)
+                }
+            }
+            .padding(.top, 12)
+        }
+    }
+
+    private func makeDraft(_ item: HistoryItem) -> ReadingDraft {
         let draft = ReadingDraft()
-        draft.drink = session.drink
-        draft.teller = session.teller
-        draft.topic = session.topic
-        draft.horizon = session.horizon
-        draft.photo = session.photo
-        draft.historySessionID = session.id
+        draft.drink = item.drink
+        draft.teller = item.teller
+        draft.topic = item.topic
+        draft.readingID = item.id
         return draft
     }
 
@@ -88,6 +105,15 @@ struct HistoryView: View {
         .padding(.bottom, 12)
     }
 
+    private var loadingState: some View {
+        VStack {
+            Spacer()
+            ProgressView().tint(Pigment.accent)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
+
     private var emptyState: some View {
         VStack(spacing: 12) {
             Spacer()
@@ -101,5 +127,53 @@ struct HistoryView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+/// Fetches the full reading for a history row, then hands it to the Result
+/// screen for verbatim replay.
+private struct HistoryReplayView: View {
+    let item: HistoryItem
+    let onAskOracle: () -> Void
+    let onClose: () -> Void
+
+    @Environment(ReadingHistoryStore.self) private var historyStore
+    @State private var reading: Reading?
+    @State private var failed = false
+
+    private var draft: ReadingDraft {
+        let draft = ReadingDraft()
+        draft.drink = item.drink
+        draft.teller = item.teller
+        draft.topic = item.topic
+        draft.readingID = item.id
+        return draft
+    }
+
+    var body: some View {
+        Group {
+            if let reading {
+                ReadingResultView(existingReading: reading, onAskOracle: onAskOracle, onClose: onClose)
+                    .environment(draft)
+            } else if failed {
+                ScreenStateView(kind: .failure, retry: { Task { await load() } })
+            } else {
+                ZStack {
+                    Pigment.background.ignoresSafeArea()
+                    ProgressView().tint(Pigment.accent)
+                }
+                .toolbar(.hidden, for: .navigationBar)
+            }
+        }
+        .task { await load() }
+    }
+
+    private func load() async {
+        failed = false
+        if let result = await historyStore.reading(for: item) {
+            reading = result
+        } else {
+            failed = true
+        }
     }
 }

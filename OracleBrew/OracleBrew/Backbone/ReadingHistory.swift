@@ -2,56 +2,76 @@
 //  ReadingHistory.swift
 //  OracleBrew
 //
-//  Reading History (tab): archive of past Brew Reading sessions. In-memory
-//  only for v1.0 (no Vault/persistence yet) — cleared on app relaunch.
+//  Reading History (tab): the user's past readings, paged from GET /history/
+//  (page size 12). A card shows a preview; tapping it fetches the full reading
+//  for replay.
 //
 
 import SwiftUI
 
-@Observable
-final class ReadingSession: Identifiable {
-    let id = UUID()
-    let date: Date
+struct HistoryItem: Identifiable, Hashable {
+    let id: Int                 // server reading id
     let drink: Drink
     let teller: FortuneTeller
     let topic: Topic?
-    let horizon: TimeHorizon
-    let photo: UIImage?
-    let reading: Reading
-    var hasChatted: Bool
+    let cupImageURL: String?
+    let preview: String
+    let adviceHeadline: String
+    let timeframe: String
+    let hasChat: Bool
+    let date: Date
 
-    init(date: Date, drink: Drink, teller: FortuneTeller, topic: Topic?, horizon: TimeHorizon,
-         photo: UIImage?, reading: Reading, hasChatted: Bool = false) {
-        self.date = date
-        self.drink = drink
-        self.teller = teller
-        self.topic = topic
-        self.horizon = horizon
-        self.photo = photo
-        self.reading = reading
-        self.hasChatted = hasChatted
-    }
-}
-
-extension ReadingSession: Hashable {
-    static func == (lhs: ReadingSession, rhs: ReadingSession) -> Bool { lhs.id == rhs.id }
+    static func == (lhs: HistoryItem, rhs: HistoryItem) -> Bool { lhs.id == rhs.id }
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
+@MainActor
 @Observable
 final class ReadingHistoryStore {
-    private(set) var sessions: [ReadingSession] = []
+    private(set) var phase: ScreenPhase<[HistoryItem]> = .loading
+    private(set) var items: [HistoryItem] = []
+    private(set) var isLoadingMore = false
 
-    @discardableResult
-    func record(drink: Drink, teller: FortuneTeller, topic: Topic?, horizon: TimeHorizon,
-                photo: UIImage?, reading: Reading) -> ReadingSession {
-        let session = ReadingSession(date: Date(), drink: drink, teller: teller, topic: topic,
-                                      horizon: horizon, photo: photo, reading: reading)
-        sessions.insert(session, at: 0)
-        return session
+    private var nextPage = 1
+    private var canLoadMore = true
+    private let repository: HistoryRepository
+
+    init(repository: HistoryRepository = HistoryRepository()) {
+        self.repository = repository
     }
 
-    func markChatted(_ id: UUID) {
-        sessions.first { $0.id == id }?.hasChatted = true
+    func loadFirst() async {
+        nextPage = 1
+        canLoadMore = true
+        items = []
+        phase = .loading
+        await fetchNextPage(replacing: true)
+    }
+
+    func loadMoreIfNeeded(currentItem: HistoryItem) async {
+        guard canLoadMore, !isLoadingMore, currentItem.id == items.last?.id else { return }
+        isLoadingMore = true
+        defer { isLoadingMore = false }
+        await fetchNextPage(replacing: false)
+    }
+
+    /// Pulls the full reading for a history row so the Result screen can replay it.
+    func reading(for item: HistoryItem) async -> Reading? {
+        try? await repository.readingDetail(id: item.id)
+    }
+
+    private func fetchNextPage(replacing: Bool) async {
+        do {
+            let page = try await repository.page(nextPage)
+            let mapped = page.results.map(HistoryMapper.item)
+            items = replacing ? mapped : items + mapped
+            canLoadMore = page.hasMore
+            nextPage += 1
+            phase = .content(items)
+        } catch let failure as EmissaryFailure {
+            if replacing { phase = .from(failure) }
+        } catch {
+            if replacing { phase = .loadFailure }
+        }
     }
 }

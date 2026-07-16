@@ -87,6 +87,6 @@ enum CatalogMapper {
     static func topic(_ dto: TopicDTO) -> Topic {
         // Recover the design colour by slug; unknown slugs get the accent.
         let colour = TopicCatalog.all.first { $0.id == dto.slug }?.color ?? Pigment.accent
-        return Topic(id: dto.slug, name: dto.title, color: colour)
+        return Topic(id: dto.slug, name: dto.title, color: colour, numericID: dto.id)
     }
 }

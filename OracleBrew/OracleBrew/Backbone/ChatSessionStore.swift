@@ -17,6 +17,11 @@ final class ChatThread: Identifiable {
     let draftContext: ReadingDraft?
     var messages: [ChatMessage] = []
     var lastUpdated = Date()
+    /// The server chat id, resolved on first open (create-or-resume). Until then
+    /// messages haven't been loaded.
+    var backendID: Int?
+    /// Quick-question chips the server suggests for this thread.
+    var quickQuestions: [String] = []
 
     init(teller: FortuneTeller, draftContext: ReadingDraft?) {
         self.teller = teller
