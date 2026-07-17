@@ -46,15 +46,6 @@
   "44": "CGFloat",
   "45": "NavigationPath",
   "46": "String",
-  "47": "FlowCard",
-  "48": "StarRating.swift",
   "49": "NavigationPath",
-  "50": "LocalizedStringKey",
-  "51": "Color",
-  "52": "HistoryCard",
-  "53": "BrewView",
-  "54": "DrinkSelectionView",
-  "55": "HistoryItem",
-  "56": "String",
-  "57": "Pathfinder"
+  "50": "LocalizedStringKey"
 }

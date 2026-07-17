@@ -1,0 +1,607 @@
+{
+  "communities": {
+    "0": [
+      "equatable",
+      "foundation",
+      "oraclebrew_oraclebrew_backbone_chatengine",
+      "oraclebrew_oraclebrew_backbone_chatengine_chatengine",
+      "oraclebrew_oraclebrew_backbone_chatengine_chatengine_greeting",
+      "oraclebrew_oraclebrew_backbone_chatengine_chatengine_quickquestions",
+      "oraclebrew_oraclebrew_backbone_chatengine_chatengine_reply",
+      "oraclebrew_oraclebrew_backbone_chatengine_chatmessage",
+      "oraclebrew_oraclebrew_backbone_chatengine_swift_bool",
+      "oraclebrew_oraclebrew_backbone_chatengine_swift_fortuneteller",
+      "oraclebrew_oraclebrew_backbone_chatengine_swift_string",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_chatsessionstore",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_chatsessionstore_thread",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_chatthread",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_chatthread_hash",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_chatthread_init",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_swift_bool",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_swift_fortuneteller",
+      "oraclebrew_oraclebrew_backbone_chatsessionstore_swift_hasher",
+      "oraclebrew_oraclebrew_backbone_readingdraft",
+      "oraclebrew_oraclebrew_backbone_readingdraft_readingdraft",
+      "oraclebrew_oraclebrew_backbone_readingdraft_swift_drink",
+      "oraclebrew_oraclebrew_backbone_readingdraft_swift_fortuneteller",
+      "oraclebrew_oraclebrew_backbone_readingdraft_swift_string",
+      "oraclebrew_oraclebrew_backbone_readingdraft_swift_uiimage",
+      "oraclebrew_oraclebrew_backbone_readingdraft_swift_uuid",
+      "oraclebrew_oraclebrew_backbone_waypoint",
+      "oraclebrew_oraclebrew_screens_chats_components_chatthreadrow",
+      "oraclebrew_oraclebrew_screens_chats_components_chatthreadrow_chatthreadrow",
+      "oraclebrew_oraclebrew_screens_chats_components_chatthreadrow_swift_string",
+      "oraclebrew_oraclebrew_screens_history_historyview",
+      "oraclebrew_oraclebrew_screens_history_historyview_historyview",
+      "oraclebrew_oraclebrew_screens_history_historyview_historyview_makedraft",
+      "oraclebrew_oraclebrew_screens_history_historyview_swift_cgfloat",
+      "oraclebrew_oraclebrew_screens_history_historyview_swift_navigationpath",
+      "oraclebrew_oraclebrew_screens_oraclechat_components_chatbubble",
+      "oraclebrew_oraclebrew_screens_oraclechat_components_chatbubble_chatbubble",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_oraclechatview",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_oraclechatview_send",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_swift_bool",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_swift_fortuneteller",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_swift_string",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_swift_void"
+    ],
+    "1": [
+      "binding",
+      "color",
+      "item",
+      "oraclebrew_oraclebrew_kit_segmentedselector",
+      "oraclebrew_oraclebrew_kit_segmentedselector_segmentedselector",
+      "oraclebrew_oraclebrew_kit_segmentedselector_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_brewreadingflow_step",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_intentionview",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_intentionview_questionfield",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_intentionview_section",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_swift_bool",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_swift_string",
+      "oraclebrew_oraclebrew_screens_intention_intentionview_swift_void",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_photouploadview",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_photouploadview_loadpicked",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_photouploadview_prefillrandomifneeded",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_photouploadview_secondarylabel",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_swift_bool",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview_swift_void",
+      "oraclebrew_oraclebrew_screens_readingresult_components_symbolchip_symbolchip",
+      "oraclebrew_oraclebrew_screens_readingresult_components_thumbcard",
+      "oraclebrew_oraclebrew_screens_readingresult_components_thumbcard_swift_image",
+      "oraclebrew_oraclebrew_screens_readingresult_components_thumbcard_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_readingresult_components_thumbcard_thumbcard",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_advice",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_content",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_keysymbols",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_savephoto",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_secondarylabel",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview_whatisee",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_swift_image",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_swift_string",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview_swift_void",
+      "photospickeritem",
+      "text",
+      "view"
+    ],
+    "2": [
+      "lineargradient",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_drink",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_drinkcatalog",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_drinkcatalog_randompick",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_swift_bool",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_backbone_drinkcatalog_swift_string",
+      "oraclebrew_oraclebrew_kit_pigment",
+      "oraclebrew_oraclebrew_kit_pigment_color",
+      "oraclebrew_oraclebrew_kit_pigment_color_init",
+      "oraclebrew_oraclebrew_kit_pigment_pigment",
+      "oraclebrew_oraclebrew_kit_pigment_swift_double",
+      "oraclebrew_oraclebrew_kit_starrating",
+      "oraclebrew_oraclebrew_kit_starrating_pigment",
+      "oraclebrew_oraclebrew_kit_starrating_ratinglabel",
+      "oraclebrew_oraclebrew_kit_starrating_starrow",
+      "oraclebrew_oraclebrew_kit_starrating_swift_cgfloat",
+      "oraclebrew_oraclebrew_kit_starrating_swift_double",
+      "oraclebrew_oraclebrew_kit_starrating_swift_int",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard_flowcard",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard_swift_cgfloat",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard_swift_string",
+      "oraclebrew_oraclebrew_screens_brew_components_flowcard_swift_void",
+      "oraclebrew_oraclebrew_screens_drinkselection_components_drinkcard",
+      "oraclebrew_oraclebrew_screens_drinkselection_components_drinkcard_drinkcard",
+      "oraclebrew_oraclebrew_screens_drinkselection_components_drinkcard_swift_bool",
+      "oraclebrew_oraclebrew_screens_drinkselection_components_drinkcard_swift_void",
+      "uint32"
+    ],
+    "3": [
+      "oraclebrew_oraclebrew_kit_stepdots",
+      "oraclebrew_oraclebrew_kit_stepdots_stepdots",
+      "oraclebrew_oraclebrew_kit_stepdots_swift_int",
+      "oraclebrew_oraclebrew_screens_brew_brewmodel",
+      "oraclebrew_oraclebrew_screens_brew_brewmodel_brewmodel",
+      "oraclebrew_oraclebrew_screens_brew_brewmodel_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_brew_brewmodel_swift_string",
+      "oraclebrew_oraclebrew_screens_brew_brewview",
+      "oraclebrew_oraclebrew_screens_brew_brewview_brewview",
+      "oraclebrew_oraclebrew_screens_brew_brewview_swift_cgfloat",
+      "oraclebrew_oraclebrew_screens_chats_chatsview",
+      "oraclebrew_oraclebrew_screens_chats_chatsview_chatsview",
+      "oraclebrew_oraclebrew_screens_chats_chatsview_swift_cgfloat",
+      "oraclebrew_oraclebrew_screens_chats_chatsview_swift_navigationpath",
+      "oraclebrew_oraclebrew_screens_drinkselection_drinkselectionview",
+      "oraclebrew_oraclebrew_screens_drinkselection_drinkselectionview_drinkselectionview",
+      "oraclebrew_oraclebrew_screens_drinkselection_drinkselectionview_swift_string",
+      "oraclebrew_oraclebrew_screens_drinkselection_drinkselectionview_swift_void",
+      "oraclebrew_oraclebrew_screens_history_components_historycard",
+      "oraclebrew_oraclebrew_screens_history_components_historycard_historycard",
+      "oraclebrew_oraclebrew_screens_history_components_historycard_swift_string",
+      "oraclebrew_oraclebrew_screens_intention_components_topicbutton",
+      "oraclebrew_oraclebrew_screens_intention_components_topicbutton_swift_bool",
+      "oraclebrew_oraclebrew_screens_intention_components_topicbutton_swift_void",
+      "oraclebrew_oraclebrew_screens_intention_components_topicbutton_topicbutton",
+      "oraclebrew_oraclebrew_screens_intention_intentionview",
+      "oraclebrew_oraclebrew_screens_photoupload_photouploadview",
+      "oraclebrew_oraclebrew_screens_readingresult_components_symbolchip",
+      "oraclebrew_oraclebrew_screens_readingresult_readingresultview",
+      "photosui",
+      "swiftui"
+    ],
+    "4": [
+      "date",
+      "hashable",
+      "oraclebrew_oraclebrew_backbone_intention",
+      "oraclebrew_oraclebrew_backbone_intention_swift_bool",
+      "oraclebrew_oraclebrew_backbone_intention_swift_hasher",
+      "oraclebrew_oraclebrew_backbone_intention_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_backbone_intention_timehorizon",
+      "oraclebrew_oraclebrew_backbone_intention_timehorizon_days",
+      "oraclebrew_oraclebrew_backbone_intention_timehorizon_month",
+      "oraclebrew_oraclebrew_backbone_intention_timehorizon_year",
+      "oraclebrew_oraclebrew_backbone_intention_topic",
+      "oraclebrew_oraclebrew_backbone_intention_topic_hash",
+      "oraclebrew_oraclebrew_backbone_intention_topiccatalog",
+      "oraclebrew_oraclebrew_backbone_readinghistory",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readinghistorystore",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readinghistorystore_markchatted",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readinghistorystore_record",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readingsession",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readingsession_hash",
+      "oraclebrew_oraclebrew_backbone_readinghistory_readingsession_init",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_bool",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_drink",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_fortuneteller",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_hasher",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_uiimage",
+      "oraclebrew_oraclebrew_backbone_readinghistory_swift_uuid",
+      "string"
+    ],
+    "5": [
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_backbone",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_brew_reading_flow",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_chat_engine",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_deferred_scope",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_drink_catalog",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_fortune_teller_characters",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_fortune_teller_provider",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_history_store",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_house_kit_primitives",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_localization_rtl",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_mvvm_router",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_onboarding",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_oracle_chat",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_pathfinder",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_protocol_boundary",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_reading_engine",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_reading_history",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_reading_result",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_screen_bundles_f20",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_settings",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_share_stories_card",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_spec",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_throb",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_user_profile_store",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_vault",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_waypoint"
+    ],
+    "6": [
+      "hasher",
+      "identifiable",
+      "oraclebrew_oraclebrew_backbone_fortunetellers",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_fortuneteller",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_fortuneteller_hash",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_fortunetellerroster",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_review",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_swift_bool",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_swift_double",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_swift_int",
+      "oraclebrew_oraclebrew_backbone_fortunetellers_swift_string",
+      "oraclebrew_oraclebrew_kit_topicchip",
+      "oraclebrew_oraclebrew_kit_topicchip_swift_bool",
+      "oraclebrew_oraclebrew_kit_topicchip_swift_string",
+      "oraclebrew_oraclebrew_kit_topicchip_topicchip",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard_swift_bool",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard_swift_int",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard_swift_void",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard_tellercard",
+      "oraclebrew_oraclebrew_screens_fortunetellers_components_tellercard_tellercard_chipset",
+      "oraclebrew_oraclebrew_screens_fortunetellers_fortunetellersview",
+      "oraclebrew_oraclebrew_screens_fortunetellers_fortunetellersview_fortunetellersview",
+      "oraclebrew_oraclebrew_screens_fortunetellers_fortunetellersview_swift_void",
+      "oraclebrew_oraclebrew_screens_tellerprofile_components_reviewcard",
+      "oraclebrew_oraclebrew_screens_tellerprofile_components_reviewcard_reviewcard"
+    ],
+    "7": [
+      "any",
+      "context",
+      "nsobject",
+      "oraclebrew_oraclebrew_kit_cadence",
+      "oraclebrew_oraclebrew_kit_cadence_cadence",
+      "oraclebrew_oraclebrew_kit_cadence_screen",
+      "oraclebrew_oraclebrew_kit_cadence_swift_cgfloat",
+      "oraclebrew_oraclebrew_kit_camerapicker",
+      "oraclebrew_oraclebrew_kit_camerapicker_camerapicker",
+      "oraclebrew_oraclebrew_kit_camerapicker_camerapicker_makecoordinator",
+      "oraclebrew_oraclebrew_kit_camerapicker_camerapicker_makeuiviewcontroller",
+      "oraclebrew_oraclebrew_kit_camerapicker_camerapicker_updateuiviewcontroller",
+      "oraclebrew_oraclebrew_kit_camerapicker_coordinator",
+      "oraclebrew_oraclebrew_kit_camerapicker_coordinator_imagepickercontroller",
+      "oraclebrew_oraclebrew_kit_camerapicker_coordinator_imagepickercontrollerdidcancel",
+      "oraclebrew_oraclebrew_kit_camerapicker_coordinator_init",
+      "oraclebrew_oraclebrew_kit_camerapicker_swift_bool",
+      "oraclebrew_oraclebrew_kit_camerapicker_swift_uiimage",
+      "oraclebrew_oraclebrew_kit_camerapicker_swift_void",
+      "uiimagepickercontroller",
+      "uiimagepickercontrollerdelegate",
+      "uikit",
+      "uinavigationcontrollerdelegate",
+      "uiviewcontrollerrepresentable"
+    ],
+    "8": [
+      "caseiterable",
+      "oraclebrew_oraclebrew_app_atrium",
+      "oraclebrew_oraclebrew_app_atrium_atrium",
+      "oraclebrew_oraclebrew_app_atrium_atrium_destination",
+      "oraclebrew_oraclebrew_app_atrium_swift_bool",
+      "oraclebrew_oraclebrew_app_atrium_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_app_atrium_tabplaceholder",
+      "oraclebrew_oraclebrew_backbone_pathfinder",
+      "oraclebrew_oraclebrew_backbone_pathfinder_pathfinder",
+      "oraclebrew_oraclebrew_backbone_pathfinder_pathfinder_pop",
+      "oraclebrew_oraclebrew_backbone_pathfinder_pathfinder_poptoroot",
+      "oraclebrew_oraclebrew_backbone_pathfinder_pathfinder_push",
+      "oraclebrew_oraclebrew_backbone_waypoint_waypoint",
+      "oraclebrew_oraclebrew_backbone_waypoint_waypoint_brewreading",
+      "oraclebrew_oraclebrew_backbone_waypoint_waypoint_settings",
+      "oraclebrew_oraclebrew_kit_tabchrome",
+      "oraclebrew_oraclebrew_kit_tabchrome_roottab",
+      "oraclebrew_oraclebrew_kit_tabchrome_roottab_brew",
+      "oraclebrew_oraclebrew_kit_tabchrome_roottab_chats",
+      "oraclebrew_oraclebrew_kit_tabchrome_roottab_history",
+      "oraclebrew_oraclebrew_kit_tabchrome_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_kit_tabchrome_swift_string",
+      "oraclebrew_oraclebrew_kit_tabchrome_tabbar"
+    ],
+    "9": [
+      "app",
+      "content",
+      "coretext",
+      "font",
+      "oraclebrew_oraclebrew_app_ignition",
+      "oraclebrew_oraclebrew_app_ignition_ignition",
+      "oraclebrew_oraclebrew_app_ignition_ignition_init",
+      "oraclebrew_oraclebrew_kit_lettering",
+      "oraclebrew_oraclebrew_kit_lettering_lettering",
+      "oraclebrew_oraclebrew_kit_lettering_lettering_body",
+      "oraclebrew_oraclebrew_kit_lettering_lettering_bodymedium",
+      "oraclebrew_oraclebrew_kit_lettering_lettering_display",
+      "oraclebrew_oraclebrew_kit_lettering_lettering_displaymedium",
+      "oraclebrew_oraclebrew_kit_lettering_lettering_registerfonts",
+      "oraclebrew_oraclebrew_kit_lettering_swift_cgfloat",
+      "oraclebrew_oraclebrew_screens_tellerprofile_tellerprofileview",
+      "oraclebrew_oraclebrew_screens_tellerprofile_tellerprofileview_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_tellerprofile_tellerprofileview_swift_void",
+      "oraclebrew_oraclebrew_screens_tellerprofile_tellerprofileview_tellerprofileview",
+      "oraclebrew_oraclebrew_screens_tellerprofile_tellerprofileview_tellerprofileview_section",
+      "scene"
+    ],
+    "10": [
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_brewreadingflow",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_brewreadingflow_pop",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_flowstub",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep_chat",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep_intention",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep_photo",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep_result",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_readingstep_tellers",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_screens_brewreading_brewreadingflow_swift_void"
+    ],
+    "11": [
+      "oraclebrew_oraclebrew_backbone_readingengine",
+      "oraclebrew_oraclebrew_backbone_readingengine_reading",
+      "oraclebrew_oraclebrew_backbone_readingengine_readingengine",
+      "oraclebrew_oraclebrew_backbone_readingengine_readingengine_generate",
+      "oraclebrew_oraclebrew_backbone_readingengine_readingsymbol",
+      "oraclebrew_oraclebrew_backbone_readingengine_seededgenerator",
+      "oraclebrew_oraclebrew_backbone_readingengine_seededgenerator_init",
+      "oraclebrew_oraclebrew_backbone_readingengine_seededgenerator_next",
+      "oraclebrew_oraclebrew_backbone_readingengine_swift_string",
+      "randomnumbergenerator",
+      "uint64"
+    ],
+    "12": [
+      "cgrect",
+      "cgsize",
+      "layout",
+      "oraclebrew_oraclebrew_kit_flowlayout",
+      "oraclebrew_oraclebrew_kit_flowlayout_flowlayout",
+      "oraclebrew_oraclebrew_kit_flowlayout_flowlayout_placesubviews",
+      "oraclebrew_oraclebrew_kit_flowlayout_flowlayout_sizethatfits",
+      "oraclebrew_oraclebrew_kit_flowlayout_swift_cgfloat",
+      "proposedviewsize",
+      "subviews"
+    ],
+    "13": [
+      "oraclebrew_oraclebrew_kit_flowchrome",
+      "oraclebrew_oraclebrew_kit_flowchrome_flowheader",
+      "oraclebrew_oraclebrew_kit_flowchrome_flowheader_chip",
+      "oraclebrew_oraclebrew_kit_flowchrome_primarybutton",
+      "oraclebrew_oraclebrew_kit_flowchrome_secondarybutton",
+      "oraclebrew_oraclebrew_kit_flowchrome_swift_bool",
+      "oraclebrew_oraclebrew_kit_flowchrome_swift_int",
+      "oraclebrew_oraclebrew_kit_flowchrome_swift_localizedstringkey",
+      "oraclebrew_oraclebrew_kit_flowchrome_swift_string",
+      "oraclebrew_oraclebrew_kit_flowchrome_swift_void"
+    ],
+    "14": [
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_cadence",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_design_system_kit",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_figma_source_of_truth",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_lettering",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_pigment",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_platform_constraints"
+    ],
+    "15": [
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatentryflow",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatentryflow_chatentrystep",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatentryflow_chatentrystep_chat",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatentryflow_oraclechatentryflow",
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatentryflow_swift_void"
+    ],
+    "16": [
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_atrium",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_build_order",
+      "docs_superpowers_specs_2026_07_14_oraclebrew_v1_design_ignition"
+    ],
+    "17": [
+      "mcp",
+      "mcp_mcp_server_figma_dev_mode"
+    ],
+    "18": [
+      "cgfloat"
+    ],
+    "19": [
+      "drink"
+    ],
+    "20": [
+      "fortuneteller"
+    ],
+    "21": [
+      "int"
+    ],
+    "22": [
+      "localizedstringkey"
+    ],
+    "23": [
+      "oraclebrew_oraclebrew_backbone_chatengine_swift_readingdraft"
+    ],
+    "24": [
+      "oraclebrew_oraclebrew_screens_oraclechat_oraclechatview_swift_readingdraft"
+    ],
+    "25": [
+      "readingdraft"
+    ],
+    "26": [
+      "roottab"
+    ],
+    "27": [
+      "timehorizon"
+    ],
+    "28": [
+      "topic"
+    ],
+    "29": [
+      "void"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06565656565656566,
+    "1": 0.09615384615384616,
+    "2": 0.07526881720430108,
+    "3": 0.06451612903225806,
+    "4": 0.13675213675213677,
+    "5": 0.10153846153846154,
+    "6": 0.09846153846153846,
+    "7": 0.11956521739130435,
+    "8": 0.09486166007905138,
+    "9": 0.12380952380952381,
+    "10": 0.18181818181818182,
+    "11": 0.36363636363636365,
+    "12": 0.26666666666666666,
+    "13": 0.3111111111111111,
+    "14": 0.3333333333333333,
+    "15": 0.4,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0
+  },
+  "gods": [
+    {
+      "id": "swiftui",
+      "label": "SwiftUI",
+      "degree": 41
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_readinghistory_readingsession",
+      "label": "ReadingSession",
+      "degree": 21
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_readingdraft_readingdraft",
+      "label": "ReadingDraft",
+      "degree": 18
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_fortunetellers_fortuneteller",
+      "label": "FortuneTeller",
+      "degree": 17
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_chatsessionstore_chatthread",
+      "label": "ChatThread",
+      "degree": 16
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_intention_topic",
+      "label": "Topic",
+      "degree": 15
+    },
+    {
+      "id": "oraclebrew_oraclebrew_screens_readingresult_readingresultview_readingresultview",
+      "label": "ReadingResultView",
+      "degree": 13
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_drinkcatalog_drink",
+      "label": "Drink",
+      "degree": 12
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_intention_timehorizon",
+      "label": "TimeHorizon",
+      "degree": 12
+    },
+    {
+      "id": "oraclebrew_oraclebrew_backbone_readingengine_reading",
+      "label": "Reading",
+      "degree": 12
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Pigment",
+      "target": "Color",
+      "source_files": [
+        "OracleBrew/OracleBrew/Kit/StarRating.swift",
+        "OracleBrew/OracleBrew/Kit/Pigment.swift"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `Pigment` unexpectedly reaches hub `Color`"
+    },
+    {
+      "source": "TellerCard",
+      "target": "Color",
+      "source_files": [
+        "OracleBrew/OracleBrew/Screens/FortuneTellers/components/TellerCard.swift",
+        "OracleBrew/OracleBrew/Kit/Pigment.swift"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "Atrium",
+      "target": "ChatSessionStore",
+      "source_files": [
+        "OracleBrew/OracleBrew/App/Atrium.swift",
+        "OracleBrew/OracleBrew/Backbone/ChatSessionStore.swift"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "Atrium",
+      "target": "ReadingHistoryStore",
+      "source_files": [
+        "OracleBrew/OracleBrew/App/Atrium.swift",
+        "OracleBrew/OracleBrew/Backbone/ReadingHistory.swift"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "BrewReadingFlow",
+      "target": "ReadingDraft",
+      "source_files": [
+        "OracleBrew/OracleBrew/Screens/BrewReading/BrewReadingFlow.swift",
+        "OracleBrew/OracleBrew/Backbone/ReadingDraft.swift"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `SwiftUI` connect `SwiftUI` to `ReadingDraft`, `View`, `Drink`, `ReadingSession`, `FortuneTeller`, `CameraPicker`, `RootTab`, `Lettering`, `ReadingStep`, `FlowLayout`, `FlowHeader`, `OracleChatEntryFlow`?",
+      "why": "High betweenness centrality (0.295) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `ReadingDraft` connect `ReadingDraft` to `ReadingStep`, `Reading`, `ReadingSession`, `OracleChatEntryFlow`?",
+      "why": "High betweenness centrality (0.076) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `ReadingSession` connect `ReadingSession` to `SwiftUI`, `ReadingDraft`, `Reading`, `FortuneTeller`?",
+      "why": "High betweenness centrality (0.051) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `ReadingDraft` (e.g. with `BrewReadingFlow` and `OracleChatEntryFlow`) actually correct?",
+      "why": "`ReadingDraft` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `figma-dev-mode`, `CoreText`, `Screen Bundles Folder Structure (F20)` to the rest of the system?",
+      "why": "29 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `ReadingDraft` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.06565656565656566 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `View` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09615384615384616 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
