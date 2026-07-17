@@ -12,7 +12,8 @@ import SwiftUI
 struct FlowHeader: View {
     let title: LocalizedStringKey
     let subtitle: LocalizedStringKey
-    let step: Int
+    /// nil hides the step dots (single-step flows, e.g. Oracle Chat's oracle pick).
+    var step: Int? = nil
     var onBack: (() -> Void)? = nil
     let onClose: () -> Void
 
@@ -26,8 +27,10 @@ struct FlowHeader: View {
                     .font(Lettering.body(12))
                     .foregroundStyle(Pigment.creamDim)
                     .multilineTextAlignment(.center)
-                StepDots(current: step)
-                    .padding(.top, 12)
+                if let step {
+                    StepDots(current: step)
+                        .padding(.top, 12)
+                }
             }
             .frame(maxWidth: .infinity)
 
