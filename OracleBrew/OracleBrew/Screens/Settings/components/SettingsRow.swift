@@ -5,7 +5,33 @@
 
 import SwiftUI
 
-/// One tappable row inside a SettingsCard — icon, title, trailing chevron.
+/// The row icons are the design's own (Lucide) slices, exported as template
+/// assets so they take a tint — SF Symbols have no match for several of them.
+struct SettingsIcon: View {
+    let name: String
+    var tint: Color = Pigment.accent
+    var size: CGFloat = 18
+
+    var body: some View {
+        Image(name)
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: size, height: size)
+            .foregroundStyle(tint)
+    }
+}
+
+/// Trailing affordance: the design uses an arrow, not a chevron. The slice
+/// points up and the design rotates it, so the same asset serves the back
+/// button too.
+struct SettingsArrow: View {
+    var body: some View {
+        SettingsIcon(name: "IconArrow", tint: Pigment.cream.opacity(0.4), size: 20)
+            .rotationEffect(.degrees(90))
+    }
+}
+
+/// One tappable row inside a SettingsCard — icon, title, trailing arrow.
 struct SettingsRow: View {
     enum Weight { case medium, semibold }
 
@@ -26,10 +52,7 @@ struct SettingsRow: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 12) {
-                Image(systemName: icon)
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(iconTint)
-                    .frame(width: 18, height: 18)
+                SettingsIcon(name: icon, tint: iconTint)
 
                 Text(title)
                     .font(titleFont)
@@ -37,9 +60,7 @@ struct SettingsRow: View {
 
                 Spacer()
 
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(Pigment.cream.opacity(0.4))
+                SettingsArrow()
             }
             .padding(.horizontal, 16)
             .frame(height: 52)
@@ -75,10 +96,7 @@ struct SettingsToggleRow: View {
 
     private var row: some View {
         HStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(iconTint)
-                .frame(width: 18, height: 18)
+            SettingsIcon(name: icon, tint: iconTint)
 
             Text(title)
                 .font(Lettering.displayMedium(16))

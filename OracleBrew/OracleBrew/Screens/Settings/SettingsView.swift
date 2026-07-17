@@ -93,11 +93,11 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 10) {
             SettingsSectionLabel(title: "settings.section.general")
             SettingsCard {
-                SettingsRow(icon: "crown.fill", title: "settings.pro_plan", tint: Pigment.gold, iconTint: Pigment.gold) {
+                SettingsRow(icon: "IconCrown", title: "settings.pro_plan", tint: Pigment.gold, iconTint: Pigment.gold) {
                     showComingSoon = true
                 }
                 SettingsDivider()
-                SettingsRow(icon: "cart", title: "settings.restore") {
+                SettingsRow(icon: "IconCart", title: "settings.restore") {
                     showComingSoon = true
                 }
             }
@@ -108,15 +108,15 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 10) {
             SettingsSectionLabel(title: "settings.section.legal")
             SettingsCard {
-                SettingsRow(icon: "list.clipboard", title: "settings.privacy_policy") {
+                SettingsRow(icon: "IconPrivacy", title: "settings.privacy_policy") {
                     router.path.append(SettingsDestination.privacy)
                 }
                 SettingsDivider()
-                SettingsRow(icon: "doc.text", title: "settings.terms") {
+                SettingsRow(icon: "IconTerms", title: "settings.terms") {
                     router.path.append(SettingsDestination.terms)
                 }
                 SettingsDivider()
-                SettingsRow(icon: "waveform", title: "settings.support") {
+                SettingsRow(icon: "IconSupport", title: "settings.support") {
                     if let url = URL(string: "mailto:support@oraclebrew.app") {
                         UIApplication.shared.open(url)
                     }
@@ -129,13 +129,13 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 10) {
             SettingsSectionLabel(title: "settings.section.permissions")
             SettingsCard {
-                SettingsToggleRow(icon: "camera", title: "settings.camera_access",
+                SettingsToggleRow(icon: "IconCamera", title: "settings.camera_access",
                                    isOn: $cameraAuthorized, interactive: false, onTap: openSystemSettings)
                 SettingsDivider()
-                SettingsToggleRow(icon: "bell.badge", title: "settings.notifications",
+                SettingsToggleRow(icon: "IconBell", title: "settings.notifications",
                                    isOn: $notificationsAuthorized, interactive: false, onTap: openSystemSettings)
                 SettingsDivider()
-                SettingsToggleRow(icon: "checkmark.shield", title: "settings.data_consent", isOn: $dataConsent)
+                SettingsToggleRow(icon: "IconShield", title: "settings.data_consent", isOn: $dataConsent)
             }
         }
     }
@@ -147,14 +147,17 @@ struct SettingsView: View {
             SettingsSectionLabel(title: "settings.section.account")
             SettingsCard {
                 if profileStore.profile.isCreated {
-                    SettingsRow(icon: "square.and.pencil", title: "settings.edit_account", action: onOpenProfile)
+                    SettingsRow(icon: "IconEdit", title: "settings.edit_account", action: onOpenProfile)
                     SettingsDivider()
-                    SettingsRow(icon: "person.badge.minus", title: "settings.delete_account",
+                    SettingsRow(icon: "IconUserMinus", title: "settings.delete_account",
                                 tint: Pigment.danger, iconTint: Pigment.danger, weight: .semibold) {
                         showDeleteConfirm = true
                     }
                 } else {
-                    SettingsRow(icon: "person.crop.circle.badge.plus", title: "settings.create_account",
+                    // The design only draws the created state, so there's no
+                    // slice for this row — it opens the same profile form as
+                    // "Edit an Account", so it borrows that icon.
+                    SettingsRow(icon: "IconEdit", title: "settings.create_account",
                                 action: onOpenProfile)
                 }
             }
