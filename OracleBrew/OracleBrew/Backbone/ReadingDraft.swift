@@ -36,4 +36,8 @@ final class ReadingDraft {
     /// the Result screen. `readingID` is the server id, used to start a chat.
     var reading: Reading?
     var readingID: Int?
+    /// Whether a chat with this reading's oracle already exists — drives the
+    /// result CTA ("Return to chat" vs "Ask Your Oracle"). True for a History
+    /// replay whose card showed the chat icon.
+    var readingHasChat = false
 }

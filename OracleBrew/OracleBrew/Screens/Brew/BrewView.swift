@@ -15,10 +15,11 @@ struct BrewView: View {
     @State private var showReadingFlow = false
     @State private var showChatFlow = false
 
-    /// The profile name once saved, otherwise a neutral greeting.
-    private var greetingName: String {
+    /// The greeting: "Hi <name>!" once the profile has a name, plain "Hi!"
+    /// while it's empty (onboarding skipped).
+    private var greeting: LocalizedStringKey {
         let name = profileStore.profile.name.trimmingCharacters(in: .whitespaces)
-        return name.isEmpty ? "there" : name
+        return name.isEmpty ? "brew.greeting_anon" : "brew.greeting \(name)"
     }
 
     private var vs: CGFloat { Screen.vScale }
@@ -56,7 +57,7 @@ struct BrewView: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
-                    Text("brew.greeting \(greetingName)")
+                    Text(greeting)
                         .font(Lettering.displayMedium(24))
                         .foregroundStyle(Pigment.cream)
                     Image(systemName: "sparkles")

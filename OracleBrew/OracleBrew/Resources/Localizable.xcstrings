@@ -82,6 +82,16 @@
         }
       }
     },
+    "brew.greeting_anon" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi!"
+          }
+        }
+      }
+    },
     "brew.hero.headline" : {
       "localizations" : {
         "en" : {
@@ -919,12 +929,32 @@
         }
       }
     },
+    "result.return_to_chat" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Return to Chat"
+          }
+        }
+      }
+    },
     "result.save" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        }
+      }
+    },
+    "result.saved.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved to Photos"
           }
         }
       }

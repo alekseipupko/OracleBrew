@@ -51,6 +51,9 @@ struct ReadingResultView: View {
             .padding(.horizontal, 20)
         }
         .toolbar(.hidden, for: .navigationBar)
+        .alert("result.saved.title", isPresented: $savedConfirmation) {
+            Button("common.ok", role: .cancel) {}
+        }
         .onAppear {
             guard reading == nil else { return }
             // existingReading = a History replay; draft.reading = the one the
@@ -208,12 +211,14 @@ struct ReadingResultView: View {
                 } else {
                     secondaryLabel("result.share", icon: "square.and.arrow.up").opacity(0.4)
                 }
-                Button(action: savePhoto) {
+                Button(action: saveCard) {
                     secondaryLabel("result.save", icon: "arrow.down.to.line")
                 }
                 .buttonStyle(.plain)
+                .disabled(shareCard == nil)
             }
-            PrimaryButton(title: "result.ask_oracle", action: onAskOracle)
+            PrimaryButton(title: draft.readingHasChat ? "result.return_to_chat" : "result.ask_oracle",
+                          action: onAskOracle)
         }
     }
 
@@ -229,8 +234,11 @@ struct ReadingResultView: View {
         .overlay(Capsule().strokeBorder(Color.white.opacity(0.15), lineWidth: 1))
     }
 
-    private func savePhoto() {
-        guard let photo = draft.photo else { return }
-        UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil)
+    private func saveCard() {
+        // Saves the branded Share card, not the raw cup photo — the reading
+        // itself is already kept server-side regardless.
+        guard let card = shareCard else { return }
+        UIImageWriteToSavedPhotosAlbum(card.image, nil, nil, nil)
+        savedConfirmation = true
     }
 }

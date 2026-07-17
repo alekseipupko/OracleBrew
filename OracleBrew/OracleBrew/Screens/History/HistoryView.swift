@@ -66,10 +66,11 @@ struct HistoryView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 10) {
                 ForEach(items) { item in
-                    Button { router.path.append(item) } label: {
-                        HistoryCard(item: item)
-                    }
-                    .buttonStyle(.plain)
+                    HistoryCard(item: item, onOpenChat: {
+                        router.path.append(chatStore.thread(for: item.teller, context: makeDraft(item)))
+                    })
+                    .contentShape(Rectangle())
+                    .onTapGesture { router.path.append(item) }
                     .task { await historyStore.loadMoreIfNeeded(currentItem: item) }
                 }
                 if historyStore.isLoadingMore {
@@ -147,6 +148,7 @@ private struct HistoryReplayView: View {
         draft.teller = item.teller
         draft.topic = item.topic
         draft.readingID = item.id
+        draft.readingHasChat = item.hasChat
         return draft
     }
 

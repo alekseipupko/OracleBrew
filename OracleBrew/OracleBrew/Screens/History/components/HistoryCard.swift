@@ -7,6 +7,9 @@ import SwiftUI
 
 struct HistoryCard: View {
     let item: HistoryItem
+    /// Tapping the chat icon jumps into the chat; tapping the card body opens
+    /// the reading result.
+    var onOpenChat: () -> Void = {}
 
     private var dateLabel: String {
         let formatter = DateFormatter()
@@ -56,9 +59,14 @@ struct HistoryCard: View {
                             .foregroundStyle(Pigment.cream.opacity(0.4))
                     }
                     if item.hasChat {
-                        Image(systemName: "bubble.left.fill")
-                            .font(.system(size: 11))
-                            .foregroundStyle(Pigment.accent)
+                        Button(action: onOpenChat) {
+                            Image(systemName: "bubble.left.fill")
+                                .font(.system(size: 13))
+                                .foregroundStyle(Pigment.accent)
+                                .frame(width: 32, height: 32)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
