@@ -1,10 +1,3 @@
-//
-//  TabChrome.swift
-//  OracleBrew
-//
-//  The 3 root tabs and the custom floating pill tab bar.
-//
-
 import SwiftUI
 
 enum RootTab: CaseIterable {

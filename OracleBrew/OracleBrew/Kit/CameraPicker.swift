@@ -1,11 +1,3 @@
-//
-//  CameraPicker.swift
-//  OracleBrew
-//
-//  Thin UIKit bridge for taking a photo with the camera (SwiftUI has no native
-//  camera capture). Gallery picking uses SwiftUI's PhotosPicker directly.
-//
-
 import SwiftUI
 import UIKit
 

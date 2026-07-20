@@ -1,11 +1,3 @@
-//
-//  Pigment.swift
-//  OracleBrew
-//
-//  Color tokens. Source of truth: Figma (raw styles, no Figma variables).
-//  Hardcoding colors in views is forbidden — always go through Pigment.
-//
-
 import SwiftUI
 
 extension Color {

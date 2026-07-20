@@ -1,12 +1,3 @@
-//
-//  SessionGate.swift
-//  OracleBrew
-//
-//  Guarantees there's a token before any authed request runs. v1.0 has no
-//  login screen, so on first launch we silently claim a guest account; the
-//  onboarding screens later PATCH the profile against that same token.
-//
-
 import Foundation
 
 private struct AuthResponse: Decodable {

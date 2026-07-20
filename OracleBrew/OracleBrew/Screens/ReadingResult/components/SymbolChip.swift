@@ -1,8 +1,3 @@
-//
-//  SymbolChip.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 struct SymbolChip: View {

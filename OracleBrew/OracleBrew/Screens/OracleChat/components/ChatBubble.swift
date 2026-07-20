@@ -1,12 +1,3 @@
-//
-//  ChatBubble.swift
-//  OracleBrew
-//
-//  Single message row — user bubbles trail right in the accent gradient with a
-//  tail on the right, oracle bubbles lead left in a dark surface with a tail on
-//  the left. The tail is the design's own (Kit/BubbleTail).
-//
-
 import SwiftUI
 
 struct ChatBubble: View {

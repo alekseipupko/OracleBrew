@@ -1,10 +1,3 @@
-//
-//  IntentionView.swift
-//  OracleBrew
-//
-//  Brew Reading — step 3. Time horizon, one topic, optional free-text question.
-//
-
 import SwiftUI
 
 struct IntentionView: View {

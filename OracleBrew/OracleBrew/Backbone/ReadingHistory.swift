@@ -1,12 +1,3 @@
-//
-//  ReadingHistory.swift
-//  OracleBrew
-//
-//  Reading History (tab): the user's past readings, paged from GET /history/
-//  (page size 12). A card shows a preview; tapping it fetches the full reading
-//  for replay.
-//
-
 import SwiftUI
 
 struct HistoryItem: Identifiable, Hashable {

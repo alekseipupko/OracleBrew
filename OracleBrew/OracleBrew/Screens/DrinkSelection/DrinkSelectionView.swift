@@ -1,10 +1,3 @@
-//
-//  DrinkSelectionView.swift
-//  OracleBrew
-//
-//  Brew Reading — step 1. Pick a drink (or Random Cup) from the catalog.
-//
-
 import SwiftUI
 
 struct DrinkSelectionView: View {

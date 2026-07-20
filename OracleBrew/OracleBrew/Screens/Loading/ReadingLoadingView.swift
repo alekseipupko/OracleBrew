@@ -1,16 +1,3 @@
-//
-//  ReadingLoadingView.swift
-//  OracleBrew
-//
-//  Brew Reading — the beat between handing over the cup photo and the result.
-//  The orb (auras, orbit rings, specks) is all circles, so it's drawn rather
-//  than shipped as an asset; the design's note asks for the small dot to
-//  circle the cup photo.
-//
-//  The wait is currently a fixed pause — ReadingEngine answers instantly. Once
-//  readings come from the API this screen covers the real request instead.
-//
-
 import SwiftUI
 
 struct ReadingLoadingView: View {

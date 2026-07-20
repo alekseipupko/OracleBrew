@@ -1,8 +1,3 @@
-//
-//  StarRating.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 extension Pigment {

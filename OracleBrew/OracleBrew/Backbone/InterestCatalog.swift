@@ -1,11 +1,3 @@
-//
-//  InterestCatalog.swift
-//  OracleBrew
-//
-//  The Profile screen's interest chips. Each carries its own hue from the
-//  design — selected chips fill with it, unselected tint it down.
-//
-
 import SwiftUI
 
 struct Interest: Identifiable, Hashable {

@@ -1,12 +1,3 @@
-//
-//  CatalogDTO.swift
-//  OracleBrew
-//
-//  Wire shapes for the catalog endpoints, straight from the API guide. These
-//  are decode-only; CatalogMapper turns them into the domain models the
-//  screens already use.
-//
-
 import Foundation
 
 struct DrinkDTO: Decodable {

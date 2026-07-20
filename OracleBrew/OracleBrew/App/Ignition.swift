@@ -1,8 +1,3 @@
-//
-//  Ignition.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 @main

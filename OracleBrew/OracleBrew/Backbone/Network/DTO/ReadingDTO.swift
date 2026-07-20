@@ -1,11 +1,3 @@
-//
-//  ReadingDTO.swift
-//  OracleBrew
-//
-//  Wire shapes for the reading flow: the reading itself, the AI job it kicks
-//  off, and the result payload the screen renders.
-//
-
 import Foundation
 
 struct AIJobDTO: Decodable {

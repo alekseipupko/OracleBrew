@@ -1,13 +1,3 @@
-//
-//  ReadingEngine.swift
-//  OracleBrew
-//
-//  Mock reading generator for v1.0 — no backend, no real AI. Builds a plausible
-//  result from a small symbol bank + templated copy, varied by topic/horizon so
-//  repeated readings don't feel identical. A real prediction service can swap
-//  in behind the same `generate(from:)` signature later.
-//
-
 import Foundation
 
 struct ReadingSymbol: Identifiable {

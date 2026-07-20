@@ -1,10 +1,3 @@
-//
-//  Waypoint.swift
-//  OracleBrew
-//
-//  Push destinations, driven by Pathfinder. Grows as flows land.
-//
-
 import Foundation
 
 enum Waypoint: Hashable {

@@ -1,12 +1,3 @@
-//
-//  ChatRepository.swift
-//  OracleBrew
-//
-//  /chats/ — create-or-resume a thread with an oracle, fetch its messages and
-//  quick questions, send a message (the reply comes back synchronously), and
-//  list threads for the Chats tab.
-//
-
 import Foundation
 
 struct ChatMessageDTO: Decodable {

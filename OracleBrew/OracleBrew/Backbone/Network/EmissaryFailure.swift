@@ -1,11 +1,3 @@
-//
-//  EmissaryFailure.swift
-//  OracleBrew
-//
-//  Typed transport error. Separates "no internet" from a server fault so the
-//  UI can tell the two apart (ScreenPhase.offline vs .loadFailure).
-//
-
 import Foundation
 
 enum EmissaryFailure: Error {

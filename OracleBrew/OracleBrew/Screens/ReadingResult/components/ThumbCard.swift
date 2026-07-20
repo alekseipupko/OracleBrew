@@ -1,11 +1,3 @@
-//
-//  ThumbCard.swift
-//  OracleBrew
-//
-//  Square photo card with a bottom gradient label — used for the "Your cup" /
-//  "Your oracle" pair on the result screen.
-//
-
 import SwiftUI
 
 struct ThumbCard: View {

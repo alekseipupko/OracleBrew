@@ -1,12 +1,3 @@
-//
-//  OracleChatEntryFlow.swift
-//  OracleBrew
-//
-//  Direct "Oracle Chat" entry from the Brew tab: pick an oracle, then chat —
-//  no reading context, so ChatEngine greets generically. Presented full-screen,
-//  mirrors BrewReadingFlow's container pattern.
-//
-
 import SwiftUI
 
 private enum ChatEntryStep: Hashable { case chat }

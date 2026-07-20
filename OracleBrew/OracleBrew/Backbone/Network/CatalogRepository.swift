@@ -1,13 +1,3 @@
-//
-//  CatalogRepository.swift
-//  OracleBrew
-//
-//  Fetches the catalog endpoints and maps their DTOs onto the domain models
-//  the screens already use (N8: repository + mapper). Fields the API doesn't
-//  carry — a drink's gradient, a topic's colour — are recovered from the
-//  bundled palette by slug, or fall back to a default.
-//
-
 import SwiftUI
 
 struct CatalogRepository {

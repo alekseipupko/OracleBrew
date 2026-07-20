@@ -1,8 +1,3 @@
-//
-//  ProfileChip.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 /// Pill option in a single-choice row (Identity / Employment / Children).

@@ -1,12 +1,3 @@
-//
-//  PhotoUploadView.swift
-//  OracleBrew
-//
-//  Brew Reading — step 4. Provide a cup photo: gallery, camera, or (for the
-//  Random Cup path) a bundled sample. Empty state shows the drop zone; once a
-//  photo exists it flips to the "Read Your Cup" preview.
-//
-
 import SwiftUI
 import PhotosUI
 

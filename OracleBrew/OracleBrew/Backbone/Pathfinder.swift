@@ -1,10 +1,3 @@
-//
-//  Pathfinder.swift
-//  OracleBrew
-//
-//  Per-tab router over NavigationPath.
-//
-
 import SwiftUI
 
 @Observable

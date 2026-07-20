@@ -1,11 +1,3 @@
-//
-//  Cadence.swift
-//  OracleBrew
-//
-//  Spacing, sizing and radius tokens. Magic numbers in views are forbidden.
-//  Vertical rhythm may scale by `Screen.scale` on shorter devices; widths stay put.
-//
-
 import SwiftUI
 import UIKit
 

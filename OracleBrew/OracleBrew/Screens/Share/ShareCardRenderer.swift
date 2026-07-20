@@ -1,10 +1,3 @@
-//
-//  ShareCardRenderer.swift
-//  OracleBrew
-//
-//  Turns ShareCard into a UIImage for the share sheet.
-//
-
 import SwiftUI
 import UniformTypeIdentifiers
 

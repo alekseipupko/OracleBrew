@@ -1,12 +1,3 @@
-//
-//  OracleChatView.swift
-//  OracleBrew
-//
-//  In-character chat with the chosen oracle. Canned replies (ChatEngine);
-//  remembers reading context (drink/topic) when reached from a finished
-//  reading, greets generically when entered directly from the Brew tab.
-//
-
 import SwiftUI
 
 /// Wraps an oracle for a view-only profile push from a chat, so it doesn't

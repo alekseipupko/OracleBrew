@@ -1,8 +1,3 @@
-//
-//  ReviewCard.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 struct ReviewCard: View {

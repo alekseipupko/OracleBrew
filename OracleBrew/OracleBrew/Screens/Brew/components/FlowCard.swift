@@ -1,10 +1,3 @@
-//
-//  FlowCard.swift
-//  OracleBrew
-//
-//  The two entry cards on the Brew tab (Brew Reading / Oracle Chat).
-//
-
 import SwiftUI
 
 struct FlowCard: View {

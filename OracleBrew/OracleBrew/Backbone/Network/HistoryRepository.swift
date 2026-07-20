@@ -1,10 +1,3 @@
-//
-//  HistoryRepository.swift
-//  OracleBrew
-//
-//  GET /history/ (paged) and the full-reading fetch behind a history row.
-//
-
 import Foundation
 
 struct HistoryItemDTO: Decodable {

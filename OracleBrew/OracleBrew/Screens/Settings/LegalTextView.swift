@@ -1,11 +1,3 @@
-//
-//  LegalTextView.swift
-//  OracleBrew
-//
-//  Shared shell for Privacy Policy / Terms of Use — opens in-app rather than
-//  Safari, per v1.0 scope. Body copy is placeholder text (no legal review yet).
-//
-
 import SwiftUI
 
 struct LegalTextView: View {

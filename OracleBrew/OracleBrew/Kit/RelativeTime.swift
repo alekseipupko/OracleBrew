@@ -1,11 +1,3 @@
-//
-//  RelativeTime.swift
-//  OracleBrew
-//
-//  Short "how long ago" labels for list timestamps ("now", "5m", "3h", "2d",
-//  then a date). The chat list shows these top-right of each row.
-//
-
 import Foundation
 
 enum RelativeTime {

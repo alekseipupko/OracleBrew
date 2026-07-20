@@ -1,10 +1,3 @@
-//
-//  TopicButton.swift
-//  OracleBrew
-//
-//  Topic chip. Unselected: tinted wash + colored text. Selected: solid fill.
-//
-
 import SwiftUI
 
 struct TopicButton: View {

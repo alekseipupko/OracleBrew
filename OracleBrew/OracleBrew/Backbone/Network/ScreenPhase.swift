@@ -1,11 +1,3 @@
-//
-//  ScreenPhase.swift
-//  OracleBrew
-//
-//  The states any network-backed screen moves through. EmissaryFailure maps
-//  straight in: .offline → .offline, everything else → .loadFailure.
-//
-
 import Foundation
 
 enum ScreenPhase<Content> {

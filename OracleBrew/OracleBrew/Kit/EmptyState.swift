@@ -1,12 +1,3 @@
-//
-//  EmptyState.swift
-//  OracleBrew
-//
-//  The "nothing here yet" placeholder from the design: a glowing round icon, a
-//  headline, and a two-line subtitle. An optional CTA sits at the bottom of the
-//  screen (Chats offers "Choose Your Oracle"; History has none).
-//
-
 import SwiftUI
 
 struct EmptyState: View {

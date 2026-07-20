@@ -1,15 +1,3 @@
-//
-//  ShareCard.swift
-//  OracleBrew
-//
-//  The 9:16 card exported to Stories: the cup photo, the reading's advice and
-//  its timeframe, and the OracleBrew watermark. Never shown on screen — it's
-//  rendered straight to a UIImage by ShareCardRenderer.
-//
-//  Laid out at the design's own 900×1600 so every size can be lifted from
-//  Figma verbatim; the renderer scales it up to 1080×1920.
-//
-
 import SwiftUI
 
 struct ShareCard: View {

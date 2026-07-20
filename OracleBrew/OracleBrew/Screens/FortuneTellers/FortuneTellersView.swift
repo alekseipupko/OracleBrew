@@ -1,10 +1,3 @@
-//
-//  FortuneTellersView.swift
-//  OracleBrew
-//
-//  Brew Reading — step 2. Pick an oracle (or open a full profile first).
-//
-
 import SwiftUI
 
 struct FortuneTellersView: View {

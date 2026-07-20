@@ -1,12 +1,3 @@
-//
-//  WaypointDestinations.swift
-//  OracleBrew
-//
-//  Every tab can reach Settings (and Profile through it), so each tab's
-//  NavigationStack registers the same Waypoint destinations against its own
-//  router rather than Atrium owning them for the Brew tab alone.
-//
-
 import SwiftUI
 
 extension View {

@@ -1,11 +1,3 @@
-//
-//  Features.swift
-//  OracleBrew
-//
-//  Flags for work that exists but isn't shipping yet. Flip one and the UI it
-//  gates comes back — nothing here deletes code.
-//
-
 import Foundation
 
 enum Features {

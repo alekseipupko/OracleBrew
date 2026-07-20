@@ -1,8 +1,3 @@
-//
-//  ProfileDropdown.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 /// Field-styled shell shared by the text field and every dropdown selector.

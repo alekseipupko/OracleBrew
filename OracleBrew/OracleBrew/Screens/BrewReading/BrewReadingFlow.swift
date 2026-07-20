@@ -1,11 +1,3 @@
-//
-//  BrewReadingFlow.swift
-//  OracleBrew
-//
-//  Container for the Brew Reading wizard. Owns the ReadingDraft and step stack.
-//  Presented full-screen from the Brew tab.
-//
-
 import SwiftUI
 
 enum ReadingStep: Hashable {

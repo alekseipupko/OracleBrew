@@ -1,8 +1,3 @@
-//
-//  BrewModel.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 @Observable

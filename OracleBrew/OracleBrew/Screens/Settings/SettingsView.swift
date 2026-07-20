@@ -1,19 +1,3 @@
-//
-//  SettingsView.swift
-//  OracleBrew
-//
-//  General (Pro Plan, Restore Purchases) / Legal & Support (Privacy Policy,
-//  Terms Of Use, Support) / Permissions (Camera, Notifications, Data Consent)
-//  / Personal account. Reached from the Brew tab's gear icon.
-//
-//  General and the consent toggle are behind Features flags — this build is
-//  free and asks for no consent, so they're built but not shown.
-//
-//  Pushed onto Atrium's brewRouter NavigationStack — it registers its own
-//  navigationDestination on that SAME stack rather than nesting a second
-//  NavigationStack, which SwiftUI renders blank.
-//
-
 import AVFoundation
 import SwiftUI
 import UserNotifications

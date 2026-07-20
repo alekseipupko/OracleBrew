@@ -1,13 +1,3 @@
-//
-//  BubbleTail.swift
-//  OracleBrew
-//
-//  The chat bubble's tail, traced from the design's slice rather than
-//  approximated: the curve swells away from the bubble before hooking back to a
-//  point, which a triangle can't do. One shape for both the oracle chat and the
-//  onboarding — the design draws them the same.
-//
-
 import SwiftUI
 
 /// Drawn leading (tip bottom-left, for the oracle) and mirrored for the user.

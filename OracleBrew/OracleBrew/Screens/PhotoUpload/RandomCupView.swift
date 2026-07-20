@@ -1,12 +1,3 @@
-//
-//  RandomCupView.swift
-//  OracleBrew
-//
-//  The Random Cup path's photo step: instead of taking a photo, the app shows
-//  a cup the backend picked. "Choose Another Cup" swaps it (never repeating the
-//  one on screen); "Start Reading" commits the shown cup to the reading.
-//
-
 import SwiftUI
 
 struct RandomCupView: View {

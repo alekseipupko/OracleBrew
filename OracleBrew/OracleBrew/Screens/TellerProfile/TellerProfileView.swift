@@ -1,12 +1,3 @@
-//
-//  TellerProfileView.swift
-//  OracleBrew
-//
-//  Full oracle profile: hero portrait, stats, topics, About, Reviews.
-//  Reached from the Fortune Tellers list; "Continue with Oracle" selects and
-//  advances the reading flow.
-//
-
 import SwiftUI
 
 struct TellerProfileView: View {

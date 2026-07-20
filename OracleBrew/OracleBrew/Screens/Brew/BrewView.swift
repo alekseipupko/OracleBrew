@@ -1,10 +1,3 @@
-//
-//  BrewView.swift
-//  OracleBrew
-//
-//  Tab 1 — home. Header, daily-fortune hero, two flow-entry cards.
-//
-
 import SwiftUI
 
 struct BrewView: View {

@@ -1,10 +1,3 @@
-//
-//  SegmentedSelector.swift
-//  OracleBrew
-//
-//  Pill segmented control — the selected segment gets an accent outline.
-//
-
 import SwiftUI
 
 struct SegmentedSelector<Item: Identifiable & Equatable>: View {

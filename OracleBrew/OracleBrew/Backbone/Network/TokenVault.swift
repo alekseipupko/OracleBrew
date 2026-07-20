@@ -1,11 +1,3 @@
-//
-//  TokenVault.swift
-//  OracleBrew
-//
-//  The auth token lives in the Keychain — it survives reinstalls-in-place and
-//  never lands in a plist or UserDefaults backup.
-//
-
 import Foundation
 import Security
 

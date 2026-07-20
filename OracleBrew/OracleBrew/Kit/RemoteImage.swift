@@ -1,13 +1,3 @@
-//
-//  RemoteImage.swift
-//  OracleBrew
-//
-//  System AsyncImage gives up after the first network hiccup (a dead keep-alive
-//  connection) and shows nothing. This retries with backoff and shows a shimmer
-//  while loading. Size is set by the backing shape; the image is an overlay
-//  clipped to it, so scaledToFill can't blow out the container.
-//
-
 import SwiftUI
 
 /// Decoded images, kept in memory and keyed by URL. URLCache already spares the

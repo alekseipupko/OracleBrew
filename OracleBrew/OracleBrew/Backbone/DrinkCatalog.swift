@@ -1,11 +1,3 @@
-//
-//  DrinkCatalog.swift
-//  OracleBrew
-//
-//  The 8 drink types offered before a Brew Reading. Mock/static for v1.0;
-//  a provider protocol can front this once a backend exists.
-//
-
 import SwiftUI
 
 struct Drink: Identifiable, Equatable {

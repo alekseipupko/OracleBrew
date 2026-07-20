@@ -1,8 +1,3 @@
-//
-//  TellerCard.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 struct TellerCard: View {

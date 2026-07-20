@@ -1,12 +1,3 @@
-//
-//  ReadingResultView.swift
-//  OracleBrew
-//
-//  Brew Reading — final step. Shows the mock ReadingEngine output: symbols,
-//  a "what I see" paragraph, the teller's advice, and a predicted timeframe.
-//  Share/save the cup photo, or continue into a chat with the chosen teller.
-//
-
 import SwiftUI
 
 struct ReadingResultView: View {

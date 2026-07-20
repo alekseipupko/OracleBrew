@@ -1,12 +1,3 @@
-//
-//  WireLog.swift
-//  OracleBrew
-//
-//  Prints what goes out and what comes back, for reading in the Xcode console.
-//  DEBUG only — the whole thing compiles out of release builds, so the wire is
-//  never echoed on a user's device.
-//
-
 import Foundation
 
 enum WireLog {

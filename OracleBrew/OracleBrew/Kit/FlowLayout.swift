@@ -1,10 +1,3 @@
-//
-//  FlowLayout.swift
-//  OracleBrew
-//
-//  Wrapping row layout (chips flow to the next line when they run out of width).
-//
-
 import SwiftUI
 
 struct FlowLayout: Layout {

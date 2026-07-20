@@ -1,13 +1,3 @@
-//
-//  FortuneTellers.swift
-//  OracleBrew
-//
-//  Fortune-teller roster. Mock/static personas for v1.0 (authored content, to be
-//  reviewed/replaced). Modelled as DATA (plain String) — a real backend would
-//  supply this per locale, so it deliberately does not go through the String
-//  Catalog. Only 4 personas until 10 unique portraits exist.
-//
-
 import Foundation
 
 struct Review: Identifiable {

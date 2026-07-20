@@ -1,11 +1,3 @@
-//
-//  Intention.swift
-//  OracleBrew
-//
-//  What the reading is about: a time horizon, one topic, and an optional
-//  free-text question. Topic colors come straight from the Figma palette.
-//
-
 import SwiftUI
 
 enum TimeHorizon: String, CaseIterable, Identifiable {

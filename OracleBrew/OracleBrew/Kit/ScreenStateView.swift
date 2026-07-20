@@ -1,12 +1,3 @@
-//
-//  ScreenStateView.swift
-//  OracleBrew
-//
-//  The load-failure / offline states for any network-backed screen, in the
-//  app's own style (no system placeholders). Distinguishes "no connection"
-//  from "failed to load" and offers a Retry.
-//
-
 import SwiftUI
 
 struct ScreenStateView: View {

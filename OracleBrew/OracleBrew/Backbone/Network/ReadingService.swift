@@ -1,13 +1,3 @@
-//
-//  ReadingService.swift
-//  OracleBrew
-//
-//  Runs the whole Brew Reading server flow behind one call: create the reading
-//  (photo upload or random cup), fire the AI job, poll it, then fetch and map
-//  the result. The Loading screen awaits generate(from:); its spinner covers
-//  exactly this work.
-//
-
 import UIKit
 
 struct ReadingService {

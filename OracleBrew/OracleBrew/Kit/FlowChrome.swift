@@ -1,11 +1,3 @@
-//
-//  FlowChrome.swift
-//  OracleBrew
-//
-//  Shared chrome for the Brew Reading wizard: centered header + close, and the
-//  primary gradient CTA. Reused across every flow step.
-//
-
 import SwiftUI
 
 /// Centered title/subtitle with step dots, plus a top-right close chip.

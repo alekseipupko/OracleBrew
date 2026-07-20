@@ -1,11 +1,3 @@
-//
-//  StepDots.swift
-//  OracleBrew
-//
-//  Flow progress indicator: the current step is a wide pill, completed steps are
-//  filled dots, upcoming steps are dim dots.
-//
-
 import SwiftUI
 
 struct StepDots: View {

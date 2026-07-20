@@ -1,12 +1,3 @@
-//
-//  CupCamera.swift
-//  OracleBrew
-//
-//  Live capture session behind the Photo Upload drop zone: the user frames the
-//  cup in-place instead of being pushed out to a modal camera. Falls back to
-//  CameraPicker where a session can't run (no camera, access denied).
-//
-
 import AVFoundation
 import SwiftUI
 import UIKit

@@ -1,13 +1,3 @@
-//
-//  Emissary.swift
-//  OracleBrew
-//
-//  The transport. Repositories describe a request and hand it here; Emissary
-//  builds the URLRequest, attaches the token, sends, and decodes. It knows
-//  nothing about domain models — DTO→domain mapping lives in the repositories
-//  (N8: repository + mapper).
-//
-
 import Foundation
 
 enum HTTPMethod: String {

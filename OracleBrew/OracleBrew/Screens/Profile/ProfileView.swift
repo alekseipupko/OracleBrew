@@ -1,16 +1,3 @@
-//
-//  ProfileView.swift
-//  OracleBrew
-//
-//  "Your Profile" — name, identity, date of birth (→ zodiac), relationship,
-//  employment, country, children, interests. Reached from Settings' Personal
-//  Account section: "Create an Account" when empty, "Edit an Account" once
-//  saved. Save is sticky at the bottom; content scrolls under a fade.
-//
-//  Pushed onto Atrium's brewRouter NavigationStack — no nested NavigationStack
-//  (SwiftUI renders those blank).
-//
-
 import SwiftUI
 
 struct ProfileView: View {

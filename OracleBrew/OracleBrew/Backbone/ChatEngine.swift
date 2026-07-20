@@ -1,13 +1,3 @@
-//
-//  ChatEngine.swift
-//  OracleBrew
-//
-//  Oracle Chat — fixed canned replies for v1.0 (mirrors FortuneTellers.swift:
-//  authored content, not routed through the String Catalog, since a real
-//  backend/AI would supply this later). `reply(to:)` is the protocol boundary
-//  a real LLM drops into without touching the chat UI.
-//
-
 import Foundation
 
 struct ChatMessage: Identifiable, Equatable {

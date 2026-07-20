@@ -1,11 +1,3 @@
-//
-//  HistoryView.swift
-//  OracleBrew
-//
-//  Tab 3 — the user's past readings, paged from the API. Tapping a card fetches
-//  the full reading and replays it; from there the oracle's chat can resume.
-//
-
 import SwiftUI
 
 struct HistoryView: View {

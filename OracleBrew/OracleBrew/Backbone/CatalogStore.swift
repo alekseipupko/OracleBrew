@@ -1,14 +1,3 @@
-//
-//  CatalogStore.swift
-//  OracleBrew
-//
-//  The shared source for drinks, oracles and topics. It starts from the
-//  bundled mock catalogs so the UI has something to show immediately, then
-//  refreshes from the API. While the backend catalogs are still empty (or a
-//  fetch fails) it keeps the mocks — the screens never go blank; once the
-//  server is populated, a real payload replaces them automatically.
-//
-
 import SwiftUI
 
 @MainActor

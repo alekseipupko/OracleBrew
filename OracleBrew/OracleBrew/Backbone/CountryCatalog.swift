@@ -1,12 +1,3 @@
-//
-//  CountryCatalog.swift
-//  OracleBrew
-//
-//  ISO region list for the Profile screen's country picker. Names come from
-//  the system so they follow the app's locale; flags are derived from the
-//  region code rather than shipped as assets.
-//
-
 import Foundation
 
 struct Country: Identifiable, Hashable {

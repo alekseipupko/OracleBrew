@@ -1,10 +1,3 @@
-//
-//  TopicChip.swift
-//  OracleBrew
-//
-//  Pill tag for teller topics. Two sizes: compact (list card) and regular (profile).
-//
-
 import SwiftUI
 
 struct TopicChip: View {

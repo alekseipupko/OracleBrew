@@ -1,8 +1,3 @@
-//
-//  DrinkCard.swift
-//  OracleBrew
-//
-
 import SwiftUI
 
 struct DrinkCard: View {

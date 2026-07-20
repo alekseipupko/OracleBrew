@@ -1,11 +1,3 @@
-//
-//  SettingsButton.swift
-//  OracleBrew
-//
-//  The gear that opens Settings. Lives in every tab's header, so it pushes
-//  onto whichever tab's Pathfinder is in the environment.
-//
-
 import SwiftUI
 
 struct SettingsButton: View {
