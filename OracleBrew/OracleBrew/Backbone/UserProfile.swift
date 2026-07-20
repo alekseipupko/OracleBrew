@@ -1,13 +1,3 @@
-//
-//  UserProfile.swift
-//  OracleBrew
-//
-//  The user's own details, gathered on the Profile screen. Feeds the greeting
-//  ("Hi Susan!") and, later, the reading's personalization. Backed by the API
-//  (GET/PATCH /profile/); the domain enum raw values are the backend's enum
-//  strings, so they cross the wire unchanged.
-//
-
 import Foundation
 
 // MARK: Field options
@@ -175,10 +165,10 @@ final class UserProfileStore {
         isLoaded = true
     }
 
-    func save(_ new: UserProfile) async throws {
+    func save(_ new: UserProfile, completingOnboarding: Bool = false) async throws {
         isSaving = true
         defer { isSaving = false }
-        profile = try await repository.update(new)
+        profile = try await repository.update(new, completingOnboarding: completingOnboarding)
     }
 
     /// Deletes the server account. The caller then mints a fresh guest token

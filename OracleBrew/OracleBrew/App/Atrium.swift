@@ -1,11 +1,3 @@
-//
-//  Atrium.swift
-//  OracleBrew
-//
-//  Root container: 3-tab shell (Brew / Chats / History) with a custom floating
-//  pill tab bar. Each tab owns its own NavigationStack + Pathfinder router.
-//
-
 import SwiftUI
 
 struct Atrium: View {
@@ -19,11 +11,23 @@ struct Atrium: View {
     @State private var session = SessionGate()
     @State private var catalog = CatalogStore()
 
+    /// Whether onboarding has been through — locally, and only locally. The
+    /// backend is told too (onboarding_completed), but that's for their records:
+    /// the token lives in the Keychain and outlives a delete, so deferring to
+    /// the backend would mean a reinstalled app never offers onboarding again.
+    /// UserDefaults goes with the app, which is the behaviour we want.
+    @AppStorage("onboardingSeen") private var onboardingSeen = false
+
+    private var showOnboarding: Bool { !onboardingSeen }
+
     /// The floating tab bar only makes sense at each tab's root — once a tab
     /// pushes a destination, it'd otherwise float on top of that content too
     /// (it's a ZStack sibling, not scoped to any one NavigationStack).
     private var showTabBar: Bool {
-        switch tab {
+        // Onboarding covers the app, but it's a ZStack sibling — the bar would
+        // otherwise float over it and stay tappable.
+        if showOnboarding { return false }
+        return switch tab {
         case .brew: brewRouter.path.isEmpty
         case .chats: chatsRouter.path.isEmpty
         case .history: historyRouter.path.isEmpty
@@ -50,7 +54,13 @@ struct Atrium: View {
             if showTabBar {
                 TabBar(selection: $tab)
             }
+
+            if showOnboarding {
+                OnboardingView(store: profileStore) { onboardingSeen = true }
+                    .transition(.opacity)
+            }
         }
+        .animation(.easeInOut(duration: 0.25), value: showOnboarding)
         .environment(chatStore)
         .environment(historyStore)
         .environment(profileStore)

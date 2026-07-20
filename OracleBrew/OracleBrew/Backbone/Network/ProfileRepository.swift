@@ -1,12 +1,3 @@
-//
-//  ProfileRepository.swift
-//  OracleBrew
-//
-//  GET/PATCH /profile/ and DELETE /account/. The wire enum strings are the
-//  domain enums' raw values, so decoding is direct; an empty string (the
-//  backend's "not set") maps to nil.
-//
-
 import Foundation
 
 struct ProfileDTO: Codable {
@@ -44,8 +35,8 @@ struct ProfileRepository {
 
     /// Partial update — sends only the fields the user filled in.
     @discardableResult
-    func update(_ profile: UserProfile) async throws -> UserProfile {
-        let body = ProfileMapper.patch(profile)
+    func update(_ profile: UserProfile, completingOnboarding: Bool = false) async throws -> UserProfile {
+        let body = ProfileMapper.patch(profile, completingOnboarding: completingOnboarding)
         let request = EmissaryRequest(path: "profile/", method: .patch, body: .json(body))
         let dto = try await emissary.perform(request, as: ProfileDTO.self)
         return ProfileMapper.domain(dto)
@@ -66,6 +57,9 @@ enum ProfileMapper {
         profile.children = enumValue(dto.children, ChildrenStatus.self)
         profile.countryCode = dto.country.flatMap { $0.isEmpty ? nil : $0 }
         profile.interests = Set(dto.topicsOfInterest ?? [])
+        // onboarding_completed is deliberately not mapped in: whether to show
+        // onboarding is a local decision (see Atrium). We report it, we don't
+        // read it back.
 
         if let dob = dto.dateOfBirth, let (day, month, year) = parseDOB(dob) {
             profile.birthDay = day
@@ -75,7 +69,10 @@ enum ProfileMapper {
         return profile
     }
 
-    static func patch(_ profile: UserProfile) -> ProfileDTO {
+    /// `completingOnboarding` is only set by the onboarding's final save —
+    /// Skip deliberately leaves it unset, which is how the backend tells a
+    /// finished profile from an abandoned one.
+    static func patch(_ profile: UserProfile, completingOnboarding: Bool = false) -> ProfileDTO {
         ProfileDTO(
             name: profile.name.isEmpty ? nil : profile.name,
             gender: profile.identity?.rawValue,
@@ -85,7 +82,7 @@ enum ProfileMapper {
             country: profile.countryCode,
             children: profile.children?.rawValue,
             topicsOfInterest: profile.interests.isEmpty ? nil : Array(profile.interests),
-            onboardingCompleted: nil,
+            onboardingCompleted: completingOnboarding ? true : nil,
             notificationsEnabled: nil,
             dataConsent: nil
         )
