@@ -44,17 +44,7 @@ struct DrinkSelectionView: View {
                                 isSelected: selectedID == drink.id,
                                 dimmed: selectedID != nil && selectedID != drink.id
                             ) {
-                                selectedID = drink.id
-                                if drink.isRandom {
-                                    draft.isRandomPath = true
-                                    // Pick from the live catalog (real ids), not
-                                    // the bundled mock, so the reading can create.
-                                    let real = catalog.drinks.filter { !$0.isRandom }
-                                    draft.drink = real.randomElement() ?? DrinkCatalog.randomPick()
-                                } else {
-                                    draft.isRandomPath = false
-                                    draft.drink = drink
-                                }
+                                select(drink)
                             }
                         }
                     }
@@ -69,6 +59,27 @@ struct DrinkSelectionView: View {
             }
         }
         .toolbar(.hidden, for: .navigationBar)
+    }
+
+    /// Tapping the picked card again clears it — the CTA goes away with it.
+    private func select(_ drink: Drink) {
+        guard selectedID != drink.id else {
+            selectedID = nil
+            draft.drink = nil
+            draft.isRandomPath = false
+            return
+        }
+        selectedID = drink.id
+        if drink.isRandom {
+            draft.isRandomPath = true
+            // Pick from the live catalog (real ids), not the bundled mock, so
+            // the reading can create.
+            let real = catalog.drinks.filter { !$0.isRandom }
+            draft.drink = real.randomElement() ?? DrinkCatalog.randomPick()
+        } else {
+            draft.isRandomPath = false
+            draft.drink = drink
+        }
     }
 
     private var continueBar: some View {

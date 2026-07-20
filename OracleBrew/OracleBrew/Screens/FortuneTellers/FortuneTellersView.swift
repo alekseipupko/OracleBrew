@@ -40,7 +40,8 @@ struct FortuneTellersView: View {
                                 teller: teller,
                                 isSelected: draft.teller == teller,
                                 dimmed: draft.teller != nil && draft.teller != teller,
-                                onSelect: { draft.teller = teller },
+                                // Tapping the picked oracle again clears it.
+                                onSelect: { draft.teller = draft.teller == teller ? nil : teller },
                                 onViewProfile: { onOpenProfile(teller) }
                             )
                         }
