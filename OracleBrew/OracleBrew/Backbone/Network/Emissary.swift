@@ -81,23 +81,30 @@ final class Emissary {
         do {
             return try await run(urlRequest, retryOnDeadConnection: true)
         } catch let failure as EmissaryFailure {
+            // Non-2xx is already on the log via the response; this is for the
+            // rest (encoding, no token).
             throw failure
         } catch {
+            WireLog.failure(error, for: urlRequest)
             throw mapURLError(error)
         }
     }
 
     private func run(_ urlRequest: URLRequest, retryOnDeadConnection: Bool) async throws -> Data {
         do {
+            WireLog.request(urlRequest)
             let (data, response) = try await session.data(for: urlRequest)
             guard let http = response as? HTTPURLResponse else {
+                WireLog.response(nil, data: data, for: urlRequest)
                 throw EmissaryFailure.server(statusCode: -1)
             }
+            WireLog.response(http, data: data, for: urlRequest)
             guard (200..<300).contains(http.statusCode) else {
                 throw EmissaryFailure.from(statusCode: http.statusCode)
             }
             return data
         } catch let urlError as URLError where retryOnDeadConnection && Self.isDeadConnection(urlError) {
+            WireLog.failure(urlError, for: urlRequest)
             // A reused keep-alive connection dies after idling: the first request
             // over it fails, a retry over a fresh one goes through. Safe — the
             // request never reached the server, so there's no response to lose.
