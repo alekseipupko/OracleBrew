@@ -20,6 +20,8 @@ struct PhotoUploadView: View {
     @State private var showCamera = false
     @State private var camera = CupCamera()
     @State private var capturing = false
+    /// Which source the current photo came from — decides what "another" offers.
+    @State private var photoFromCamera = false
 
     private let field = Color(hex: 0x271C3E)
 
@@ -97,9 +99,13 @@ struct PhotoUploadView: View {
                 Color.clear
                     .overlay { Image(uiImage: photo).resizable().scaledToFill() }
                     .clipShape(RoundedRectangle(cornerRadius: 20))
-            } else if let session = camera.session {
+                    // clipShape hides the overflow but still lets it take taps,
+                    // and a camera frame is tall enough to spill over the header
+                    // and swallow the close button. It's decoration — opt it out.
+                    .allowsHitTesting(false)
+            } else if camera.phase == .running {
                 // Live feed — the user frames the cup right in the drop zone.
-                CameraPreview(session: session)
+                CameraPreview(session: camera.session)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
@@ -113,7 +119,9 @@ struct PhotoUploadView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 395 * Screen.vScale)
+        // Flexible rather than fixed: at 395pt the column overflows on SE and
+        // shoves the header up under the status bar. It shrinks to fit instead.
+        .frame(minHeight: 220, maxHeight: 395 * Screen.vScale)
     }
 
     /// Shown until the feed is up, and for good where it can't run at all
@@ -163,10 +171,18 @@ struct PhotoUploadView: View {
     private var buttons: some View {
         VStack(spacing: 12) {
             if hasPhoto {
-                PhotosPicker(selection: $pickerItem, matching: .images) {
-                    secondaryLabel("photo.select_another")
+                // "Another" has to mean the same source the photo came from —
+                // offering the gallery after a camera shot (or the reverse)
+                // isn't what the label promises.
+                if photoFromCamera {
+                    Button(action: retake) { secondaryLabel("photo.take_another") }
+                        .buttonStyle(.plain)
+                } else {
+                    PhotosPicker(selection: $pickerItem, matching: .images) {
+                        secondaryLabel("photo.select_another")
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
                 PrimaryButton(title: "photo.continue", action: onContinue)
             } else {
                 PhotosPicker(selection: $pickerItem, matching: .images) {
@@ -204,8 +220,16 @@ struct PhotoUploadView: View {
             defer { capturing = false }
             guard let image = await camera.capture() else { return }
             draft.photo = image
+            photoFromCamera = true
             camera.stop()
         }
+    }
+
+    /// Drops the shot and brings the live feed back for another go.
+    private func retake() {
+        draft.photo = nil
+        photoFromCamera = false
+        Task { await camera.prepare() }
     }
 
     private func prefillRandomIfNeeded() {
@@ -221,6 +245,7 @@ struct PhotoUploadView: View {
                let image = UIImage(data: data) {
                 await MainActor.run {
                     draft.photo = image
+                    photoFromCamera = false
                     camera.stop()
                 }
             }

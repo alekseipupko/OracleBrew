@@ -24,9 +24,12 @@ final class ReadingDraft {
 
     // Photo of the cup (gallery / camera / a bundled sample for the Random path)
     var photo: UIImage?
-    /// The API random-cup id, fetched when the reading is created on the Random
-    /// path (mutually exclusive with uploading `photo`).
+    /// The API random-cup shown on the "Chosen for You" screen — its id goes to
+    /// the reading (mutually exclusive with uploading `photo`), its image is
+    /// what the user saw. Picked on that screen, not at create time, so the
+    /// reading uses the exact cup the user was shown.
     var randomCupID: Int?
+    var randomCupImageURL: String?
 
     /// Set once this reading is recorded into ReadingHistoryStore, so re-appearing
     /// on Reading Result (e.g. after a chat) doesn't record a duplicate entry.

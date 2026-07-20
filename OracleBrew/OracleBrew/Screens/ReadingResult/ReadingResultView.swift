@@ -204,7 +204,12 @@ struct ReadingResultView: View {
                 if let card = shareCard {
                     ShareLink(
                         item: card,
-                        preview: SharePreview("share.preview_title", image: Image(uiImage: card.image))
+                        // Brand the preview with the app icon rather than the
+                        // raw card thumbnail — this is how the share sheet and
+                        // the saved item identify OracleBrew.
+                        preview: SharePreview("share.preview_title",
+                                              image: Image(uiImage: card.image),
+                                              icon: Image("ShareIcon"))
                     ) {
                         secondaryLabel("result.share", icon: "square.and.arrow.up")
                     }

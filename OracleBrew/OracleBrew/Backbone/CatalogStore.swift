@@ -48,4 +48,15 @@ final class CatalogStore {
         }
         dailyFortune = await repository.dailyFortune()
     }
+
+    /// A random cup for the "Chosen for You" screen. No drink is passed: only
+    /// some drinks have cups on the backend, and constraining to one the user
+    /// happened to land on 404s. Let the backend pick a cup that exists and
+    /// report which drink it belongs to — the reading must use that drink.
+    /// `excludeID` skips the one already shown, so "Choose Another Cup" never
+    /// repeats it back.
+    func randomCup(excludeID: Int? = nil) async throws -> (id: Int, imageURL: String?, drink: Drink) {
+        let dto = try await repository.randomCup(excludeID: excludeID)
+        return (dto.id, dto.image, CatalogMapper.drink(dto.drink))
+    }
 }

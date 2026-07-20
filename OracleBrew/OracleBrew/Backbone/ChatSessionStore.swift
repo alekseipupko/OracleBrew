@@ -43,6 +43,9 @@ struct ChatSummary: Identifiable, Hashable {
     let date: Date
     /// The oracle sent a message the user hasn't opened yet — shows the dot.
     let hasUnread: Bool
+    /// This chat grew out of a grounds reading (has a reading id) rather than a
+    /// direct Oracle Chat — the design badges the avatar with a cup for it.
+    let fromReading: Bool
 }
 
 @MainActor
@@ -123,7 +126,8 @@ final class ChatSessionStore {
             teller: CatalogMapper.oracle(dto.oracle),
             preview: dto.lastMessage?.text ?? "Say hello to start the conversation",
             date: dto.updatedAt.flatMap { isoFormatter.date(from: $0) } ?? Date(),
-            hasUnread: dto.hasUnreadFromOracle ?? false
+            hasUnread: dto.hasUnreadFromOracle ?? false,
+            fromReading: dto.readingId != nil
         )
     }
 }

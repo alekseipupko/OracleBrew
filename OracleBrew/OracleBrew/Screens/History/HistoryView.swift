@@ -124,19 +124,14 @@ struct HistoryView: View {
         .frame(maxWidth: .infinity)
     }
 
+    // The design only draws the Chats empty state; this mirrors its pattern for
+    // History (no CTA — the tab can't start a reading, that lives on Brew).
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Spacer()
-            Image(systemName: "clock.arrow.circlepath")
-                .font(.system(size: 36))
-                .foregroundStyle(Pigment.cream.opacity(0.3))
-            Text("history.empty")
-                .font(Lettering.body(14))
-                .foregroundStyle(Pigment.cream.opacity(0.4))
-                .multilineTextAlignment(.center)
-            Spacer()
-        }
-        .frame(maxWidth: .infinity)
+        EmptyState(
+            icon: "book.closed",
+            headline: "history.empty.title",
+            subtitle: "history.empty.subtitle"
+        )
     }
 }
 

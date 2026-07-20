@@ -70,11 +70,21 @@ struct BrewReadingFlow: View {
                 onClose: onClose
             )
         case .photo:
-            PhotoUploadView(
-                onContinue: { path.append(ReadingStep.loading) },
-                onBack: pop,
-                onClose: onClose
-            )
+            // Random Cup shows a backend-chosen cup rather than asking for a
+            // photo — same step in the wizard, different source.
+            if draft.isRandomPath {
+                RandomCupView(
+                    onContinue: { path.append(ReadingStep.loading) },
+                    onBack: pop,
+                    onClose: onClose
+                )
+            } else {
+                PhotoUploadView(
+                    onContinue: { path.append(ReadingStep.loading) },
+                    onBack: pop,
+                    onClose: onClose
+                )
+            }
         case .loading:
             // Swap for the result rather than pushing on top of it — the reading
             // is the destination, and going back from it belongs at the photo

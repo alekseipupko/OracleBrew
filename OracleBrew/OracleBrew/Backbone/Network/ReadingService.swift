@@ -34,13 +34,20 @@ struct ReadingService {
         let horizon = draft.horizon.rawValue
 
         if draft.isRandomPath {
-            // Random path: fetch a random cup for this drink, then create by id.
-            let cup = try await catalog.randomCup(drinkID: drinkID)
+            // Random path: use the cup the user was shown on "Chosen for You".
+            // It's picked there; only fetch here as a fallback if the screen was
+            // somehow skipped.
+            let cupID: Int
+            if let chosen = draft.randomCupID {
+                cupID = chosen
+            } else {
+                cupID = try await catalog.randomCup().id
+            }
             var body: [String: AnyJSON] = [
                 "drink_id": .int(drinkID),
                 "oracle_id": .int(oracleID),
                 "time_horizon": .string(horizon),
-                "random_cup_id": .int(cup.id),
+                "random_cup_id": .int(cupID),
             ]
             if let topicID = draft.topic?.numericID { body["topic_id"] = .int(topicID) }
             if !draft.question.isEmpty { body["question"] = .string(draft.question) }

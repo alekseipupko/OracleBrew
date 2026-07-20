@@ -190,58 +190,75 @@ struct OracleChatView: View {
             .padding(.top, 4)
     }
 
-    // Vertical suggestion menu pinned bottom-right, with a dismiss button on the
-    // left — matching the design (was a horizontal chip strip).
+    /// The suggestions sit on their own tinted panel, and each one is shaped
+    /// like a message the user is about to send — same gradient, same tail. The
+    /// dismiss sits inside the panel's top-left corner.
     private var quickMenu: some View {
-        HStack(alignment: .bottom, spacing: 8) {
-            Button { withAnimation { chipsHidden = true } } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(Pigment.cream.opacity(0.6))
-                    .frame(width: 34, height: 34)
-                    .background(Circle().fill(Pigment.surface))
-                    .overlay(Circle().strokeBorder(Color.white.opacity(0.12), lineWidth: 1))
-            }
-            .buttonStyle(.plain)
-
-            Spacer(minLength: 0)
-
-            VStack(alignment: .trailing, spacing: 8) {
-                ForEach(thread.quickQuestions, id: \.self) { question in
-                    Button { send(question) } label: {
-                        Text(question)
-                            .font(Lettering.body(13))
-                            .foregroundStyle(Pigment.cream)
-                            .multilineTextAlignment(.trailing)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 10)
-                            .background(Capsule().fill(Pigment.accent.opacity(0.18)))
-                            .overlay(Capsule().strokeBorder(Pigment.accent.opacity(0.4), lineWidth: 1))
-                    }
-                    .buttonStyle(.plain)
+        VStack(alignment: .trailing, spacing: 10) {
+            ForEach(thread.quickQuestions, id: \.self) { question in
+                Button { send(question) } label: {
+                    Text(question)
+                        .font(Lettering.bodyMedium(14))
+                        .foregroundStyle(Pigment.cream)
+                        .multilineTextAlignment(.trailing)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Pigment.accentGradient)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .background(alignment: .bottomTrailing) {
+                            BubbleTail(leading: false)
+                                .fill(Pigment.accentGradient)
+                                .frame(width: BubbleTail.size.width, height: BubbleTail.size.height)
+                                .offset(x: 3)
+                        }
                 }
+                .buttonStyle(.plain)
             }
         }
-        .padding(.bottom, 8)
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        // A plain accent tint, as the design has it. Material was far heavier
+        // than its 4pt backdrop blur and washed the panel grey.
+        .background(RoundedRectangle(cornerRadius: 20).fill(Pigment.accent.opacity(0.15)))
+        .overlay(alignment: .topLeading) { dismissHints }
+        .padding(.bottom, 12)
+    }
+
+    private var dismissHints: some View {
+        Button { withAnimation { chipsHidden = true } } label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(Pigment.cream)
+                .frame(width: 32, height: 32)
+                .background(Circle().fill(Pigment.inkDeep))
+                .contentShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .padding(8)
     }
 
     private var inputBar: some View {
         HStack(spacing: 8) {
             TextField("chat.placeholder", text: $draftText, axis: .vertical)
-                .font(Lettering.body(15))
+                .font(Lettering.body(14))
                 .foregroundStyle(Pigment.cream)
                 .focused($inputFocused)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(Capsule().fill(Color(hex: 0x271C3E)))
-                .overlay(Capsule().strokeBorder(Color.white.opacity(0.15), lineWidth: 1))
+                .frame(minHeight: 52)
+                .background(Capsule().fill(Pigment.inkDeep))
+                .overlay(Capsule().strokeBorder(Pigment.accent.opacity(0.4), lineWidth: 1))
 
             Button { send(draftText) } label: {
-                Image(systemName: "arrow.up")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(Pigment.cardInk)
-                    .frame(width: 44, height: 44)
+                Image("IconSend")
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(Pigment.cream)
+                    .frame(width: 52, height: 52)
                     .background(Circle().fill(Pigment.accentGradient))
+                    .overlay(Circle().strokeBorder(Pigment.cream.opacity(0.15), lineWidth: 1))
+                    .shadow(color: Pigment.accent.opacity(0.3), radius: 3, y: 4)
+                    .contentShape(Circle())
             }
             .buttonStyle(.plain)
             .disabled(draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)

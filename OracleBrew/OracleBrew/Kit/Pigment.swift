@@ -51,6 +51,16 @@ enum Pigment {
     /// Amber — warm end of the share card's cup ring.
     static let amber = Color(hex: 0xF59E0B)
 
+    /// The darkest surface in the palette — under the onboarding art, and the
+    /// fill for the chat's input field and the History card's menu chip.
+    static let inkDeep = Color(hex: 0x130E24)
+
+    // MARK: Onboarding-only
+    /// Progress track, Skip pill, and the wheel-picker panel.
+    static let onboardingPanel = Color(hex: 0x2C2142)
+    /// The oracle's bubble.
+    static let onboardingBubble = Color(hex: 0x38295C)
+
     /// Ring around the cup photo on the share card. Figma draws a gradient
     /// stroke, but Dev Mode flattens strokes to a single colour and the stops
     /// aren't variables — so this approximates it from the existing palette

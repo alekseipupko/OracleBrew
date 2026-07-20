@@ -12,6 +12,7 @@ struct ChatsView: View {
     @Environment(ChatSessionStore.self) private var chatStore
     @Bindable var router: Pathfinder
 
+    @State private var showChatFlow = false
     private let tabClearance: CGFloat = 96
 
     var body: some View {
@@ -43,6 +44,12 @@ struct ChatsView: View {
             }
         }
         .environment(router)
+        .fullScreenCover(isPresented: $showChatFlow) {
+            OracleChatEntryFlow {
+                showChatFlow = false
+                Task { await chatStore.loadList() }
+            }
+        }
         .task { await chatStore.loadList() }
         .onChange(of: router.path.isEmpty) { _, atRoot in
             // Returning to the list — refresh so the unread dot clears (the
@@ -110,17 +117,11 @@ struct ChatsView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Spacer()
-            Image(systemName: "bubble.left.and.bubble.right")
-                .font(.system(size: 36))
-                .foregroundStyle(Pigment.cream.opacity(0.3))
-            Text("chats.empty")
-                .font(Lettering.body(14))
-                .foregroundStyle(Pigment.cream.opacity(0.4))
-                .multilineTextAlignment(.center)
-            Spacer()
-        }
-        .frame(maxWidth: .infinity)
+        EmptyState(
+            icon: "ellipsis.bubble",
+            headline: "chats.empty.title",
+            subtitle: "chats.empty.subtitle",
+            cta: (title: "chats.empty.cta", action: { showChatFlow = true })
+        )
     }
 }

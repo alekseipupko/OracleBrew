@@ -30,6 +30,10 @@ struct TellerCard: View {
                 RoundedRectangle(cornerRadius: Cadence.cardRadius)
                     .strokeBorder(Color.white.opacity(0.1), lineWidth: 2)
             )
+            // Pins the interaction and accessibility frame to the card itself.
+            // Without it the union of the children — the portrait fills wider
+            // than its clip — reports a frame starting off the left edge.
+            .contentShape(RoundedRectangle(cornerRadius: Cadence.cardRadius))
         }
         .buttonStyle(.plain)
         // The design drops the unpicked oracles to 30%.
@@ -61,6 +65,10 @@ struct TellerCard: View {
             Spacer(minLength: 0)
         }
         .allowsHitTesting(false)
+        // Decorative. Without this the portrait's scaledToFill overflow is
+        // unioned into the card's accessibility frame, which then starts ~16pt
+        // off the left edge — the drawing is clipped, the a11y rect wasn't.
+        .accessibilityHidden(true)
     }
 
     /// Figma: a 193×164 text block at (142, 18) — the button sits at its
@@ -132,7 +140,10 @@ struct TellerCard: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 24)
                 .background(Capsule().fill(Pigment.accent.opacity(0.15)))
-                .contentShape(Capsule())
+                // 24pt tall in the design; the hit area reaches the 44pt
+                // minimum without the pill growing.
+                .frame(height: Cadence.tapTarget)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

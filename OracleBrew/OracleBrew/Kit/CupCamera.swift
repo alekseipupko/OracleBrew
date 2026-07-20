@@ -24,14 +24,23 @@ final class CupCamera {
 
     private(set) var phase: Phase = .idle
 
-    /// Handed to the preview layer; nil until the session is configured.
-    @ObservationIgnored private(set) var session: AVCaptureSession?
+    /// One session for this object's lifetime, handed to the preview layer once
+    /// and never swapped. Giving the layer a *different* session while it still
+    /// holds a connection from the old one trips AVFoundation's "connection
+    /// references an input unknown to this session" assertion — so stopping
+    /// only stops it running; it never throws the session away.
+    @ObservationIgnored let session = AVCaptureSession()
+
     @ObservationIgnored private let output = AVCapturePhotoOutput()
+    /// Configuring and starting a session blocks, so it stays off the main
+    /// thread, as AVFoundation asks.
     @ObservationIgnored private let queue = DispatchQueue(label: "cup-camera")
     @ObservationIgnored private var captor: PhotoCaptor?
+    @ObservationIgnored private var isConfigured = false
 
     /// Asks for access (first call shows the system prompt) and starts the
-    /// session. Safe to call again — a running session is left alone.
+    /// session. Safe to call again — a running session is left alone, and the
+    /// inputs are only ever added once.
     func prepare() async {
         guard phase != .running else { return }
 
@@ -48,34 +57,50 @@ final class CupCamera {
             return
         }
 
+        if !isConfigured {
+            guard await configure() else {
+                phase = .unavailable
+                return
+            }
+            isConfigured = true
+        }
+
+        phase = .running
+        queue.async { [session] in
+            if !session.isRunning { session.startRunning() }
+        }
+    }
+
+    /// Wires the camera into the session. Runs once; after that the session is
+    /// only started and stopped.
+    private func configure() async -> Bool {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
               let input = try? AVCaptureDeviceInput(device: device) else {
-            phase = .unavailable
-            return
+            return false
         }
-
-        let session = AVCaptureSession()
-        session.sessionPreset = .photo
-        session.beginConfiguration()
-        guard session.canAddInput(input), session.canAddOutput(output) else {
-            session.commitConfiguration()
-            phase = .unavailable
-            return
+        return await withCheckedContinuation { continuation in
+            queue.async { [session, output] in
+                session.beginConfiguration()
+                session.sessionPreset = .photo
+                guard session.canAddInput(input), session.canAddOutput(output) else {
+                    session.commitConfiguration()
+                    continuation.resume(returning: false)
+                    return
+                }
+                session.addInput(input)
+                session.addOutput(output)
+                session.commitConfiguration()
+                continuation.resume(returning: true)
+            }
         }
-        session.addInput(input)
-        session.addOutput(output)
-        session.commitConfiguration()
-
-        self.session = session
-        phase = .running
-        queue.async { session.startRunning() }
     }
 
     func stop() {
-        guard let session else { return }
-        queue.async { session.stopRunning() }
+        guard phase == .running else { return }
         phase = .idle
-        self.session = nil
+        queue.async { [session] in
+            if session.isRunning { session.stopRunning() }
+        }
     }
 
     /// Takes a still. Returns nil if the session isn't running or capture failed.
@@ -124,9 +149,9 @@ struct CameraPreview: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ view: PreviewView, context: Context) {
-        if view.previewLayer.session !== session { view.previewLayer.session = session }
-    }
+    /// Deliberately empty: the session never changes, and reassigning it is
+    /// exactly what trips the connection assertion.
+    func updateUIView(_ view: PreviewView, context: Context) {}
 
     final class PreviewView: UIView {
         override class var layerClass: AnyClass { AVCaptureVideoPreviewLayer.self }
@@ -135,7 +160,9 @@ struct CameraPreview: UIViewRepresentable {
         override func layoutSubviews() {
             super.layoutSubviews()
             // The flow is portrait-locked; pin the feed so it never lands sideways.
-            previewLayer.connection?.videoRotationAngle = 90
+            guard let connection = previewLayer.connection,
+                  connection.isVideoRotationAngleSupported(90) else { return }
+            connection.videoRotationAngle = 90
         }
     }
 }

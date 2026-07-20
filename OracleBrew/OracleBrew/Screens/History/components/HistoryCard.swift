@@ -2,73 +2,56 @@
 //  HistoryCard.swift
 //  OracleBrew
 //
+//  One row in the History list, per the design: the oracle's photo on the left,
+//  then the date, the topic chip, and two lines of the reading. A "…" menu sits
+//  top-right — present only when a chat grew from this reading, and opening it
+//  jumps into that chat. Tapping the card body opens the full result.
+//
 
 import SwiftUI
 
 struct HistoryCard: View {
     let item: HistoryItem
-    /// Tapping the chat icon jumps into the chat; tapping the card body opens
-    /// the reading result.
+    /// Opening the "…" menu jumps into the chat this reading led to.
     var onOpenChat: () -> Void = {}
 
     private var dateLabel: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: item.date)
+        item.date.formatted(.dateTime.month(.wide).day().year()).uppercased()
     }
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            thumbnail
+            portrait
 
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 6) {
-                    Text(item.drink.name)
-                        .font(Lettering.bodyMedium(13))
-                        .foregroundStyle(Pigment.cream)
-                    Text("·")
-                        .foregroundStyle(Pigment.cream.opacity(0.3))
-                    Text(dateLabel)
-                        .font(Lettering.body(11))
-                        .foregroundStyle(Pigment.cream.opacity(0.4))
+            VStack(alignment: .leading, spacing: 8) {
+                Text(dateLabel)
+                    .font(Lettering.body(11))
+                    .foregroundStyle(Pigment.cream.opacity(0.4))
+
+                if let topic = item.topic {
+                    TopicChip(text: topic.name, compact: true)
                 }
 
                 Text(item.preview)
-                    .font(Lettering.body(12))
-                    .foregroundStyle(Pigment.cream.opacity(0.6))
+                    .font(Lettering.body(13))
+                    .foregroundStyle(Pigment.cream.opacity(0.7))
+                    .lineSpacing(2)
                     .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
-                HStack(spacing: 6) {
-                    if let topic = item.topic {
-                        TopicChip(text: topic.name, compact: true)
-                    }
-                    Spacer()
-                    HStack(spacing: 4) {
-                        Group {
-                            if let url = item.teller.portraitURL, !url.isEmpty {
-                                RemoteImage(urlString: url, cornerRadius: 9)
-                            } else {
-                                Image(item.teller.portrait).resizable().scaledToFill()
-                            }
-                        }
-                        .frame(width: 18, height: 18)
-                        .clipShape(Circle())
-                        Text(item.teller.name)
-                            .font(Lettering.body(11))
-                            .foregroundStyle(Pigment.cream.opacity(0.4))
-                    }
-                    if item.hasChat {
-                        Button(action: onOpenChat) {
-                            Image(systemName: "bubble.left.fill")
-                                .font(.system(size: 13))
-                                .foregroundStyle(Pigment.accent)
-                                .frame(width: 32, height: 32)
-                                .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                    }
+            Spacer(minLength: 4)
+
+            if item.hasChat {
+                Button(action: onOpenChat) {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Pigment.cream.opacity(0.6))
+                        .frame(width: 36, height: 36)
+                        .background(Circle().fill(Pigment.inkDeep))
+                        .contentShape(Circle())
                 }
+                .buttonStyle(.plain)
             }
         }
         .padding(12)
@@ -76,15 +59,15 @@ struct HistoryCard: View {
         .overlay(RoundedRectangle(cornerRadius: Cadence.cardRadius).strokeBorder(Color.white.opacity(0.1), lineWidth: 1))
     }
 
-    private var thumbnail: some View {
+    private var portrait: some View {
         Group {
-            if let url = item.cupImageURL, !url.isEmpty {
-                RemoteImage(urlString: url, cornerRadius: 14)
+            if let url = item.teller.portraitURL, !url.isEmpty {
+                RemoteImage(urlString: url, cornerRadius: 16)
             } else {
-                Image("SampleCupCard").resizable().scaledToFill()
+                Image(item.teller.portrait).resizable().scaledToFill()
             }
         }
-        .frame(width: 64, height: 64)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .frame(width: 80, height: 80)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
