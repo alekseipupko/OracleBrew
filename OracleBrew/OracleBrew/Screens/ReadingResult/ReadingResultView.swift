@@ -158,9 +158,10 @@ struct ReadingResultView: View {
     private func advice(_ reading: Reading) -> some View {
         VStack(spacing: 12) {
             VStack(spacing: 12) {
-                Image(systemName: "sparkles")
-                    .font(.system(size: 32))
-                    .foregroundStyle(Pigment.accent)
+                Image("magic-ball")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
                 Text(reading.advice)
                     .font(Lettering.displayMedium(24))
                     .foregroundStyle(Pigment.cream)
@@ -176,9 +177,11 @@ struct ReadingResultView: View {
             .overlay(RoundedRectangle(cornerRadius: 24).strokeBorder(Color.white.opacity(0.15), lineWidth: 1))
 
             HStack(spacing: 6) {
-                Image(systemName: "clock")
-                    .font(.system(size: 14))
-                    .foregroundStyle(Pigment.cream.opacity(0.6))
+                Image("clock")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 14, height: 14)
+                    .opacity(0.6)
                 Text("result.timeframe_label")
                     .font(Lettering.body(12))
                     .foregroundStyle(Pigment.cream.opacity(0.6))
