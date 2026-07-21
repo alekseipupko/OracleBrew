@@ -7,6 +7,13 @@ struct ChatsView: View {
 
     @State private var showChatFlow = false
     private let tabClearance: CGFloat = 96
+    /// Button height plus the gap under the last row.
+    private let newChatClearance: CGFloat = 72
+
+    private var hasChats: Bool {
+        if case .content(let items) = chatStore.listPhase { return !items.isEmpty }
+        return false
+    }
 
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -19,7 +26,17 @@ struct ChatsView: View {
                     content
                 }
                 .padding(.top, 4)
-                .padding(.bottom, tabClearance)
+                // The list stops above the CTA rather than scrolling under it —
+                // the button is opaque and would clip the last row.
+                .padding(.bottom, tabClearance + (hasChats ? newChatClearance : 0))
+            }
+            .overlay(alignment: .bottom) {
+                // Only once there are chats. The empty state carries its own CTA.
+                if hasChats {
+                    PrimaryButton(title: "chats.new_chat.cta") { showChatFlow = true }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, tabClearance)
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
             .waypointDestinations(router)

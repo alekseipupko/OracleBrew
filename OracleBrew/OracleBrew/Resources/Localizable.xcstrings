@@ -221,6 +221,16 @@
         }
       }
     },
+    "chats.new_chat.cta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a chat with a new Oracle"
+          }
+        }
+      }
+    },
     "chats.subtitle" : {
       "localizations" : {
         "en" : {
