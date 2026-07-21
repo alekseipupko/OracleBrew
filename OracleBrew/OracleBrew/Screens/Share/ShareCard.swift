@@ -67,16 +67,13 @@ struct ShareCard: View {
 
     private var watermark: some View {
         HStack(spacing: 16) {
-            // The app icon doesn't exist yet — the design ships a checkerboard
-            // placeholder here with a note to drop it in once it's drawn.
-            RoundedRectangle(cornerRadius: 21)
-                .fill(Pigment.surface)
+            // A copy of the app icon, not AppIcon itself — the icon in an
+            // .appiconset isn't loadable by name at runtime, so the artwork
+            // ships a second time as a plain imageset.
+            Image("BrandMark")
+                .resizable()
                 .frame(width: 96, height: 96)
-                .overlay(
-                    Image(systemName: "cup.and.saucer.fill")
-                        .font(.system(size: 44))
-                        .foregroundStyle(Pigment.accent)
-                )
+                .clipShape(RoundedRectangle(cornerRadius: 21, style: .continuous))
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("share.brand")
