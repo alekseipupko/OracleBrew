@@ -127,6 +127,12 @@ final class Emissary {
             urlRequest.setValue(APIConfig.authValue(for: token), forHTTPHeaderField: "Authorization")
         }
 
+        // The language the UI is actually running in, so the catalog and the
+        // generated readings can come back in it. The backend ignores this
+        // today — it answers in English either way — but sending it now means
+        // the day it honours the header is a backend-only change.
+        urlRequest.setValue(APIConfig.preferredLanguage, forHTTPHeaderField: "Accept-Language")
+
         switch request.body {
         case .none:
             break
