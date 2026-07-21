@@ -44,6 +44,9 @@ struct OracleDTO: Decodable {
     let id: Int
     let slug: String
     let name: String
+    /// The line under the name — "The Moon Seer". Distinct from the
+    /// specializations, which are the topic chips.
+    let profession: String?
     let illustration: String?
     let rating: Double?
     let sessionsCount: Int?
@@ -55,7 +58,7 @@ struct OracleDTO: Decodable {
     let quickPrompts: [String]?
 
     enum CodingKeys: String, CodingKey {
-        case id, slug, name, illustration, rating, specializations, bio, reviews
+        case id, slug, name, profession, illustration, rating, specializations, bio, reviews
         case sessionsCount = "sessions_count"
         case sortOrder = "sort_order"
         case quickPrompts = "quick_prompts"

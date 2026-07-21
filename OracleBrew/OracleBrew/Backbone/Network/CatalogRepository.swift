@@ -69,7 +69,9 @@ enum CatalogMapper {
         return FortuneTeller(
             id: String(dto.id),
             name: dto.name,
-            title: specs.first?.title ?? "",
+            // The design's subtitle is the profession; the first specialization
+            // was only ever standing in for it.
+            title: dto.profession ?? specs.first?.title ?? "",
             portrait: "",
             rating: dto.rating ?? 0,
             sessions: dto.sessionsCount ?? 0,
