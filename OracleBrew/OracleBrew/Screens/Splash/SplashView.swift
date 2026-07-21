@@ -1,24 +1,30 @@
+import AVFoundation
 import SwiftUI
 
-/// The launch screen: the ball, the wordmark, and the two corner glows.
+/// The launch screen: the ball clip, the wordmark, and the two corner glows.
 ///
 /// It also owns the tracking prompt and the app's boot work. The order is
-/// deliberate — the screen appears static, ATT is requested over it, and only
-/// once the user has answered does the reveal animation run. Raising the dialog
-/// over a moving screen looks broken, so nothing moves until it's dismissed.
+/// deliberate — the screen appears with the clip paused on its first frame, ATT
+/// is requested over it, and only once the user has answered does the clip
+/// start. Raising the dialog over a playing video looks broken.
+///
+/// The splash lasts exactly as long as the clip; there is no separate hold.
 struct SplashView: View {
-    /// Boot work to run behind the animation — the session, catalog and profile.
+    /// Boot work to run behind the clip — the session, catalog and profile.
     let bootstrap: () async -> Void
     let onFinish: () -> Void
 
-    /// The splash holds at least this long once the animation starts, so a warm
-    /// launch doesn't flash it for a single frame.
-    private static let minimumHold = Duration.seconds(1.5)
+    /// Backstop for a clip that never reports finishing (a corrupt file, a
+    /// decoder stall). Comfortably longer than the clip, which runs ~5s.
+    private static let playbackCap = Duration.seconds(8)
+    /// How long the splash holds when the clip is missing altogether.
+    private static let fallbackHold = Duration.seconds(1.5)
 
     @Environment(\.scenePhase) private var scenePhase
 
-    @State private var revealed = false
-    @State private var pulsing = false
+    @State private var player = Bundle.main
+        .url(forResource: "splash", withExtension: "mp4")
+        .map { AVPlayer(url: $0) }
     @State private var started = false
 
     var body: some View {
@@ -29,12 +35,10 @@ struct SplashView: View {
                 .overlay(alignment: .topLeading) { topGlow }
                 .overlay(alignment: .bottomTrailing) { bottomGlow }
 
-            Image("Ball")
-                .resizable()
+            ball
                 .frame(width: 200, height: 200)
+                .mask { edgeFade }
                 .offset(y: -26)
-                .opacity(revealed ? 1 : 0)
-                .scaleEffect(revealed ? 1 : 0.85)
 
             VStack {
                 Spacer()
@@ -47,7 +51,6 @@ struct SplashView: View {
                     SparklePair()
                 }
                 .padding(.bottom, 44)
-                .opacity(revealed ? 1 : 0)
             }
         }
         .ignoresSafeArea()
@@ -60,17 +63,61 @@ struct SplashView: View {
 
             await Beacon.request()
 
-            withAnimation(.easeOut(duration: 0.6)) { revealed = true }
-            withAnimation(.easeInOut(duration: 2.4).repeatForever(autoreverses: true)) {
-                pulsing = true
-            }
-
-            let start = ContinuousClock.now
-            await bootstrap()
-            let remaining = Self.minimumHold - start.duration(to: .now)
-            if remaining > .zero { try? await Task.sleep(for: remaining) }
+            // Boot runs under the clip, so the first screen the user touches
+            // already has its data. Whichever finishes last decides the exit.
+            async let booted: Void = bootstrap()
+            await playClip()
+            await booted
 
             onFinish()
+        }
+    }
+
+    @ViewBuilder
+    private var ball: some View {
+        if let player {
+            VideoLayerView(player: player)
+        } else {
+            // The clip is bundled, so this only shows if the build lost it.
+            Image("Ball").resizable()
+        }
+    }
+
+    /// The clip has no alpha and its own glow around the ball, so its frame
+    /// reads as a lighter square against the backdrop. Fading the edges out
+    /// dissolves that seam — a hard circle would only trade it for a crisp one.
+    private var edgeFade: some View {
+        RadialGradient(
+            gradient: Gradient(stops: [
+                .init(color: .black, location: 0),
+                .init(color: .black, location: 0.62),
+                .init(color: .clear, location: 1),
+            ]),
+            center: .center,
+            startRadius: 0,
+            endRadius: 100
+        )
+    }
+
+    /// Plays the clip and returns when it reaches the end.
+    private func playClip() async {
+        guard let player, let item = player.currentItem else {
+            try? await Task.sleep(for: Self.fallbackHold)
+            return
+        }
+        // Muted so a splash never talks over whatever the user is listening to.
+        player.isMuted = true
+        player.play()
+
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask {
+                for await _ in NotificationCenter.default.notifications(
+                    named: AVPlayerItem.didPlayToEndTimeNotification, object: item
+                ) { return }
+            }
+            group.addTask { try? await Task.sleep(for: Self.playbackCap) }
+            await group.next()
+            group.cancelAll()
         }
     }
 
@@ -82,7 +129,6 @@ struct SplashView: View {
             .fill(Pigment.splashGlowTop)
             .frame(width: 340, height: 340)
             .blur(radius: 110)
-            .scaleEffect(pulsing ? 1.12 : 1)
             .offset(x: -150, y: -120)
     }
 
@@ -91,7 +137,6 @@ struct SplashView: View {
             .fill(Pigment.splashGlowBottom)
             .frame(width: 220, height: 220)
             .blur(radius: 55)
-            .scaleEffect(pulsing ? 1.15 : 1)
             .offset(x: 67, y: -60)
     }
 }
