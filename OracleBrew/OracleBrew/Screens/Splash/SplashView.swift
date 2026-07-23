@@ -3,15 +3,16 @@ import SwiftUI
 
 /// The launch screen: the ball clip, the wordmark, and the two corner glows.
 ///
-/// It also owns the tracking prompt and the app's boot work. The order is
-/// deliberate — the screen appears with the clip paused on its first frame, ATT
-/// is requested over it, and only once the user has answered does the clip
-/// start. Raising the dialog over a playing video looks broken.
+/// It also owns the tracking prompt. The order is deliberate — the screen
+/// appears with the clip paused on its first frame, ATT is requested over it,
+/// and only once the user has answered does the clip start. Raising the dialog
+/// over a playing video looks broken.
 ///
-/// The splash lasts exactly as long as the clip; there is no separate hold.
+/// The boot work is deliberately NOT run here: the ATT dialog takes the scene
+/// inactive and back, which restarts a `task(id: scenePhase)` and cancels
+/// whatever it was awaiting. Loading lives in Atrium, outside that churn.
 struct SplashView: View {
-    /// Boot work to run behind the clip — the session, catalog and profile.
-    let bootstrap: () async -> Void
+    /// The clip has played out — the app may show itself once its data is in.
     let onFinish: () -> Void
 
     /// Backstop for a clip that never reports finishing (a corrupt file, a
@@ -62,13 +63,7 @@ struct SplashView: View {
             started = true
 
             await Beacon.request()
-
-            // Boot runs under the clip, so the first screen the user touches
-            // already has its data. Whichever finishes last decides the exit.
-            async let booted: Void = bootstrap()
             await playClip()
-            await booted
-
             onFinish()
         }
     }
@@ -142,5 +137,5 @@ struct SplashView: View {
 }
 
 #Preview {
-    SplashView(bootstrap: {}, onFinish: {})
+    SplashView(onFinish: {})
 }

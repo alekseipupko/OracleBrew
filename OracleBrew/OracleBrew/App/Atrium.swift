@@ -19,8 +19,12 @@ struct Atrium: View {
     @AppStorage("onboardingSeen") private var onboardingSeen = false
 
     /// The splash covers the app until the tracking prompt is answered and the
-    /// session is up, so nothing underneath is ever seen mid-load.
-    @State private var booting = true
+    /// session is up, so nothing underneath is ever seen mid-load. It lifts only
+    /// once both are done — whichever finishes last.
+    @State private var splashPlayed = false
+    @State private var loaded = false
+
+    private var booting: Bool { !splashPlayed || !loaded }
 
     private var showOnboarding: Bool { !onboardingSeen }
 
@@ -65,7 +69,7 @@ struct Atrium: View {
             }
 
             if booting {
-                SplashView(bootstrap: bootstrap) { booting = false }
+                SplashView { splashPlayed = true }
                     .transition(.opacity)
             }
         }
@@ -76,6 +80,13 @@ struct Atrium: View {
         .environment(profileStore)
         .environment(session)
         .environment(catalog)
+        // Deliberately not inside the splash: the ATT dialog cycles the scene
+        // phase, and a task keyed on that would be cancelled mid-flight — which
+        // silently left the catalog on its bundled mocks.
+        .task {
+            await bootstrap()
+            loaded = true
+        }
     }
 
     /// Runs under the splash, so the first screen the user touches already has
