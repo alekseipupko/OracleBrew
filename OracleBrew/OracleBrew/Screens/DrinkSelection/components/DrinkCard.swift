@@ -36,8 +36,14 @@ struct DrinkCard: View {
         .background(
             LinearGradient(colors: drink.gradient, startPoint: .top, endPoint: .bottom)
         )
-        .overlay(alignment: .topLeading) {
-            if drink.isRandom { ribbon }
+        .overlay {
+            // Placed by absolute geometry, not by an alignment: the sash is
+            // decoration painted across the artwork, so it stays put whichever
+            // way the card reads, and `.position` takes the design's own
+            // centre point directly.
+            if drink.isRandom {
+                ribbon.position(x: Self.ribbonCentre.x, y: Self.ribbonCentre.y)
+            }
         }
         .overlay(alignment: .topTrailing) { radio }
         .clipShape(RoundedRectangle(cornerRadius: Cadence.cardRadius))
@@ -88,17 +94,28 @@ struct DrinkCard: View {
         .allowsHitTesting(false)
     }
 
+    // The sash, straight off the design. Its size is the band before rotation,
+    // solved from the rotated bounding box Figma reports (178.09 x 138.06 at
+    // -35°); its centre is where that box sits relative to the card's corner.
+    //
+    // Fixed rather than sized to the text on purpose: the band is rotated about
+    // its own centre, so a width that followed the translation would move where
+    // it crosses the corner. The Arabic string is shorter than the English one
+    // and used to sit 12pt further into the card. The text centres inside a
+    // constant band instead.
+    private static let ribbonWidth: CGFloat = 195
+    private static let ribbonHeight: CGFloat = 32
+    private static let ribbonCentre = CGPoint(x: 44.23, y: 34.42)
+
     private var ribbon: some View {
         Text("drink.photo_included")
-            .font(.custom("JosefinSans-Medium", size: 11))
+            .font(Lettering.displaySemibold(12))
             .foregroundStyle(Pigment.cream)
-            .padding(.horizontal, 30)
-            .padding(.vertical, 4)
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
+            .frame(width: Self.ribbonWidth, height: Self.ribbonHeight)
             .background(Pigment.accentGradient)
-            // The corner it crosses mirrors with `.topLeading`; the diagonal it
-            // runs along and the nudge into the corner do not.
-            .rotationEffect(.degrees(-35 * layoutDirection.sign))
-            .offset(x: 2 * layoutDirection.sign, y: 16)
+            .rotationEffect(.degrees(-35))
             .allowsHitTesting(false)
             .accessibilityHidden(true)
     }
