@@ -3,7 +3,7 @@ import SwiftUI
 struct FlowCard: View {
     let title: LocalizedStringKey
     let subtitle: LocalizedStringKey
-    let gradient: LinearGradient
+    let gradient: CardGradient.Spec
     let art: String
     var height: CGFloat = Cadence.cardHeight
     let action: () -> Void
@@ -17,7 +17,7 @@ struct FlowCard: View {
 
     private var card: some View {
         ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: Cadence.cardRadius).fill(gradient)
+            CardGradient(spec: gradient, mirrored: layoutDirection == .rightToLeft)
 
             // Illustration fills the right side; decorative → no hit-testing.
             // Left edge fades into the card so the artwork's own backdrop

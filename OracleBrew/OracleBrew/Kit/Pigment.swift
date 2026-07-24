@@ -71,14 +71,19 @@ enum Pigment {
     /// Selected chip fill — accent at 15%.
     static let chipSelected = Color(hex: 0xBB7EF7, alpha: 0.15)
 
-    // Card gradients (angles ≈ Figma: 133° / 128°, mapped to topLeading→bottomTrailing).
-    static let brewCard = LinearGradient(
+    // Home card gradients. The Figma fills are angled (133° / 128° in CSS terms,
+    // where 0° points up and 90° right) with an offset first stop — the light
+    // colour holds for the first third, then eases into the darker one at the
+    // bottom-right. A plain topLeading→bottomTrailing LinearGradient can't
+    // express either the true angle (it collapses to the card's corner slope,
+    // ~117° on this aspect) or the held stop, so CardGradient renders it exactly.
+    static let brewCard = CardGradient.Spec(
         colors: [Color(hex: 0xF1E0D6), Color(hex: 0xE8C7B6)],
-        startPoint: .topLeading, endPoint: .bottomTrailing
+        stops: [0.384, 1], angle: 133.436
     )
-    static let oracleCard = LinearGradient(
+    static let oracleCard = CardGradient.Spec(
         colors: [Color(hex: 0xC7B6DC), Color(hex: 0x8972B1)],
-        startPoint: .topLeading, endPoint: .bottomTrailing
+        stops: [0.471, 1], angle: 127.712
     )
 
     /// Primary CTA gradient (Continue button, "Photo included" ribbon).
