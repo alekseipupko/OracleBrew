@@ -34,7 +34,6 @@ struct HistoryView: View {
             .navigationDestination(for: ChatThread.self) { thread in
                 OracleChatView(
                     thread: thread,
-                    userName: "Susan",
                     onClose: router.pop,
                     onOpenProfile: { router.path.append(TellerPeek(teller: thread.teller)) },
                     onReturnToReading: router.pop

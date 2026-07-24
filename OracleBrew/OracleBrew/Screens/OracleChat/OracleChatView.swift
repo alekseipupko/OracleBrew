@@ -17,7 +17,6 @@ private struct CardOffsetKey: PreferenceKey {
 
 struct OracleChatView: View {
     let thread: ChatThread
-    let userName: String
     let onClose: () -> Void
     /// Opens the oracle's profile (view-only) when the header portrait is tapped.
     var onOpenProfile: (() -> Void)? = nil
@@ -124,7 +123,13 @@ struct OracleChatView: View {
             }
             let detail = try await repository.detail(id: chatID)
             thread.messages = (detail.messages ?? []).map(ChatMapper.message)
-            thread.quickQuestions = detail.quickQuestions ?? []
+            // Bundled suggestions when there are any — the backend's are static
+            // English whatever language was asked for. All or nothing, so the
+            // list is never half translated.
+            thread.quickQuestions = OracleContentCatalog.prompts(
+                forSlug: teller.slug,
+                fromReading: draft?.readingID != nil
+            )
         } catch {
             sendFailed = true
         }
@@ -242,14 +247,12 @@ struct OracleChatView: View {
         .buttonStyle(.plain)
     }
 
-    /// The cup the reading was drawn from — an uploaded photo, an API random cup,
-    /// or the bundled sample as a last resort.
+    /// The cup the reading was drawn from — the uploaded (or bundled Random-Cup)
+    /// photo, or the bundled sample as a last resort.
     @ViewBuilder
     private var cupThumb: some View {
         if let photo = draft?.photo {
             Image(uiImage: photo).resizable().scaledToFill()
-        } else if let url = draft?.randomCupImageURL, !url.isEmpty {
-            RemoteImage(urlString: url, cornerRadius: 40)
         } else {
             Image("SampleCupCard").resizable().scaledToFill()
         }

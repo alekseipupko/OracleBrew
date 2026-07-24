@@ -42,11 +42,11 @@ struct ChatsView: View {
             .waypointDestinations(router)
             .navigationDestination(for: ChatSummary.self) { summary in
                 let thread = chatStore.thread(for: summary)
-                OracleChatView(thread: thread, userName: "Susan", onClose: router.pop,
+                OracleChatView(thread: thread, onClose: router.pop,
                                onOpenProfile: { router.path.append(TellerPeek(teller: thread.teller)) })
             }
             .navigationDestination(for: ChatThread.self) { thread in
-                OracleChatView(thread: thread, userName: "Susan", onClose: router.pop,
+                OracleChatView(thread: thread, onClose: router.pop,
                                onOpenProfile: { router.path.append(TellerPeek(teller: thread.teller)) })
             }
             .navigationDestination(for: TellerPeek.self) { peek in

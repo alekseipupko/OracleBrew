@@ -31,7 +31,7 @@ struct OracleChatEntryFlow: View {
             }
             .navigationDestination(for: ChatEntryStep.self) { _ in
                 if let teller = draft.teller {
-                    OracleChatView(thread: chatStore.thread(for: teller, context: nil), userName: "Susan",
+                    OracleChatView(thread: chatStore.thread(for: teller, context: nil),
                                    onClose: onClose,
                                    onOpenProfile: { path.append(TellerPeek(teller: teller)) })
                 }

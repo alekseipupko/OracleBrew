@@ -1,0 +1,784 @@
+{
+  "oracles": [
+    {
+      "slug": "serena",
+      "name": "Serena",
+      "profession": "Moon Seer",
+      "short_description": "Ancient moon wisdom for clarity, emotional insight, and guidance through life's turning points.",
+      "bio": "Serena is known for her deep connection with moon energy, dreams, and hidden emotional signs. Her gift is uncovering what people often leave unsaid—quiet fears, secret feelings, repeating life patterns, and the true meaning behind confusing situations. She specializes in love, personal growth, life crossroads, and emotional healing. Her readings are gentle, intuitive, and focused on helping people trust their own path.",
+      "rating": 4.9,
+      "reviews_count": 36,
+      "sessions_count": 77,
+      "sort_order": 0,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "love",
+          "title": "Love"
+        },
+        {
+          "slug": "personal_growth",
+          "title": "Personal Growth"
+        },
+        {
+          "slug": "life_crossroads",
+          "title": "Life Crossroads"
+        },
+        {
+          "slug": "emotional_healing",
+          "title": "Emotional Healing"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Emma R.",
+          "rating": 5,
+          "text": "Serena's reading felt incredibly personal. She understood emotions I hadn't even mentioned and gave me a completely new perspective."
+        },
+        {
+          "author_name": "Michelle L.",
+          "rating": 5,
+          "text": "Calm, compassionate, and amazingly accurate. Every word resonated."
+        },
+        {
+          "author_name": "Sarah K.",
+          "rating": 5,
+          "text": "I came with questions about my relationship and left with clarity. Her insight felt natural rather than scripted, and she explained everything with kindness."
+        },
+        {
+          "author_name": "Jay T.",
+          "rating": 5,
+          "text": "She has such peaceful energy. Talking to Serena helped me stop overthinking and finally trust my intuition."
+        }
+      ]
+    },
+    {
+      "slug": "orion",
+      "name": "Orion",
+      "profession": "Star Oracle",
+      "short_description": "Read the wisdom of the stars and discover the direction your soul is calling you toward.",
+      "bio": "Orion reads the language of the stars to reveal timing, opportunities, and hidden influences shaping your life. He specializes in destiny, career decisions, personal purpose, and important life transitions. His readings combine ancient astrological symbolism with practical guidance, helping people move forward with confidence.",
+      "rating": 4.8,
+      "reviews_count": 54,
+      "sessions_count": 135,
+      "sort_order": 1,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "destiny",
+          "title": "Destiny"
+        },
+        {
+          "slug": "career",
+          "title": "Career"
+        },
+        {
+          "slug": "purpose",
+          "title": "Purpose"
+        },
+        {
+          "slug": "life_transitions",
+          "title": "Life Transitions"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Natalie B.",
+          "rating": 5,
+          "text": "Orion explained my situation with incredible precision. Everything made perfect sense afterward."
+        },
+        {
+          "author_name": "David W.",
+          "rating": 5,
+          "text": "His advice helped me make a career decision I'd been delaying for months."
+        },
+        {
+          "author_name": "Rachel P.",
+          "rating": 5,
+          "text": "I loved how balanced his reading was. Spiritual without being unrealistic."
+        },
+        {
+          "author_name": "Marcus L.",
+          "rating": 5,
+          "text": "Very thoughtful and surprisingly specific. I felt like he genuinely understood my situation."
+        }
+      ]
+    },
+    {
+      "slug": "aurora",
+      "name": "Aurora",
+      "profession": "Dream Whisperer",
+      "short_description": "Unlock the hidden messages within your dreams and subconscious mind.",
+      "bio": "Aurora believes that every dream carries a message waiting to be understood. She specializes in dream interpretation, intuition, emotional healing, and subconscious patterns. Her readings help people uncover hidden fears, recognize inner strengths, and better understand the messages their minds are already trying to share.",
+      "rating": 4.9,
+      "reviews_count": 167,
+      "sessions_count": 221,
+      "sort_order": 2,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "dreams",
+          "title": "Dreams"
+        },
+        {
+          "slug": "intuition",
+          "title": "Intuition"
+        },
+        {
+          "slug": "emotional_healing",
+          "title": "Emotional Healing"
+        },
+        {
+          "slug": "subconscious",
+          "title": "Subconscious"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Jessica M.",
+          "rating": 5,
+          "text": "Aurora interpreted a recurring dream I'd had for years. Everything suddenly clicked."
+        },
+        {
+          "author_name": "Linda F.",
+          "rating": 5,
+          "text": "Warm, patient, and incredibly insightful."
+        },
+        {
+          "author_name": "Olivia S.",
+          "rating": 5,
+          "text": "Her explanations were thoughtful and comforting. I left feeling lighter and much more confident."
+        },
+        {
+          "author_name": "Emily G.",
+          "rating": 5,
+          "text": "The reading felt deeply meaningful without being dramatic. Highly recommend."
+        }
+      ]
+    },
+    {
+      "slug": "raven",
+      "name": "Raven",
+      "profession": "Fate Weaver",
+      "short_description": "Reveal the unseen threads connecting your past, present, and future.",
+      "bio": "Raven is gifted at recognizing the invisible connections between events, choices, and future possibilities. She helps people understand relationship dynamics, family patterns, major decisions, and unexpected life changes. Her readings encourage thoughtful action while revealing opportunities that may otherwise go unnoticed.",
+      "rating": 4.8,
+      "reviews_count": 70,
+      "sessions_count": 89,
+      "sort_order": 3,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        },
+        {
+          "slug": "family",
+          "title": "Family"
+        },
+        {
+          "slug": "major_decisions",
+          "title": "Major Decisions"
+        },
+        {
+          "slug": "life_changes",
+          "title": "Life Changes"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Ashley C.",
+          "rating": 5,
+          "text": "Raven helped me see connections I never would have noticed myself."
+        },
+        {
+          "author_name": "Brian T.",
+          "rating": 5,
+          "text": "Honest, calm, and incredibly perceptive."
+        },
+        {
+          "author_name": "Sophia H.",
+          "rating": 5,
+          "text": "Her reading gave me confidence to make a difficult decision I'd been avoiding."
+        },
+        {
+          "author_name": "Nicole D.",
+          "rating": 5,
+          "text": "Everything was explained with warmth and respect. I never felt judged or pressured."
+        }
+      ]
+    },
+    {
+      "slug": "elias",
+      "name": "Elias",
+      "profession": "Spirit Guide",
+      "short_description": "Compassionate spiritual guidance to help you find peace, purpose, and confidence.",
+      "bio": "Elias is known for his calm presence and remarkable ability to help people reconnect with their inner wisdom. His readings focus on spiritual growth, healing, life purpose, difficult decisions, and overcoming emotional uncertainty. Clients often describe his guidance as grounding, uplifting, and deeply reassuring.",
+      "rating": 5.0,
+      "reviews_count": 120,
+      "sessions_count": 245,
+      "sort_order": 4,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "spiritual_growth",
+          "title": "Spiritual Growth"
+        },
+        {
+          "slug": "healing",
+          "title": "Healing"
+        },
+        {
+          "slug": "life_purpose",
+          "title": "Life Purpose"
+        },
+        {
+          "slug": "difficult_decisions",
+          "title": "Difficult Decisions"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Amanda J.",
+          "rating": 5,
+          "text": "Elias helped me find peace during one of the most stressful periods of my life."
+        },
+        {
+          "author_name": "Kevin M.",
+          "rating": 5,
+          "text": "I appreciated how practical and compassionate his advice was."
+        },
+        {
+          "author_name": "Lauren C.",
+          "rating": 5,
+          "text": "His reading gave me hope without making unrealistic promises. Everything felt sincere and thoughtful."
+        },
+        {
+          "author_name": "Daniel R.",
+          "rating": 5,
+          "text": "Talking to Elias felt like speaking with someone who truly cared. I left feeling calmer and much more optimistic."
+        }
+      ]
+    },
+    {
+      "slug": "lyra",
+      "name": "Lyra",
+      "profession": "Crystal Oracle",
+      "short_description": "Discover hidden truths through the timeless wisdom of crystal energy.",
+      "bio": "Lyra channels the energy of crystals to reveal emotional blocks, hidden opportunities, and the deeper forces influencing your life. Her readings are especially helpful for healing, relationships, self-discovery, and personal transformation.",
+      "rating": 4.9,
+      "reviews_count": 193,
+      "sessions_count": 203,
+      "sort_order": 5,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "healing",
+          "title": "Healing"
+        },
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        },
+        {
+          "slug": "self_discovery",
+          "title": "Self-Discovery"
+        },
+        {
+          "slug": "transformation",
+          "title": "Transformation"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Olivia W.",
+          "rating": 5,
+          "text": "Lyra immediately understood what I was struggling with. Her reading was thoughtful and comforting."
+        },
+        {
+          "author_name": "Megan H.",
+          "rating": 5,
+          "text": "Beautiful energy and surprisingly accurate."
+        },
+        {
+          "author_name": "Lauren T.",
+          "rating": 5,
+          "text": "I felt completely understood. She gave practical advice along with spiritual insight."
+        },
+        {
+          "author_name": "Sophia D.",
+          "rating": 5,
+          "text": "One of the best readings I've ever received."
+        }
+      ]
+    },
+    {
+      "slug": "cassian",
+      "name": "Cassian",
+      "profession": "Tarot Master",
+      "short_description": "Ancient tarot guidance for confident decisions and new beginnings.",
+      "bio": "Cassian has spent decades mastering tarot symbolism. His readings reveal hidden motivations, likely outcomes, and practical next steps. Clients seek him for career choices, relationships, finances, and life transitions.",
+      "rating": 4.8,
+      "reviews_count": 122,
+      "sessions_count": 196,
+      "sort_order": 6,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "career",
+          "title": "Career"
+        },
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        },
+        {
+          "slug": "finances",
+          "title": "Finances"
+        },
+        {
+          "slug": "life_transitions",
+          "title": "Life Transitions"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Brian C.",
+          "rating": 5,
+          "text": "Every card made sense once he explained it."
+        },
+        {
+          "author_name": "Julia P.",
+          "rating": 5,
+          "text": "Honest, insightful, and easy to talk to."
+        },
+        {
+          "author_name": "Ethan G.",
+          "rating": 5,
+          "text": "His reading helped me make a difficult decision with confidence."
+        },
+        {
+          "author_name": "Nicole A.",
+          "rating": 5,
+          "text": "Very professional and incredibly intuitive."
+        }
+      ]
+    },
+    {
+      "slug": "elara",
+      "name": "Elara",
+      "profession": "Soul Reader",
+      "short_description": "Understand your soul's journey and embrace your true purpose.",
+      "bio": "Elara helps people reconnect with their authentic selves. She uncovers emotional patterns, soul lessons, and hidden strengths, offering compassionate guidance for personal growth and meaningful change.",
+      "rating": 4.9,
+      "reviews_count": 55,
+      "sessions_count": 79,
+      "sort_order": 7,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "personal_growth",
+          "title": "Personal Growth"
+        },
+        {
+          "slug": "emotional_patterns",
+          "title": "Emotional Patterns"
+        },
+        {
+          "slug": "soul_lessons",
+          "title": "Soul Lessons"
+        },
+        {
+          "slug": "purpose",
+          "title": "Purpose"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Rebecca F.",
+          "rating": 5,
+          "text": "Her reading felt deeply healing."
+        },
+        {
+          "author_name": "Ashley M.",
+          "rating": 5,
+          "text": "She helped me see myself differently."
+        },
+        {
+          "author_name": "Claire S.",
+          "rating": 5,
+          "text": "Everything she said felt honest and empowering."
+        },
+        {
+          "author_name": "Melissa R.",
+          "rating": 5,
+          "text": "Calm, insightful, and genuinely caring."
+        }
+      ]
+    },
+    {
+      "slug": "nyx",
+      "name": "Nyx",
+      "profession": "Shadow Mystic",
+      "short_description": "Find light within uncertainty through powerful intuitive guidance.",
+      "bio": "Nyx specializes in uncovering hidden fears, unresolved emotions, and the unseen influences affecting your decisions. Her readings help clients move through uncertainty with confidence and self-awareness.",
+      "rating": 4.8,
+      "reviews_count": 66,
+      "sessions_count": 83,
+      "sort_order": 8,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "hidden_fears",
+          "title": "Hidden Fears"
+        },
+        {
+          "slug": "emotional_healing",
+          "title": "Emotional Healing"
+        },
+        {
+          "slug": "uncertainty",
+          "title": "Uncertainty"
+        },
+        {
+          "slug": "self_awareness",
+          "title": "Self-Awareness"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Chloe T.",
+          "rating": 5,
+          "text": "She saw things I hadn't admitted even to myself."
+        },
+        {
+          "author_name": "Hannah J.",
+          "rating": 5,
+          "text": "Honest without being harsh."
+        },
+        {
+          "author_name": "Rachel W.",
+          "rating": 5,
+          "text": "Deeply insightful and comforting."
+        },
+        {
+          "author_name": "Amber L.",
+          "rating": 5,
+          "text": "Helped me understand why I kept repeating the same patterns."
+        }
+      ]
+    },
+    {
+      "slug": "rowan",
+      "name": "Rowan",
+      "profession": "Rune Keeper",
+      "short_description": "Ancient rune wisdom for life's biggest questions.",
+      "bio": "Rowan interprets ancient runes to reveal opportunities, challenges, and personal strengths. His readings focus on life direction, resilience, career, and relationships, blending timeless symbolism with practical advice.",
+      "rating": 4.9,
+      "reviews_count": 110,
+      "sessions_count": 144,
+      "sort_order": 9,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "life_direction",
+          "title": "Life Direction"
+        },
+        {
+          "slug": "resilience",
+          "title": "Resilience"
+        },
+        {
+          "slug": "career",
+          "title": "Career"
+        },
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Daniel H.",
+          "rating": 5,
+          "text": "Every rune seemed to speak directly to my situation."
+        },
+        {
+          "author_name": "Emma B.",
+          "rating": 5,
+          "text": "Clear, wise, and reassuring."
+        },
+        {
+          "author_name": "Michael R.",
+          "rating": 5,
+          "text": "Great balance between spiritual insight and practical guidance."
+        },
+        {
+          "author_name": "Anna C.",
+          "rating": 5,
+          "text": "I left the reading feeling hopeful and focused."
+        }
+      ]
+    },
+    {
+      "slug": "seraphine",
+      "name": "Seraphine",
+      "profession": "Angel Messenger",
+      "short_description": "Gentle guidance inspired by light, hope, and inner peace.",
+      "bio": "Seraphine offers compassionate readings centered on healing, encouragement, and emotional clarity. She helps people navigate relationships, family matters, self-worth, and life's difficult transitions.",
+      "rating": 5.0,
+      "reviews_count": 98,
+      "sessions_count": 112,
+      "sort_order": 10,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "healing",
+          "title": "Healing"
+        },
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        },
+        {
+          "slug": "family",
+          "title": "Family"
+        },
+        {
+          "slug": "self_worth",
+          "title": "Self-Worth"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Grace L.",
+          "rating": 5,
+          "text": "Her kindness shines through every word."
+        },
+        {
+          "author_name": "Isabella M.",
+          "rating": 5,
+          "text": "The reading gave me hope when I really needed it."
+        },
+        {
+          "author_name": "Emily W.",
+          "rating": 5,
+          "text": "Gentle, comforting, and remarkably accurate."
+        },
+        {
+          "author_name": "Kate N.",
+          "rating": 5,
+          "text": "She helped me find peace during a confusing time."
+        }
+      ]
+    },
+    {
+      "slug": "zephyr",
+      "name": "Zephyr",
+      "profession": "Wind Diviner",
+      "short_description": "Follow the signs carried by destiny's invisible currents.",
+      "bio": "Zephyr believes every change begins with subtle signs. His intuitive readings reveal timing, opportunities, and hidden influences, helping clients move forward with confidence during periods of uncertainty.",
+      "rating": 4.8,
+      "reviews_count": 74,
+      "sessions_count": 88,
+      "sort_order": 11,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "timing",
+          "title": "Timing"
+        },
+        {
+          "slug": "opportunities",
+          "title": "Opportunities"
+        },
+        {
+          "slug": "change",
+          "title": "Change"
+        },
+        {
+          "slug": "destiny",
+          "title": "Destiny"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Jacob T.",
+          "rating": 5,
+          "text": "He gave me exactly the clarity I needed."
+        },
+        {
+          "author_name": "Emma S.",
+          "rating": 5,
+          "text": "Calm, thoughtful, and incredibly intuitive."
+        },
+        {
+          "author_name": "Liam P.",
+          "rating": 5,
+          "text": "Everything felt surprisingly relevant."
+        },
+        {
+          "author_name": "Sophie R.",
+          "rating": 5,
+          "text": "His advice helped me trust my next step."
+        }
+      ]
+    },
+    {
+      "slug": "isolde",
+      "name": "Isolde",
+      "profession": "Love Oracle",
+      "short_description": "Reveal the hidden truths behind love, connection, and destiny.",
+      "bio": "Isolde specializes in matters of the heart. She helps clients understand romantic connections, emotional compatibility, relationship challenges, and future possibilities with warmth and compassion.",
+      "rating": 4.9,
+      "reviews_count": 140,
+      "sessions_count": 284,
+      "sort_order": 12,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "love",
+          "title": "Love"
+        },
+        {
+          "slug": "relationships",
+          "title": "Relationships"
+        },
+        {
+          "slug": "compatibility",
+          "title": "Compatibility"
+        },
+        {
+          "slug": "destiny",
+          "title": "Destiny"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Natalie K.",
+          "rating": 5,
+          "text": "She described my relationship perfectly."
+        },
+        {
+          "author_name": "Victoria P.",
+          "rating": 5,
+          "text": "So warm and incredibly insightful."
+        },
+        {
+          "author_name": "Olivia J.",
+          "rating": 5,
+          "text": "I finally understood why things weren't working."
+        },
+        {
+          "author_name": "Emma L.",
+          "rating": 5,
+          "text": "Her reading gave me hope without false promises."
+        }
+      ]
+    },
+    {
+      "slug": "thorne",
+      "name": "Thorne",
+      "profession": "Mystic Sage",
+      "short_description": "Timeless wisdom for life's greatest questions and boldest choices.",
+      "bio": "Thorne combines decades of spiritual study with exceptional intuition. His readings focus on wisdom, life purpose, personal growth, and navigating complex decisions with clarity and confidence.",
+      "rating": 4.9,
+      "reviews_count": 99,
+      "sessions_count": 182,
+      "sort_order": 13,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "wisdom",
+          "title": "Wisdom"
+        },
+        {
+          "slug": "life_purpose",
+          "title": "Life Purpose"
+        },
+        {
+          "slug": "personal_growth",
+          "title": "Personal Growth"
+        },
+        {
+          "slug": "decisions",
+          "title": "Decisions"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Peter G.",
+          "rating": 5,
+          "text": "His wisdom felt timeless."
+        },
+        {
+          "author_name": "Susan W.",
+          "rating": 5,
+          "text": "Every answer was thoughtful and balanced."
+        },
+        {
+          "author_name": "Matthew C.",
+          "rating": 5,
+          "text": "The reading helped me see my situation objectively."
+        },
+        {
+          "author_name": "Laura M.",
+          "rating": 5,
+          "text": "Deep, meaningful, and inspiring."
+        }
+      ]
+    },
+    {
+      "slug": "mira",
+      "name": "Mira",
+      "profession": "Destiny Weaver",
+      "short_description": "See the threads of fate and embrace your next chapter.",
+      "bio": "Mira has a remarkable ability to recognize the connections between past choices, present circumstances, and future possibilities. Her readings help clients discover new opportunities, overcome uncertainty, and step confidently into the next chapter of their lives.",
+      "rating": 5.0,
+      "reviews_count": 230,
+      "sessions_count": 267,
+      "sort_order": 14,
+      "illustration": null,
+      "specializations": [
+        {
+          "slug": "destiny",
+          "title": "Destiny"
+        },
+        {
+          "slug": "opportunities",
+          "title": "Opportunities"
+        },
+        {
+          "slug": "new_beginnings",
+          "title": "New Beginnings"
+        },
+        {
+          "slug": "uncertainty",
+          "title": "Uncertainty"
+        }
+      ],
+      "reviews": [
+        {
+          "author_name": "Charlotte B.",
+          "rating": 5,
+          "text": "Mira connected everything in a way that finally made sense."
+        },
+        {
+          "author_name": "Emily R.",
+          "rating": 5,
+          "text": "I felt encouraged, understood, and inspired."
+        },
+        {
+          "author_name": "Samantha D.",
+          "rating": 5,
+          "text": "One of the most accurate readings I've experienced."
+        },
+        {
+          "author_name": "Jessica T.",
+          "rating": 5,
+          "text": "She gave me both hope and practical direction. Everything felt genuine and deeply personal."
+        }
+      ]
+    }
+  ]
+}

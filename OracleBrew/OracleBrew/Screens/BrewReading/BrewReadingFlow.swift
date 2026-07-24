@@ -62,8 +62,8 @@ struct BrewReadingFlow: View {
                 onClose: onClose
             )
         case .photo:
-            // Random Cup shows a backend-chosen cup rather than asking for a
-            // photo — same step in the wizard, different source.
+            // Random Cup shows a bundled cup photo rather than asking for one —
+            // same step in the wizard, different source.
             if draft.isRandomPath {
                 RandomCupView(
                     onContinue: { path.append(ReadingStep.loading) },
@@ -100,7 +100,6 @@ struct BrewReadingFlow: View {
             let teller = draft.teller ?? FortuneTellerRoster.all[0]
             OracleChatView(
                 thread: chatStore.thread(for: teller, context: draft),
-                userName: "Susan",
                 onClose: onClose,
                 onOpenProfile: { path.append(TellerPeek(teller: teller)) },
                 onReturnToReading: pop

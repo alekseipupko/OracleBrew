@@ -35,6 +35,16 @@ final class CupCamera {
     func prepare() async {
         guard phase != .running else { return }
 
+        #if targetEnvironment(simulator)
+        // The simulator's virtual camera trips AVFoundation's "connection
+        // references an input unknown to this session" assertion the moment the
+        // preview layer binds to it — a simulator-only bug, not a real-device
+        // one. There is no real capture device here anyway, so treat it as
+        // unavailable; the gallery picker still exercises the upload flow.
+        phase = .unavailable
+        return
+        #endif
+
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             break

@@ -14,14 +14,11 @@ final class ReadingDraft {
     var topic: Topic?
     var question: String = ""
 
-    // Photo of the cup (gallery / camera / a bundled sample for the Random path)
+    // Photo of the cup — gallery, camera, or a bundled cup for the Random path.
+    // The Random path picks one of the drink's bundled cup photos and stores it
+    // here too, so both paths create the reading the same way: by uploading this
+    // image. There is no separate backend cup id any more.
     var photo: UIImage?
-    /// The API random-cup shown on the "Chosen for You" screen — its id goes to
-    /// the reading (mutually exclusive with uploading `photo`), its image is
-    /// what the user saw. Picked on that screen, not at create time, so the
-    /// reading uses the exact cup the user was shown.
-    var randomCupID: Int?
-    var randomCupImageURL: String?
 
     /// Set once this reading is recorded into ReadingHistoryStore, so re-appearing
     /// on Reading Result (e.g. after a chat) doesn't record a duplicate entry.

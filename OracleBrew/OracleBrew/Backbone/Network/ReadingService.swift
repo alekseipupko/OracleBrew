@@ -2,7 +2,6 @@ import UIKit
 
 struct ReadingService {
     var emissary: Emissary = .shared
-    var catalog = CatalogRepository()
 
     /// The end-to-end flow. Throws EmissaryFailure on any step; the reading id
     /// is returned alongside the result so the caller can start a chat from it.
@@ -23,43 +22,23 @@ struct ReadingService {
         }
         let horizon = draft.horizon.rawValue
 
-        if draft.isRandomPath {
-            // Random path: use the cup the user was shown on "Chosen for You".
-            // It's picked there; only fetch here as a fallback if the screen was
-            // somehow skipped.
-            let cupID: Int
-            if let chosen = draft.randomCupID {
-                cupID = chosen
-            } else {
-                cupID = try await catalog.randomCup().id
-            }
-            var body: [String: AnyJSON] = [
-                "drink_id": .int(drinkID),
-                "oracle_id": .int(oracleID),
-                "time_horizon": .string(horizon),
-                "random_cup_id": .int(cupID),
-            ]
-            if let topicID = draft.topic?.numericID { body["topic_id"] = .int(topicID) }
-            if !draft.question.isEmpty { body["question"] = .string(draft.question) }
-            let request = EmissaryRequest(path: "readings/", method: .post, body: .json(body))
-            return try await emissary.perform(request, as: ReadingDTO.self)
-        } else {
-            // Upload path: the cup photo as multipart.
-            guard let photo = draft.photo,
-                  let jpeg = photo.jpegData(compressionQuality: 0.85) else {
-                throw EmissaryFailure.server(statusCode: -1)
-            }
-            var parts: [MultipartPart] = [
-                .field("drink_id", String(drinkID)),
-                .field("oracle_id", String(oracleID)),
-                .field("time_horizon", horizon),
-                .file("cup_image", filename: "cup.jpg", mimeType: "image/jpeg", data: jpeg),
-            ]
-            if let topicID = draft.topic?.numericID { parts.append(.field("topic_id", String(topicID))) }
-            if !draft.question.isEmpty { parts.append(.field("question", draft.question)) }
-            let request = EmissaryRequest(path: "readings/", method: .post, body: .multipart(parts))
-            return try await emissary.perform(request, as: ReadingDTO.self)
+        // One path for both cases: the cup photo goes up as multipart. An
+        // uploaded shot and a bundled Random-Cup photo are the same to the
+        // backend — the Random path just picks its image from the bundle first.
+        guard let photo = draft.photo,
+              let jpeg = photo.jpegData(compressionQuality: 0.85) else {
+            throw EmissaryFailure.server(statusCode: -1)
         }
+        var parts: [MultipartPart] = [
+            .field("drink_id", String(drinkID)),
+            .field("oracle_id", String(oracleID)),
+            .field("time_horizon", horizon),
+            .file("cup_image", filename: "cup.jpg", mimeType: "image/jpeg", data: jpeg),
+        ]
+        if let topicID = draft.topic?.numericID { parts.append(.field("topic_id", String(topicID))) }
+        if !draft.question.isEmpty { parts.append(.field("question", draft.question)) }
+        let request = EmissaryRequest(path: "readings/", method: .post, body: .multipart(parts))
+        return try await emissary.perform(request, as: ReadingDTO.self)
     }
 
     private func analyze(readingID: Int) async throws -> AIJobDTO {

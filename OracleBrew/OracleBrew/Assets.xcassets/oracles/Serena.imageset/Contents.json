@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Serena.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

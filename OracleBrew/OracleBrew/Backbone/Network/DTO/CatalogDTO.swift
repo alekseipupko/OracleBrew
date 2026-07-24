@@ -14,12 +14,6 @@ struct DrinkDTO: Decodable {
     }
 }
 
-struct RandomCupDTO: Decodable {
-    let id: Int
-    let image: String?
-    let drink: DrinkDTO
-}
-
 struct SpecializationDTO: Decodable {
     let id: Int
     let slug: String
@@ -47,6 +41,9 @@ struct OracleDTO: Decodable {
     /// The line under the name — "The Moon Seer". Distinct from the
     /// specializations, which are the topic chips.
     let profession: String?
+    /// One-line card subtitle. Present but empty on every live oracle so far —
+    /// the bundled copy covers it.
+    let shortDescription: String?
     let illustration: String?
     let rating: Double?
     let sessionsCount: Int?
@@ -59,6 +56,7 @@ struct OracleDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case id, slug, name, profession, illustration, rating, specializations, bio, reviews
+        case shortDescription = "short_description"
         case sessionsCount = "sessions_count"
         case sortOrder = "sort_order"
         case quickPrompts = "quick_prompts"

@@ -8,7 +8,12 @@ struct Review: Identifiable {
 }
 
 struct FortuneTeller: Identifiable, Equatable, Hashable {
+    /// The backend's numeric id, as a string. This is what a chat and a reading
+    /// are created against.
     let id: String
+    /// The backend's text key. Not an identity — `id` is — but it is how the
+    /// app finds its own bundled copy and artwork for this oracle.
+    var slug: String = ""
     let name: String
     let title: String
     let portrait: String
@@ -21,8 +26,16 @@ struct FortuneTeller: Identifiable, Equatable, Hashable {
     /// Set for oracles from the API; nil for the bundled mock roster, which
     /// draws from `portrait` instead.
     var portraitURL: String? = nil
+    /// How many reviews the oracle has in total. Stored, not derived: `reviews`
+    /// holds only the handful shown on the profile, so counting it would report
+    /// four where the real figure is eighteen thousand.
+    var reviewCount: Int = 0
 
-    var reviewCount: Int { reviews.count }
+    /// The count as the design writes it — "18.7K". Compact notation is
+    /// locale-aware, so this is not an English-only abbreviation.
+    var reviewCountLabel: String {
+        reviewCount.formatted(.number.notation(.compactName))
+    }
 
     static func == (lhs: FortuneTeller, rhs: FortuneTeller) -> Bool { lhs.id == rhs.id }
     func hash(into hasher: inout Hasher) { hasher.combine(id) }

@@ -6,8 +6,9 @@ final class CatalogStore {
     private(set) var drinks: [Drink] = DrinkCatalog.all
     private(set) var oracles: [FortuneTeller] = FortuneTellerRoster.all
     private(set) var topics: [Topic] = TopicCatalog.all
-    /// The home screen's daily line; nil until loaded (or if the backend has none).
-    private(set) var dailyFortune: String?
+    /// The home screen's daily line. Bundled, so it is on screen before the
+    /// network answers and reads naturally in every language.
+    private(set) var dailyFortune: String? = FortuneCatalog.fortune()
 
     private let repository: CatalogRepository
     private var loaded = false
@@ -35,17 +36,6 @@ final class CatalogStore {
         if let topics = await remoteTopics, !topics.isEmpty {
             self.topics = topics
         }
-        dailyFortune = await repository.dailyFortune()
     }
 
-    /// A random cup for the "Chosen for You" screen. No drink is passed: only
-    /// some drinks have cups on the backend, and constraining to one the user
-    /// happened to land on 404s. Let the backend pick a cup that exists and
-    /// report which drink it belongs to — the reading must use that drink.
-    /// `excludeID` skips the one already shown, so "Choose Another Cup" never
-    /// repeats it back.
-    func randomCup(excludeID: Int? = nil) async throws -> (id: Int, imageURL: String?, drink: Drink) {
-        let dto = try await repository.randomCup(excludeID: excludeID)
-        return (dto.id, dto.image, CatalogMapper.drink(dto.drink))
-    }
 }

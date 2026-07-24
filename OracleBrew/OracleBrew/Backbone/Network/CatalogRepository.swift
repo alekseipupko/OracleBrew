@@ -23,13 +23,6 @@ struct CatalogRepository {
         return dtos.map(CatalogMapper.topic)
     }
 
-    func randomCup(excludeID: Int? = nil, drinkID: Int? = nil) async throws -> RandomCupDTO {
-        var query: [String: String] = [:]
-        if let excludeID { query["exclude_id"] = String(excludeID) }
-        if let drinkID { query["drink_id"] = String(drinkID) }
-        return try await emissary.perform(EmissaryRequest(path: "drinks/random/", query: query), as: RandomCupDTO.self)
-    }
-
     /// The home screen's daily line. Returns nil when the backend has none
     /// (it answers 404 rather than an empty object).
     func dailyFortune() async -> String? {
@@ -55,31 +48,53 @@ enum CatalogMapper {
         let mock = mockIDBySlug[dto.slug].flatMap { id in DrinkCatalog.all.first { $0.id == id } }
         return Drink(
             id: String(dto.id),
-            name: LocalizedStringKey(dto.title),
-            blurb: LocalizedStringKey(dto.description),
+            // The backend's title/description are English-only. The bundled
+            // drink for this slug already carries catalog keys, so it supplies
+            // the words; the server's text is the fallback for a slug we don't
+            // know yet, and shows up untranslated by design rather than by
+            // accident.
+            name: mock?.name ?? LocalizedStringKey(dto.title),
+            blurb: mock?.blurb ?? LocalizedStringKey(dto.description),
             art: mock?.art ?? "",
             gradient: mock?.gradient ?? [Color(hex: 0x241649), Color(hex: 0x0E062C)],
             isRandom: false,
-            imageURL: dto.image
+            imageURL: dto.image,
+            // The Random Cup path draws from these bundled photos; a slug we
+            // don't know yet simply has none and falls back to the sample.
+            cupPhotos: mock?.cupPhotos ?? []
         )
     }
 
+    /// The backend owns the oracle's identity; the app owns how it reads.
+    ///
+    /// Anything the bundle has copy for wins, because that copy is localized and
+    /// the API's is English-only. The id, and therefore what a chat or reading is
+    /// created against, always stays the backend's.
     static func oracle(_ dto: OracleDTO) -> FortuneTeller {
         let specs = dto.specializations ?? []
+        let local = OracleContentCatalog.content(forSlug: dto.slug)
+        let apiReviews = (dto.reviews ?? []).map(review)
+
         return FortuneTeller(
             id: String(dto.id),
-            name: dto.name,
+            slug: dto.slug,
+            name: local?.name ?? dto.name,
             // The design's subtitle is the profession; the first specialization
             // was only ever standing in for it.
-            title: dto.profession ?? specs.first?.title ?? "",
-            portrait: "",
-            rating: dto.rating ?? 0,
-            sessions: dto.sessionsCount ?? 0,
-            topics: specs.map(\.title),
-            blurb: dto.bio ?? "",
-            bio: dto.bio ?? "",
-            reviews: (dto.reviews ?? []).map(review),
-            portraitURL: dto.illustration
+            title: local?.profession ?? dto.profession ?? specs.first?.title ?? "",
+            portrait: local?.portrait ?? "",
+            rating: local?.rating ?? dto.rating ?? 0,
+            sessions: local?.sessions ?? dto.sessionsCount ?? 0,
+            topics: local?.topics ?? specs.map(\.title),
+            // The card wants one line. `bio` is a paragraph, so it is only a
+            // stand-in until short_description is filled in server-side.
+            blurb: local?.shortDescription ?? dto.shortDescription ?? dto.bio ?? "",
+            bio: local?.bio ?? dto.bio ?? "",
+            reviews: local?.reviews ?? apiReviews,
+            // Bundled art wins once it exists; until the assets land the
+            // backend's illustration is the only picture there is.
+            portraitURL: local?.hasArtwork == true ? nil : dto.illustration,
+            reviewCount: local?.reviewCount ?? apiReviews.count
         )
     }
 
@@ -90,6 +105,8 @@ enum CatalogMapper {
     static func topic(_ dto: TopicDTO) -> Topic {
         // Recover the design colour by slug; unknown slugs get the accent.
         let colour = TopicCatalog.all.first { $0.id == dto.slug }?.color ?? Pigment.accent
-        return Topic(id: dto.slug, name: dto.title, color: colour, numericID: dto.id)
+        // The backend's `title` is English-only; ours translates.
+        let name = TopicCatalog.localizedName(forSlug: dto.slug) ?? dto.title
+        return Topic(id: dto.slug, name: name, color: colour, numericID: dto.id)
     }
 }
